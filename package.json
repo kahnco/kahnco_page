@@ -2,25 +2,29 @@
   "name": "kahnco-pages",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://kahnco.github.io/kahnco_page/",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "predeploy": "yarn build",
+    "deploy": "if (!(Test-Path -Path 'out/.nojekyll')) { New-Item -Path 'out/.nojekyll' -ItemType File } && gh-pages -d out --dotfiles"
   },
   "dependencies": {
+    "gh-pages": "^6.1.1",
+    "next": "14.2.10",
     "react": "^18",
-    "react-dom": "^18",
-    "next": "14.2.10"
+    "react-dom": "^18"
   },
   "devDependencies": {
-    "typescript": "^5",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "eslint": "^8",
+    "eslint-config-next": "14.2.10",
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
-    "eslint": "^8",
-    "eslint-config-next": "14.2.10"
+    "typescript": "^5"
   }
 }
