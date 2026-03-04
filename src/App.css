@@ -19,25 +19,16 @@
 :root {
   --font-geist-sans: 'Geist Sans', Arial, Helvetica, sans-serif;
   --font-geist-mono: 'Geist Mono', monospace;
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
+  margin: 0;
+  background: #0a0a0a;
+  color: #ededed;
   font-family: var(--font-geist-sans);
+  -webkit-font-smoothing: antialiased;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+html {
+  scroll-behavior: smooth;
 }

@@ -12,6 +12,7 @@
     "deploy": "yarn build && gh-pages -d dist"
   },
   "dependencies": {
+    "framer-motion": "^12.35.0",
     "react": "^18",
     "react-dom": "^18"
   },
