@@ -1,12 +1,18 @@
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Hero from "./components/Hero";
 import About from "./components/About";
 import Skills from "./components/Skills";
 import Projects from "./components/Projects";
 import Links from "./components/Links";
+import YourThoughtsPrivacy from "./pages/YourThoughtsPrivacy";
+import YourThoughtsTerms from "./pages/YourThoughtsTerms";
 
-export default function App() {
+function Home() {
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-white font-[family-name:var(--font-geist-sans)]">
+      <header className="fixed top-0 left-0 right-0 z-50 flex items-center px-6 py-4 bg-[#0a0a0a]/80 backdrop-blur-md">
+        <img src="/logo.jpg" alt="Kahnco" className="w-8 h-8 rounded" />
+      </header>
       <Hero />
       <About />
       <Skills />
@@ -24,5 +30,17 @@ export default function App() {
         <p className="pt-2">© 2026 Kahnco. All rights reserved.</p>
       </footer>
     </div>
+  );
+}
+
+export default function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/yourthoughts/privacy" element={<YourThoughtsPrivacy />} />
+        <Route path="/yourthoughts/terms" element={<YourThoughtsTerms />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
