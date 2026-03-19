@@ -6,6 +6,8 @@ import Projects from "./components/Projects";
 import Links from "./components/Links";
 import YourThoughtsPrivacy from "./pages/YourThoughtsPrivacy";
 import YourThoughtsTerms from "./pages/YourThoughtsTerms";
+import AtomicDemolitionPrivacy from "./pages/AtomicDemolitionPrivacy";
+import AtomicDemolitionTerms from "./pages/AtomicDemolitionTerms";
 
 function Home() {
   return (
@@ -40,6 +42,8 @@ export default function App() {
         <Route path="/" element={<Home />} />
         <Route path="/yourthoughts/privacy" element={<YourThoughtsPrivacy />} />
         <Route path="/yourthoughts/terms" element={<YourThoughtsTerms />} />
+        <Route path="/atomic-demolition/privacy" element={<AtomicDemolitionPrivacy />} />
+        <Route path="/atomic-demolition/terms" element={<AtomicDemolitionTerms />} />
       </Routes>
     </BrowserRouter>
   );
