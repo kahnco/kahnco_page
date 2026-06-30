@@ -98,7 +98,7 @@ Application을 하나하나 손으로 만드는 건 앱이 몇 개일 때나 가
 
 **App of Apps**는 "Application들을 만들어내는 Application"입니다. 부모 Application 하나가 자식 Application 매니페스트들을 가리키고, 자식들이 실제 워크로드를 배포합니다. 전체 클러스터의 배포 구성을 한 곳에서 부트스트랩할 수 있습니다.
 
-더 강력한 건 **ApplicationSet**입니다. generator로 Application을 *템플릿에서 동적으로 생성*합니다. 특히 [쿠버네티스 멀티테넌시 글](/blog/kubernetes-multitenancy-isolation)에서 이야기한 테넌트 온보딩 자동화와 잘 맞물립니다. Git 저장소의 `tenants/` 아래 디렉터리 하나가 곧 테넌트 하나가 되도록 만들 수 있습니다.
+더 강력한 건 **ApplicationSet**입니다. generator로 Application을 *템플릿에서 동적으로 생성*합니다. 특히 [쿠버네티스 멀티테넌시 글](/kubernetes-multitenancy-isolation)에서 이야기한 테넌트 온보딩 자동화와 잘 맞물립니다. Git 저장소의 `tenants/` 아래 디렉터리 하나가 곧 테넌트 하나가 되도록 만들 수 있습니다.
 
 ```yaml
 apiVersion: argoproj.io/v1alpha1
@@ -163,4 +163,4 @@ GitOps와 ArgoCD를 한 문장으로 압축하면 이렇게 말할 수 있습니
 - **ApplicationSet**으로 테넌트·환경을 선언 하나에서 파생시켜 규모를 키울 수 있습니다.
 - 시크릿은 **암호문이나 참조만** Git에 두는 게 원칙입니다.
 
-이전 글들에서 다룬 [AWS CDK](/blog/taming-aws-cdk-in-production)가 클라우드 인프라를 코드로 다스리는 이야기였다면, GitOps는 그렇게 정의한 상태를 *지속적으로 유지*하는 이야기입니다. 둘을 함께 갖추면, 인프라는 비로소 "한 번 만들고 끝"이 아니라 "코드와 늘 일치하는" 살아있는 시스템이 됩니다.
+이전 글들에서 다룬 [AWS CDK](/taming-aws-cdk-in-production)가 클라우드 인프라를 코드로 다스리는 이야기였다면, GitOps는 그렇게 정의한 상태를 *지속적으로 유지*하는 이야기입니다. 둘을 함께 갖추면, 인프라는 비로소 "한 번 만들고 끝"이 아니라 "코드와 늘 일치하는" 살아있는 시스템이 됩니다.

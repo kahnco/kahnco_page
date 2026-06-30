@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import BlogHeader from "../components/blog/BlogHeader";
+import BlogHeader from "../components/BlogHeader";
 import { getAllPosts, getAllTags } from "../lib/posts";
 import { setSeo, clearArticleJsonLd } from "../lib/seo";
 
@@ -21,7 +21,7 @@ export default function BlogList() {
     setSeo({
       title: "개발 블로그",
       description: "인프라 · DevOps · 풀스택 개발 경험을 기록하는 칸코테크 개발 블로그입니다.",
-      path: "/blog",
+      path: "/",
     });
   }, []);
 
@@ -87,7 +87,7 @@ export default function BlogList() {
               transition={{ duration: 0.5, delay: Math.min(i * 0.05, 0.3) }}
             >
               <Link
-                to={`/blog/${post.slug}`}
+                to={`/${post.slug}`}
                 className="group block rounded-xl border border-white/10 bg-white/[0.02] p-6 transition-colors hover:border-blue-500/40 hover:bg-white/[0.04]"
               >
                 <div className="flex items-center gap-3 text-xs text-neutral-500">
@@ -125,12 +125,12 @@ export default function BlogList() {
         </div>
 
         <div className="mt-16 border-t border-white/10 pt-8">
-          <Link
-            to="/"
+          <a
+            href="https://kahnco.me"
             className="text-sm text-neutral-500 transition-colors hover:text-white"
           >
-            ← 메인으로
-          </Link>
+            ← 칸코테크 메인으로
+          </a>
         </div>
       </main>
     </div>

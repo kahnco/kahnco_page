@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { motion } from "framer-motion";
-import BlogHeader from "../components/blog/BlogHeader";
-import Markdown from "../components/blog/Markdown";
+import BlogHeader from "../components/BlogHeader";
+import Markdown from "../components/Markdown";
 import { getPostBySlug } from "../lib/posts";
 import { setSeo, setArticleJsonLd, clearArticleJsonLd } from "../lib/seo";
 
@@ -20,7 +20,7 @@ export default function BlogPost() {
     window.scrollTo(0, 0);
 
     if (!post) {
-      setSeo({ title: "글을 찾을 수 없습니다", path: `/blog/${slug ?? ""}` });
+      setSeo({ title: "글을 찾을 수 없습니다", path: `/${slug ?? ""}` });
       clearArticleJsonLd();
       return;
     }
@@ -28,7 +28,7 @@ export default function BlogPost() {
     setSeo({
       title: post.title,
       description: post.description,
-      path: `/blog/${post.slug}`,
+      path: `/${post.slug}`,
       type: "article",
       image: post.thumbnail,
       publishedTime: post.date,
@@ -37,7 +37,7 @@ export default function BlogPost() {
     setArticleJsonLd({
       title: post.title,
       description: post.description,
-      path: `/blog/${post.slug}`,
+      path: `/${post.slug}`,
       datePublished: post.date,
       image: post.thumbnail,
     });
@@ -53,7 +53,7 @@ export default function BlogPost() {
           <h1 className="text-3xl font-bold">글을 찾을 수 없습니다</h1>
           <p className="mt-4 text-neutral-400">요청하신 글이 존재하지 않거나 이동되었습니다.</p>
           <Link
-            to="/blog"
+            to="/"
             className="mt-8 inline-block rounded-full bg-blue-500 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-blue-600"
           >
             블로그 목록으로
@@ -74,7 +74,7 @@ export default function BlogPost() {
           transition={{ duration: 0.6 }}
         >
           <Link
-            to="/blog"
+            to="/"
             className="text-sm text-neutral-500 transition-colors hover:text-white"
           >
             ← 블로그 목록
@@ -118,7 +118,7 @@ export default function BlogPost() {
 
         <footer className="mt-16 border-t border-white/10 pt-8">
           <Link
-            to="/blog"
+            to="/"
             className="text-sm text-neutral-500 transition-colors hover:text-white"
           >
             ← 블로그 목록으로

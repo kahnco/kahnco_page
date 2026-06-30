@@ -36,6 +36,6 @@ jobs:
       - run: yarn build
 ```
 
-> 첫 정식 글은 **[프로덕션에서 AWS CDK 길들이기](/blog/taming-aws-cdk-in-production)** 입니다. escape hatch, Aspects, 안정화 전략까지 — CDK를 운영 가능한 IaC로 만드는 실전 이야기를 다룹니다.
+> 첫 정식 글은 **[프로덕션에서 AWS CDK 길들이기](/taming-aws-cdk-in-production)** 입니다. escape hatch, Aspects, 안정화 전략까지 — CDK를 운영 가능한 IaC로 만드는 실전 이야기를 다룹니다.
 
 읽어주셔서 감사합니다. 🙇

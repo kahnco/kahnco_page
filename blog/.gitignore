@@ -1,0 +1,9 @@
+node_modules
+dist
+.firebase
+*.tsbuildinfo
+.DS_Store
+
+# 빌드 시 자동 생성 (scripts/generate-sitemap.mjs)
+public/sitemap.xml
+public/robots.txt

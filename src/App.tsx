@@ -1,5 +1,4 @@
-import { lazy, Suspense } from "react";
-import { BrowserRouter, Routes, Route, Link, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Hero from "./components/Hero";
 import About from "./components/About";
 import Skills from "./components/Skills";
@@ -13,10 +12,8 @@ import AtomicDemolitionPrivacy from "./pages/AtomicDemolitionPrivacy";
 import AtomicDemolitionTerms from "./pages/AtomicDemolitionTerms";
 import AtomicDemolitionLanding from "./pages/AtomicDemolitionLanding";
 
-// 블로그 페이지는 react-markdown·highlight.js 등 무거운 의존성을 포함하므로
-// 코드 스플리팅하여 메인 포트폴리오 번들을 가볍게 유지한다.
-const BlogList = lazy(() => import("./pages/BlogList"));
-const BlogPost = lazy(() => import("./pages/BlogPost"));
+// 블로그는 별도 프로젝트(blog/)로 분리되어 blog.kahnco.me 에서 서비스됩니다.
+const BLOG_URL = "https://blog.kahnco.me";
 
 function Home() {
   return (
@@ -24,12 +21,12 @@ function Home() {
       <header className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-4 bg-[#0a0a0a]/80 backdrop-blur-md">
         <img src="/logo.jpg" alt="Kahnco" className="w-8 h-8 rounded" />
         <nav>
-          <Link
-            to="/blog"
+          <a
+            href={BLOG_URL}
             className="text-sm font-medium text-neutral-400 hover:text-white transition-colors"
           >
             Blog
-          </Link>
+          </a>
         </nav>
       </header>
       <Hero />
@@ -53,46 +50,17 @@ function Home() {
   );
 }
 
-/**
- * 루트 라우트. blog.kahnco.me 같은 blog 서브도메인으로 접속하면
- * 포트폴리오 홈 대신 블로그 목록으로 바로 보낸다.
- * 그 외 도메인(kahnco.me, *.web.app)에서는 평소대로 홈을 보여준다.
- */
-function RootRoute() {
-  const host = typeof window !== "undefined" ? window.location.hostname : "";
-  if (host.startsWith("blog.")) {
-    return <Navigate to="/blog" replace />;
-  }
-  return <Home />;
-}
-
 export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<RootRoute />} />
+        <Route path="/" element={<Home />} />
         <Route path="/yourthoughts" element={<YourThoughtsLanding />} />
         <Route path="/yourthoughts/privacy" element={<YourThoughtsPrivacy />} />
         <Route path="/yourthoughts/terms" element={<YourThoughtsTerms />} />
         <Route path="/atomic-demolition" element={<AtomicDemolitionLanding />} />
         <Route path="/atomic-demolition/privacy" element={<AtomicDemolitionPrivacy />} />
         <Route path="/atomic-demolition/terms" element={<AtomicDemolitionTerms />} />
-        <Route
-          path="/blog"
-          element={
-            <Suspense fallback={<div className="min-h-screen bg-[#0a0a0a]" />}>
-              <BlogList />
-            </Suspense>
-          }
-        />
-        <Route
-          path="/blog/:slug"
-          element={
-            <Suspense fallback={<div className="min-h-screen bg-[#0a0a0a]" />}>
-              <BlogPost />
-            </Suspense>
-          }
-        />
       </Routes>
     </BrowserRouter>
   );

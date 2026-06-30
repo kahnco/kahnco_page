@@ -4,14 +4,15 @@
 // 주의: 이 사이트는 클라이언트 렌더링 SPA 이므로, 검색엔진의 JS 실행에 의존한다.
 // 더 강한 SEO 가 필요하면 빌드 타임 프리렌더링(react-snap 등) 도입을 검토할 것.
 
-const SITE_NAME = "Kahnco";
-const SITE_URL = "https://kahnco.me";
+const SITE_NAME = "Kahnco Blog";
+const SITE_URL = "https://blog.kahnco.me"; // 블로그 정식(canonical) 도메인
+const MAIN_URL = "https://kahnco.me"; // 메인 사이트(작성자/발행처)
 const DEFAULT_DESCRIPTION = "칸코테크 개발 블로그 — 인프라, DevOps, 풀스택 개발 경험을 기록합니다.";
 
 interface SeoInput {
   title?: string;
   description?: string;
-  /** 절대 경로 또는 사이트 기준 상대 경로 (예: /blog/foo) */
+  /** 절대 경로 또는 사이트 기준 상대 경로 (예: /my-post) */
   path?: string;
   image?: string;
   type?: "website" | "article";
@@ -108,8 +109,8 @@ export function setArticleJsonLd(input: {
     description: input.description,
     datePublished: input.datePublished,
     dateModified: input.datePublished,
-    author: { "@type": "Person", name: "이현준", url: SITE_URL },
-    publisher: { "@type": "Organization", name: "칸코테크", url: SITE_URL },
+    author: { "@type": "Person", name: "이현준", url: MAIN_URL },
+    publisher: { "@type": "Organization", name: "칸코테크", url: MAIN_URL },
     mainEntityOfPage: `${SITE_URL}${input.path}`,
     ...(input.image ? { image: input.image.startsWith("http") ? input.image : `${SITE_URL}${input.image}` } : {}),
   };

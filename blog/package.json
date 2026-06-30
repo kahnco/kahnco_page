@@ -1,30 +1,30 @@
 {
-  "name": "kahnco-pages",
+  "name": "kahnco-blog",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://kahnco.github.io/kahnco_page/",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "sitemap": "node scripts/generate-sitemap.mjs",
     "build": "node scripts/generate-sitemap.mjs && tsc -b && vite build",
-    "preview": "vite preview",
-    "lint": "eslint .",
-    "deploy": "yarn build && gh-pages -d dist"
+    "preview": "vite preview"
   },
   "dependencies": {
     "framer-motion": "^12.35.0",
+    "highlight.js": "^11.10.0",
     "react": "^18",
     "react-dom": "^18",
-    "react-router-dom": "^7.13.1"
+    "react-markdown": "^10.1.0",
+    "react-router-dom": "^7.13.1",
+    "rehype-highlight": "^7.0.2",
+    "rehype-slug": "^6.0.0",
+    "remark-gfm": "^4.0.1"
   },
   "devDependencies": {
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "@vitejs/plugin-react": "^4.3.4",
     "autoprefixer": "^10.4.20",
-    "eslint": "^8",
-    "gh-pages": "^6.1.1",
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
     "typescript": "^5",

@@ -1,5 +1,18 @@
 {
   "projects": {
     "default": "yourthoughts-5138d"
-  }
+  },
+  "targets": {
+    "yourthoughts-5138d": {
+      "hosting": {
+        "main": [
+          "yourthoughts-5138d"
+        ],
+        "blog": [
+          "kahnco-blog"
+        ]
+      }
+    }
+  },
+  "etags": {}
 }
