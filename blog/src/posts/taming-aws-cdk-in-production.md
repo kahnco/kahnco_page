@@ -24,6 +24,16 @@ CDK 코드를 디버깅하려면 먼저 추상화 레벨을 구분하는 게 좋
 
 L2·L3가 편한 이유와 발목을 잡는 이유는 사실 **같습니다**. 결정을 대신 내려주기 때문입니다. 그래서 그 결정이 내 요구와 어긋나는 순간, 우리는 추상화를 *뚫고 내려가야* 합니다. 그 통로가 escape hatch입니다.
 
+아래는 CDK가 코드에서 CloudFormation으로 바뀌는 흐름과, escape hatch·Aspects가 끼어드는 지점입니다.
+
+```mermaid
+flowchart LR
+    App["CDK App<br/>(TypeScript)"] --> C["Constructs<br/>L1 / L2 / L3"]
+    EH["escape hatch<br/>addPropertyOverride"] -.->|"L1 직접 수정"| C
+    Asp["Aspects<br/>트리 순회 강제"] -.->|"태깅·삭제보호·검증"| C
+    C --> Synth["cdk synth"] --> CFN["CloudFormation 템플릿"] --> Deploy["배포"]
+```
+
 ## 1. escape hatch — 추상화가 막힐 때 L1으로 내려가기
 
 L2 construct가 원하는 속성을 노출하지 않을 때, construct를 버리고 L1으로 새로 짜는 건 권하고 싶지 않습니다. 대신 모든 L2는 내부에 L1 자식을 품고 있고, 거기에 직접 접근할 수 있습니다.

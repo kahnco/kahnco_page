@@ -3,6 +3,17 @@ import remarkGfm from "remark-gfm";
 import rehypeHighlight from "rehype-highlight";
 import rehypeSlug from "rehype-slug";
 import "highlight.js/styles/github-dark.css";
+import MermaidDiagram from "./MermaidDiagram";
+
+/** pre 의 자식 code 엘리먼트에서 raw 텍스트를 추출한다. */
+function extractText(node: unknown): string {
+  if (typeof node === "string") return node;
+  if (Array.isArray(node)) return node.map(extractText).join("");
+  if (node && typeof node === "object" && "props" in node) {
+    return extractText((node as { props?: { children?: unknown } }).props?.children);
+  }
+  return "";
+}
 
 /**
  * 블로그 본문 마크다운 렌더러.
@@ -16,7 +27,7 @@ export default function Markdown({ children }: { children: string }) {
     <div className="markdown-body text-neutral-300 leading-relaxed">
       <ReactMarkdown
         remarkPlugins={[remarkGfm]}
-        rehypePlugins={[rehypeSlug, rehypeHighlight]}
+        rehypePlugins={[rehypeSlug, [rehypeHighlight, { ignoreMissing: true }]]}
         components={{
           h1: ({ ...props }) => (
             <h1 className="scroll-mt-24 text-3xl sm:text-4xl font-bold text-white mt-12 mb-5" {...props} />
@@ -84,12 +95,26 @@ export default function Markdown({ children }: { children: string }) {
               </code>
             );
           },
-          pre: ({ ...props }) => (
-            <pre
-              className="my-5 overflow-x-auto rounded-lg border border-white/10 bg-[#0d1117] p-4 text-sm leading-relaxed"
-              {...props}
-            />
-          ),
+          pre: ({ children, ...props }) => {
+            // ```mermaid 코드 블록은 다이어그램으로 렌더링한다.
+            const child = Array.isArray(children) ? children[0] : children;
+            const cls =
+              child && typeof child === "object" && "props" in child
+                ? ((child as { props?: { className?: string } }).props?.className ?? "")
+                : "";
+            if (cls.includes("language-mermaid")) {
+              const code = extractText(child).replace(/\n$/, "");
+              return <MermaidDiagram chart={code} />;
+            }
+            return (
+              <pre
+                className="my-5 overflow-x-auto rounded-lg border border-white/10 bg-[#0d1117] p-4 text-sm leading-relaxed"
+                {...props}
+              >
+                {children}
+              </pre>
+            );
+          },
         }}
       >
         {children}

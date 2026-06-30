@@ -19,6 +19,15 @@ draft: false
 - **CI/CD** — 빌드·테스트·배포 파이프라인 설계
 - **GitOps** — ArgoCD로 쿠버네티스 배포 자동화
 
+큰 흐름은 "인프라를 정의하고 → 배포하고 → 운영·확장하는" 순서로 이어집니다.
+
+```mermaid
+flowchart LR
+    A["IaC<br/>AWS CDK"] --> B["컨테이너·오케스트레이션<br/>K8s 멀티테넌시"]
+    B --> C["배포<br/>GitOps · ArgoCD"]
+    C --> D["운영·확장<br/>오토스케일링"]
+```
+
 ## 코드도 이렇게 보입니다
 
 ```yaml

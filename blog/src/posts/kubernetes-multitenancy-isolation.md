@@ -33,7 +33,18 @@ draft: false
 | 노드/스케줄링 | taint·toleration, node pool | ❌ |
 | 커널·런타임 | gVisor, Kata, vcluster, 별도 클러스터 | ❌ (공유 커널) |
 
-네임스페이스가 기본으로 주는 건 **이름 충돌 방지와 오브젝트 그룹화**뿐입니다. 나머지는 전부 명시적으로 채워야 합니다. 하나씩 보겠습니다.
+네임스페이스가 기본으로 주는 건 **이름 충돌 방지와 오브젝트 그룹화**뿐입니다. 나머지는 전부 명시적으로 채워야 합니다. 한 테넌트를 둘러싼 다섯 축을 그림으로 보면 이렇습니다.
+
+```mermaid
+flowchart TB
+    T["테넌트"] --> A1["① RBAC · ServiceAccount<br/>인증·권한"]
+    T --> A2["② ResourceQuota · LimitRange<br/>리소스"]
+    T --> A3["③ NetworkPolicy default-deny<br/>네트워크"]
+    T --> A4["④ taint · 전용 노드풀<br/>노드"]
+    T --> A5["⑤ 샌드박스 · vcluster · 별도 클러스터<br/>커널·런타임"]
+```
+
+하나씩 보겠습니다.
 
 ### 1. 인증·권한 — RBAC와 ServiceAccount
 
