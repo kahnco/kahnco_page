@@ -1,5 +1,5 @@
 import { lazy, Suspense } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Link, Navigate } from "react-router-dom";
 import Hero from "./components/Hero";
 import About from "./components/About";
 import Skills from "./components/Skills";
@@ -21,8 +21,16 @@ const BlogPost = lazy(() => import("./pages/BlogPost"));
 function Home() {
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-white font-[family-name:var(--font-geist-sans)]">
-      <header className="fixed top-0 left-0 right-0 z-50 flex items-center px-6 py-4 bg-[#0a0a0a]/80 backdrop-blur-md">
+      <header className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-4 bg-[#0a0a0a]/80 backdrop-blur-md">
         <img src="/logo.jpg" alt="Kahnco" className="w-8 h-8 rounded" />
+        <nav>
+          <Link
+            to="/blog"
+            className="text-sm font-medium text-neutral-400 hover:text-white transition-colors"
+          >
+            Blog
+          </Link>
+        </nav>
       </header>
       <Hero />
       <About />
@@ -45,11 +53,24 @@ function Home() {
   );
 }
 
+/**
+ * 루트 라우트. blog.kahnco.me 같은 blog 서브도메인으로 접속하면
+ * 포트폴리오 홈 대신 블로그 목록으로 바로 보낸다.
+ * 그 외 도메인(kahnco.me, *.web.app)에서는 평소대로 홈을 보여준다.
+ */
+function RootRoute() {
+  const host = typeof window !== "undefined" ? window.location.hostname : "";
+  if (host.startsWith("blog.")) {
+    return <Navigate to="/blog" replace />;
+  }
+  return <Home />;
+}
+
 export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<RootRoute />} />
         <Route path="/yourthoughts" element={<YourThoughtsLanding />} />
         <Route path="/yourthoughts/privacy" element={<YourThoughtsPrivacy />} />
         <Route path="/yourthoughts/terms" element={<YourThoughtsTerms />} />
