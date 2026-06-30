@@ -82,8 +82,6 @@ export default function BlogPost() {
 
           <div className="mt-6 flex flex-wrap items-center gap-3 text-xs text-neutral-500">
             <time dateTime={post.date}>{formatDate(post.date)}</time>
-            <span>·</span>
-            <span>{post.readingMinutes}분 읽기</span>
           </div>
 
           <h1 className="mt-4 text-3xl sm:text-4xl font-bold leading-tight tracking-tight">

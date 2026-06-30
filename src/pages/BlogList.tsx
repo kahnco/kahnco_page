@@ -92,8 +92,6 @@ export default function BlogList() {
               >
                 <div className="flex items-center gap-3 text-xs text-neutral-500">
                   <time dateTime={post.date}>{formatDate(post.date)}</time>
-                  <span>·</span>
-                  <span>{post.readingMinutes}분 읽기</span>
                   {post.draft && (
                     <span className="rounded bg-yellow-500/20 px-1.5 py-0.5 text-yellow-400">
                       초안
