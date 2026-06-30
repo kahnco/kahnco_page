@@ -169,7 +169,7 @@ export class SecureBucket extends Construct {
 
 ### logical ID를 함부로 바꾸지 않기
 
-CloudFormation은 **logical ID로 리소스의 정체성을 추적**합니다. CDK는 construct 트리의 경로(path)를 해싱해 logical ID를 만듭니다. 즉 construct의 id를 바꾸거나, 부모 construct를 끼워 넣어 트리 경로가 달라지면 logical ID가 바뀌고, CloudFormation은 그것을 **"기존 리소스 삭제 + 새 리소스 생성"**으로 해석합니다.
+CloudFormation은 **logical ID로 리소스의 정체성을 추적**합니다. CDK는 construct 트리의 경로(path)를 해싱해 logical ID를 만듭니다. 즉 construct의 id를 바꾸거나, 부모 construct를 끼워 넣어 트리 경로가 달라지면 logical ID가 바뀌고, CloudFormation은 그것을 "**기존 리소스 삭제 + 새 리소스 생성**"으로 해석합니다.
 
 stateless 리소스라면 잠깐의 교체로 끝나지만, RDS·S3·DynamoDB라면 **데이터가 사라질 수 있습니다.** 리팩터링 한 번에 프로덕션 DB가 replace 대상이 되는 사고가 여기서 나옵니다.
 
