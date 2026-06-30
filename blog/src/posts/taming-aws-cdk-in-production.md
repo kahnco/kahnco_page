@@ -1,6 +1,6 @@
 ---
 title: 프로덕션에서 AWS CDK 길들이기 — escape hatch, Aspects, 그리고 안정화 전략
-date: 2026-06-30
+date: 2026-05-03
 description: CDK의 L2·L3 추상화는 편하지만 프로덕션에선 발목을 잡습니다. escape hatch로 추상화를 뚫고, Aspects로 횡단 정책을 강제하고, logical ID와 drift를 다스려 CDK를 운영 가능한 IaC로 만드는 실전 전략을 정리합니다.
 tags: [AWS, CDK, IaC, DevOps]
 draft: false
