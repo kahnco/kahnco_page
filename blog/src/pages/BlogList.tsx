@@ -2,6 +2,8 @@ import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import BlogHeader from "../components/BlogHeader";
+import AdSlot from "../components/AdSlot";
+import { AD_SLOTS } from "../lib/ads";
 import { getAllPosts, getAllTags } from "../lib/posts";
 import { setSeo, clearArticleJsonLd } from "../lib/seo";
 
@@ -123,6 +125,9 @@ export default function BlogList() {
             </motion.article>
           ))}
         </div>
+
+        {/* 목록 하단 광고 */}
+        <AdSlot slot={AD_SLOTS.listBottom} />
 
         <div className="mt-16 border-t border-white/10 pt-8">
           <a

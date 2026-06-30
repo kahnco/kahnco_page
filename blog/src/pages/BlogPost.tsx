@@ -3,6 +3,8 @@ import { Link, useParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import BlogHeader from "../components/BlogHeader";
 import Markdown from "../components/Markdown";
+import AdSlot from "../components/AdSlot";
+import { AD_SLOTS } from "../lib/ads";
 import { getPostBySlug } from "../lib/posts";
 import { setSeo, setArticleJsonLd, clearArticleJsonLd } from "../lib/seo";
 
@@ -10,6 +12,26 @@ function formatDate(iso: string): string {
   const [y, m, d] = iso.split("-");
   if (!y || !m || !d) return iso;
   return `${y}.${m}.${d}`;
+}
+
+/**
+ * 본문을 인아티클 광고를 끼울 두 덩어리로 나눈다.
+ * 글 중간에서 가장 가까운 ## 헤딩 경계로 분할(섹션 사이에 자연스럽게 광고가 들어가도록).
+ * 헤딩이 2개 미만이면 분할하지 않는다.
+ */
+function splitForAd(content: string): [string, string] {
+  const positions: number[] = [];
+  const re = /\n## /g;
+  let m: RegExpExecArray | null;
+  while ((m = re.exec(content)) !== null) positions.push(m.index);
+  if (positions.length < 2) return [content, ""];
+
+  const mid = content.length / 2;
+  let best = positions[0];
+  for (const p of positions) {
+    if (Math.abs(p - mid) < Math.abs(best - mid)) best = p;
+  }
+  return [content.slice(0, best), content.slice(best)];
 }
 
 export default function BlogPost() {
@@ -113,8 +135,24 @@ export default function BlogPost() {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.1 }}
         >
-          <Markdown>{post.content}</Markdown>
+          {(() => {
+            const [firstHalf, secondHalf] = splitForAd(post.content);
+            return (
+              <>
+                <Markdown>{firstHalf}</Markdown>
+                {secondHalf && (
+                  <>
+                    <AdSlot slot={AD_SLOTS.inArticle} />
+                    <Markdown>{secondHalf}</Markdown>
+                  </>
+                )}
+              </>
+            );
+          })()}
         </motion.div>
+
+        {/* 본문 끝 광고 */}
+        <AdSlot slot={AD_SLOTS.articleEnd} />
 
         <footer className="mt-16 border-t border-white/10 pt-8">
           <Link
