@@ -11,10 +11,12 @@
 
 export const ADSENSE_CLIENT = "ca-pub-6711409267761750";
 
+// 단일 광고 단위(blog-in-article, slot 2110914747)를 세 자리에 재사용.
+// 자리별로 리포트를 나누고 싶으면 각각 다른 슬롯 ID를 넣으면 된다.
 export const AD_SLOTS = {
-  inArticle: "", // 글 본문 중간 (인아티클)
-  articleEnd: "", // 글 본문 끝
-  listBottom: "", // 목록 페이지 하단
+  inArticle: "2110914747", // 글 본문 중간 (인아티클)
+  articleEnd: "2110914747", // 글 본문 끝
+  listBottom: "2110914747", // 목록 페이지 하단
 };
 
 /** AdSense 게시자 ID가 정상 형식으로 채워졌는지 */
