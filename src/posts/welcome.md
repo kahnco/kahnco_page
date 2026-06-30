@@ -14,9 +14,9 @@ draft: false
 
 ## 앞으로 다룰 주제
 
-- **CI/CD** — GitHub Actions로 빌드·테스트·배포 파이프라인 구축
-- **컨테이너 / 오케스트레이션** — Docker에서 Kubernetes로 넘어가는 개념의 벽
-- **IaC** — AWS CDK로 인프라를 코드로 관리하기
+- **IaC** — AWS CDK를 프로덕션에서 안정적으로 운영하기
+- **컨테이너 / 오케스트레이션** — Kubernetes 멀티테넌시와 리소스 격리
+- **CI/CD** — 빌드·테스트·배포 파이프라인 설계
 - **GitOps** — ArgoCD로 쿠버네티스 배포 자동화
 
 ## 코드도 이렇게 보입니다
@@ -36,6 +36,6 @@ jobs:
       - run: yarn build
 ```
 
-> 첫 정식 글은 **"GitHub Actions로 CI/CD 파이프라인 처음부터 구축하기"** 입니다. 곧 올라옵니다.
+> 첫 정식 글은 **[프로덕션에서 AWS CDK 길들이기](/blog/taming-aws-cdk-in-production)** 입니다. escape hatch, Aspects, 안정화 전략까지 — CDK를 운영 가능한 IaC로 만드는 실전 이야기를 다룹니다.
 
 읽어주셔서 감사합니다. 🙇
