@@ -9,7 +9,7 @@
 // 값이 비어 있으면 광고가 렌더링되지 않으므로(레이아웃 영향 없음), 채우기 전까지 안전합니다.
 // 같은 광고 단위 ID를 여러 자리에 재사용해도 됩니다(슬롯을 따로 안 만들고 싶다면 동일 값 입력).
 
-export const ADSENSE_CLIENT = ""; // 예: "ca-pub-1234567890123456"
+export const ADSENSE_CLIENT = "ca-pub-6711409267761750";
 
 export const AD_SLOTS = {
   inArticle: "", // 글 본문 중간 (인아티클)
