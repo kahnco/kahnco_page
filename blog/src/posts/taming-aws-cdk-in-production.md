@@ -24,6 +24,8 @@ CDK 코드를 디버깅하려면 먼저 추상화 레벨을 구분하는 게 좋
 
 L2·L3가 편한 이유와 발목을 잡는 이유는 사실 **같습니다**. 결정을 대신 내려주기 때문입니다. 그래서 그 결정이 내 요구와 어긋나는 순간, 우리는 추상화를 *뚫고 내려가야* 합니다. 그 통로가 escape hatch입니다.
 
+여기서 한 가지 더 짚고 싶은 게 있습니다. **레벨이 높을수록 편하지만, 탈출 비용도 함께 커집니다.** L3 패턴은 ALB·Fargate 서비스·로그 그룹·보안 그룹·타깃 그룹을 한 번에 만들어주지만, 그중 보안 그룹 규칙 하나만 손보려 해도 패턴이 감싼 내부 구조를 헤집어야 합니다. 그래서 실무에서는 "처음엔 L3로 빠르게 띄우고, 커스터마이징 요구가 쌓이면 L2 조합으로 풀어 쓰는" 전환이 자주 일어납니다. 어느 레벨이 정답인지는 **"이 리소스를 앞으로 얼마나 세밀하게 제어할 것인가"**로 가늠하면 대체로 맞습니다. 한 번 만들고 거의 안 건드릴 보조 리소스는 L3로 편하게, 두고두고 튜닝할 핵심 리소스는 L2로 직접 조립하는 식입니다.
+
 아래는 CDK가 코드에서 CloudFormation으로 바뀌는 흐름과, escape hatch·Aspects가 끼어드는 지점입니다.
 
 ```mermaid
@@ -62,6 +64,8 @@ cfnBucket.addOverride('Metadata.guardduty.scan', 'enabled');
 cfnBucket.addDeletionOverride('Properties.Tags');
 ```
 
+`addOverride`의 경로는 합성될 CloudFormation 템플릿의 구조를 그대로 따라갑니다. 배열에는 인덱스로 접근하는데, 예를 들어 첫 번째 태그의 값을 바꾸려면 `addOverride('Properties.Tags.0.Value', 'prod')`처럼 씁니다. 다만 이 경로는 **L2가 만들어내는 CloudFormation 구조에 의존**하기 때문에, CDK 버전이 올라가며 내부 구조가 바뀌면 경로가 어긋나 override가 조용히 무력화될 수 있습니다. 컴파일 에러도 안 나고 합성도 통과하는데 결과만 달라지는, 추적하기 까다로운 부류의 문제입니다. 그래서 raw override를 쓸 때는 뒤에서 다룰 **스냅샷 테스트로 합성 결과를 묶어두어**, 경로가 깨지면 테스트에서 바로 드러나게 해두는 편이 안전합니다.
+
 기억해두면 좋은 원칙이 하나 있습니다. **escape hatch는 "탈출구"이지 "정문"이 아닙니다.** 한두 곳에서 L1을 건드리는 건 자연스럽지만, 코드베이스 전체에 `addPropertyOverride`가 흩뿌려져 있다면 그건 추상화가 잘못됐다는 신호로 봐도 좋습니다. 반복되는 override는 다음 절의 Aspect나 커스텀 construct로 끌어올리는 편이 낫습니다.
 
 > 한 가지 주의할 점이 있습니다. `defaultChild`가 항상 원하는 L1을 가리키진 않습니다. L3 패턴처럼 자식이 여럿이면 `node.findChild('Resource')`나 `node.children`을 직접 탐색해야 합니다. 합성 트리는 `cdk synth`로 언제든 들여다볼 수 있습니다.
@@ -98,6 +102,18 @@ class EnforceStatefulProtection implements IAspect {
 import { Aspects } from 'aws-cdk-lib';
 Aspects.of(stack).add(new EnforceStatefulProtection());
 ```
+
+비슷한 결로 **비용 태깅**도 한 곳에서 강제할 수 있습니다. 다만 단순 태깅이라면 Aspect를 직접 짤 필요 없이, CDK가 제공하는 `Tags.of(scope).add(...)`가 더 간단합니다. 이것도 내부적으로는 Aspect로 동작해 하위 트리 전체에 태그를 전파합니다.
+
+```typescript
+import { Tags } from 'aws-cdk-lib';
+
+// 이 스택 아래 모든 리소스에 태그가 전파됩니다
+Tags.of(stack).add('CostCenter', 'platform');
+Tags.of(stack).add('Environment', 'prod');
+```
+
+여기서 기억할 건 도구 이름이 아니라 성질입니다. **"한 곳에서 선언하면 트리 전체에 적용된다"**는 Aspect의 성질이, 태깅·삭제 보호·보안 규칙처럼 빠뜨리면 안 되는 일들을 사람의 주의력 대신 합성 단계가 책임지게 만들어 줍니다.
 
 Aspect가 진짜 강력해지는 건 **단순 적용을 넘어 검증·차단**에 쓸 때입니다. `Annotations.of(node).addError(...)`로 에러를 달면 `cdk synth` 자체가 실패합니다. 즉 잘못된 인프라가 배포 파이프라인에 진입하기 전에 멈춰 세울 수 있습니다.
 
@@ -182,6 +198,12 @@ cfnTable.overrideLogicalId('UsersTableLegacyId');
 
 리팩터링 전후로 `cdk diff`를 돌려 **Replacement가 뜨는지 확인하는 습관**이 가장 든든한 안전장치입니다.
 
+### stateful 리소스는 별도 스택으로 분리
+
+logical ID 사고를 구조적으로 줄이는 방법이 하나 더 있습니다. **데이터가 있는 리소스(RDS·DynamoDB·S3)를 애플리케이션 스택과 분리해 별도 스택에 두는 것**입니다. 자주 바뀌는 애플리케이션 스택(Fargate·Lambda·ALB)은 부담 없이 갈아엎되, 좀처럼 바뀌지 않는 데이터 스택은 손대지 않는 구조를 만드는 겁니다. 이렇게 나누면 잦은 리팩터링이 데이터 리소스의 logical ID를 건드릴 일 자체가 줄어듭니다.
+
+다만 스택을 나누면 **교차 스택 참조(cross-stack reference)** 가 생기고, 여기에도 함정이 있습니다. 한 스택이 다른 스택의 값을 `export`하면, 그 값을 누군가 쓰는 동안에는 export한 쪽을 마음대로 바꾸거나 지울 수 없습니다(`Export ... cannot be deleted as it is in use` 오류). 자주 바뀌는 값을 export로 주고받으면 두 스택이 사실상 한 몸처럼 묶여버립니다. 그래서 변동이 잦은 값은 export보다 **SSM Parameter Store나 명시적 props**로 넘겨, 스택 사이의 결합을 느슨하게 유지하는 편이 유연합니다.
+
 ### cdk diff를 CI 게이트로
 
 `cdk deploy`를 사람이 로컬에서 돌리는 한 사고는 반복되기 쉽습니다. CI에서 `cdk diff`를 PR 코멘트로 띄우고, 특히 `Replacement: True`나 stateful 리소스 삭제가 보이면 머지를 막아두면 좋습니다.
@@ -215,6 +237,26 @@ test('보안 버킷은 퍼블릭 액세스를 차단한다', () => {
 
 콘솔에서 누군가 손으로 보안 그룹을 열거나 태그를 바꾸면, 코드와 실제 인프라가 어긋납니다(drift). CloudFormation의 drift detection을 주기적으로 돌려(예: EventBridge 스케줄 + Lambda) 코드가 더 이상 진실이 아닌 상태를 일찍 잡아두는 게 좋습니다. IaC의 가치는 "코드 = 인프라"라는 등식이 유지될 때 비로소 살아납니다.
 
+## 5. 환경을 코드로 분리하기
+
+마지막으로, 안정적인 CDK 운영에서 의외로 자주 어긋나는 지점이 **환경 분리**입니다. prod와 dev가 같은 코드를 공유하되 값만 달라야 한다면, 그 차이를 코드 곳곳의 `if (env === 'prod')` 분기로 흩뿌리지 말고 **타입이 있는 설정 객체** 한 곳에 모으는 게 좋습니다. 그래야 "이 환경에서 무엇이 어떻게 다른지"가 한눈에 보이고, 새 환경을 추가할 때도 객체 하나만 채우면 됩니다.
+
+```typescript
+interface EnvConfig {
+  readonly minCapacity: number;
+  readonly retainData: boolean;
+  readonly account: string;
+  readonly region: string;
+}
+
+const CONFIG: Record<string, EnvConfig> = {
+  dev:  { minCapacity: 1, retainData: false, account: '111111111111', region: 'ap-northeast-2' },
+  prod: { minCapacity: 3, retainData: true,  account: '222222222222', region: 'ap-northeast-2' },
+};
+```
+
+그리고 스택의 `env`(계정·리전)는 가능하면 **명시적으로** 지정하는 게 좋습니다. 비워두면 CDK가 실행 환경의 자격증명에서 계정을 추론하는데(environment-agnostic), 이 값이 사람마다·CI마다 달라지면 "내 노트북에선 되는데 파이프라인에선 엉뚱한 계정에 배포되는" 혼란이 생깁니다. 계정·리전을 코드에 박아두면, 어떤 환경에서 합성하든 결과가 같아져 예측 가능성이 한 단계 올라갑니다.
+
 ## 정리 — 도구가 아니라 규율의 문제
 
 CDK를 프로덕션에서 다스리는 일은 결국 세 층위의 규율로 압축됩니다.
@@ -222,6 +264,7 @@ CDK를 프로덕션에서 다스리는 일은 결국 세 층위의 규율로 압
 - **escape hatch**: 추상화가 막히면 깔끔하게 L1으로 내려가되, 반복되면 끌어올립니다.
 - **Aspects**: 보안·태깅·삭제 보호 같은 횡단 규칙은 트리 순회로 강제하고, 위반은 합성 단계에서 멈춰 세웁니다.
 - **커스텀 construct**: 조직의 "올바른 기본값"을 코드 하나의 진실로 굳힙니다.
-- 그 위에 **logical ID 안정성 · cdk diff 게이트 · snapshot 테스트 · drift 감지**로 예측 가능성을 보장합니다.
+- 그 위에 **logical ID 안정성 · stateful 스택 분리 · cdk diff 게이트 · snapshot 테스트 · drift 감지**로 예측 가능성을 보장합니다.
+- 환경 차이는 **타입 있는 설정 객체와 명시적 `env`**로 한곳에 모읍니다.
 
 CDK의 진짜 강점은 "프로그래밍 언어로 인프라를 쓴다"가 아니라, **인프라에 추상화·테스트·정적 검증 같은 소프트웨어 엔지니어링 규율을 그대로 적용할 수 있다**는 데 있다고 생각합니다. 그 규율을 세우는 순간 CDK는 편한 장난감에서 운영 가능한 플랫폼 코드로 바뀝니다.
