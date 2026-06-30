@@ -92,9 +92,7 @@ export default function YourThoughtsTerms() {
             <p>회사가 제공하는 서비스는 다음과 같습니다.</p>
             <ul className="list-disc pl-5 space-y-1 mt-2">
               <li>
-                국내 주요 온라인 커뮤니티(디시인사이드, 에펨코리아, 클리앙,
-                뽐뿌, 루리웹, 더쿠, 인벤, 엠엘비파크, 보배드림, 네이트판,
-                82쿡)의 실시간 키워드 분석
+                국내 주요 온라인 커뮤니티의 실시간 키워드 분석
               </li>
               <li>커뮤니티 키워드 언급 빈도 순위 (TOP 20)</li>
               <li>커뮤니티 키워드 인기도 순위 (TOP 20)</li>

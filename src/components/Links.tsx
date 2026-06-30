@@ -1,9 +1,11 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const links = [
   {
     name: "GitHub",
     url: "https://github.com/ggj0418",
+    internal: false,
     description: "코드와 프로젝트를 확인하세요",
     icon: (
       <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor">
@@ -13,8 +15,9 @@ const links = [
   },
   {
     name: "Blog",
-    url: "https://kahnco.tistory.com/",
-    description: "기술 블로그에서 글을 읽어보세요",
+    url: "/blog",
+    internal: true,
+    description: "인프라 · DevOps · 개발 경험을 기록합니다",
     icon: (
       <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z" />
@@ -37,26 +40,45 @@ export default function Links() {
       </motion.h2>
 
       <div className="flex flex-col sm:flex-row gap-6">
-        {links.map((link) => (
-          <motion.a
-            key={link.name}
-            href={link.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group w-64 p-6 rounded-2xl border border-white/10 bg-white/5 transition-colors hover:bg-blue-500/10 hover:border-blue-500/30"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            whileHover={{ y: -4 }}
-            transition={{ duration: 0.3 }}
-          >
-            <div className="mb-4 text-neutral-400 group-hover:text-blue-400 transition-colors">
-              {link.icon}
-            </div>
-            <h3 className="text-lg font-semibold mb-1">{link.name}</h3>
-            <p className="text-sm text-neutral-500">{link.description}</p>
-          </motion.a>
-        ))}
+        {links.map((link) => {
+          const cardClass =
+            "group w-64 p-6 rounded-2xl border border-white/10 bg-white/5 transition-colors hover:bg-blue-500/10 hover:border-blue-500/30";
+          const inner = (
+            <>
+              <div className="mb-4 text-neutral-400 group-hover:text-blue-400 transition-colors">
+                {link.icon}
+              </div>
+              <h3 className="text-lg font-semibold mb-1">{link.name}</h3>
+              <p className="text-sm text-neutral-500">{link.description}</p>
+            </>
+          );
+          const motionProps = {
+            initial: { opacity: 0, y: 20 },
+            whileInView: { opacity: 1, y: 0 },
+            viewport: { once: true },
+            whileHover: { y: -4 },
+            transition: { duration: 0.3 },
+          } as const;
+
+          return link.internal ? (
+            <motion.div key={link.name} {...motionProps}>
+              <Link to={link.url} className={`${cardClass} block`}>
+                {inner}
+              </Link>
+            </motion.div>
+          ) : (
+            <motion.a
+              key={link.name}
+              href={link.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={cardClass}
+              {...motionProps}
+            >
+              {inner}
+            </motion.a>
+          );
+        })}
       </div>
     </section>
   );
