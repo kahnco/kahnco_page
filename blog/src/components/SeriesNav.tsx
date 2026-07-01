@@ -14,7 +14,7 @@ export default function SeriesNav({ slug }: { slug: string }) {
   return (
     <aside className="my-10 rounded-xl border border-blue-500/25 bg-blue-500/[0.05] p-5">
       <div className="flex items-baseline justify-between gap-3">
-        <h3 className="text-sm font-semibold text-blue-300">📚 {series.title} 커리큘럼</h3>
+        <h3 className="text-sm font-semibold text-blue-300">📚 {series.title}</h3>
         <span className="shrink-0 text-xs text-neutral-500">
           {position} / {total}편
         </span>

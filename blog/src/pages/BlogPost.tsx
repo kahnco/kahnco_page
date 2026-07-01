@@ -136,7 +136,7 @@ export default function BlogPost() {
             if (!s) return null;
             return (
               <div className="mt-4 inline-flex items-center gap-2 rounded-full border border-blue-500/30 bg-blue-500/10 px-3 py-1 text-xs text-blue-300">
-                📚 {s.series.title} 커리큘럼 · {s.position}/{s.total}편
+                📚 {s.series.title} · {s.position}/{s.total}편
               </div>
             );
           })()}

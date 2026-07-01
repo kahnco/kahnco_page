@@ -20,7 +20,7 @@ export const SERIES: Series[] = [
   {
     slug: "stocks-basics",
     title: "주식 투자 기초",
-    description: "순서대로 읽으면 주식 투자의 기본기를 잡을 수 있도록 구성한 커리큘럼입니다.",
+    description: "순서대로 읽으면 주식 투자의 기본기를 잡을 수 있도록 순서를 잡은 글들입니다.",
     parts: [
       { order: 1, title: "시작하기 전에 — 마인드셋과 가격의 원리", slug: "stocks-before-you-start" },
       { order: 2, title: "기업 가치 읽기 — PER·PBR·ROE", slug: "reading-valuation-metrics" },
