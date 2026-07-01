@@ -14,6 +14,7 @@ title: 글 제목 (검색 키워드를 자연스럽게 포함)
 date: 2026-07-01
 description: 검색 결과·SNS 공유에 노출되는 한 줄 요약. 120자 내외 권장.
 tags: [DevOps, CI/CD, GitHub Actions]
+category: [dev, infra]       # [1차, 2차] — slug 또는 한글 라벨 모두 허용
 thumbnail: /cover.png        # 선택. public/ 기준 절대경로
 draft: false                 # true면 목록·배포에서 제외 (개발 모드에서만 미리보기)
 ---
@@ -22,6 +23,20 @@ draft: false                 # true면 목록·배포에서 제외 (개발 모�
 ```
 
 3. 본문을 마크다운으로 작성한다. 표·체크리스트(GFM), 코드 블록 구문 강조 모두 지원.
+
+## 카테고리
+
+글은 `category: [1차, 2차]` 로 소속을 지정합니다. 카테고리 정의는 `blog/src/lib/categories.ts` 한 곳에서 관리하며,
+사이드바 메뉴와 `/category/...` 페이지가 여기서 만들어집니다. slug 또는 한글 라벨 아무거나 써도 됩니다.
+
+| 1차 (slug / 라벨) | 2차 (slug / 라벨) |
+|---|---|
+| `dev` / 개발 | `backend` / 백엔드, `infra` / 인프라·DevOps, `cs` / CS·이론 |
+| `invest` / 투자 | `stocks` / 주식 |
+| `life` / 일상 | `etc` / 잡담 |
+
+새 카테고리가 필요하면 `categories.ts` 의 `CATEGORIES` 배열에 추가하면 메뉴에 자동 반영됩니다.
+카테고리를 지정하지 않은 글은 "전체 글"에만 나오고 카테고리 페이지에는 안 잡힙니다.
 
 ## 어투
 

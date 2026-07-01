@@ -6,6 +6,7 @@ import Markdown from "../components/Markdown";
 import AdSlot from "../components/AdSlot";
 import { AD_SLOTS } from "../lib/ads";
 import { getPostBySlug } from "../lib/posts";
+import { primaryLabel, secondaryLabel } from "../lib/categories";
 import { setSeo, setArticleJsonLd, clearArticleJsonLd } from "../lib/seo";
 
 function formatDate(iso: string): string {
@@ -102,7 +103,29 @@ export default function BlogPost() {
             ← 블로그 목록
           </Link>
 
-          <div className="mt-6 flex flex-wrap items-center gap-3 text-xs text-neutral-500">
+          <div className="mt-6 flex flex-wrap items-center gap-2 text-xs text-neutral-500">
+            {post.primaryCategory && (
+              <>
+                <Link
+                  to={`/category/${post.primaryCategory}`}
+                  className="text-blue-400 hover:text-blue-300 transition-colors"
+                >
+                  {primaryLabel(post.primaryCategory)}
+                </Link>
+                {post.secondaryCategory && (
+                  <>
+                    <span className="text-neutral-600">›</span>
+                    <Link
+                      to={`/category/${post.primaryCategory}/${post.secondaryCategory}`}
+                      className="text-blue-400 hover:text-blue-300 transition-colors"
+                    >
+                      {secondaryLabel(post.primaryCategory, post.secondaryCategory)}
+                    </Link>
+                  </>
+                )}
+                <span className="text-neutral-700">·</span>
+              </>
+            )}
             <time dateTime={post.date}>{formatDate(post.date)}</time>
           </div>
 

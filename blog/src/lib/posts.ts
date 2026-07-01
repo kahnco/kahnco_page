@@ -12,6 +12,9 @@
 // ---
 //
 // 본문은 frontmatter 아래에 일반 마크다운으로 작성한다.
+// 카테고리는 `category: [dev, infra]` (1차, 2차 slug 또는 한글 라벨) 로 지정한다.
+
+import { resolvePrimary, resolveSecondary } from "./categories";
 
 export interface PostMeta {
   slug: string;
@@ -22,6 +25,8 @@ export interface PostMeta {
   thumbnail?: string;
   draft: boolean;
   readingMinutes: number;
+  primaryCategory?: string; // 1차 카테고리 slug (예: dev)
+  secondaryCategory?: string; // 2차 카테고리 slug (예: infra)
 }
 
 export interface Post extends PostMeta {
@@ -87,9 +92,30 @@ function estimateReadingMinutes(body: string): number {
   return Math.max(1, minutes);
 }
 
+/** frontmatter 의 category 값을 1차·2차 slug 로 해석한다. */
+function parseCategory(value: unknown): { primary?: string; secondary?: string } {
+  const tokens = Array.isArray(value)
+    ? (value as string[])
+    : typeof value === "string" && value
+      ? value.split("/")
+      : [];
+  if (!tokens[0]) return {};
+
+  const primary = resolvePrimary(String(tokens[0]));
+  if (!primary) return {};
+  const result: { primary?: string; secondary?: string } = { primary: primary.slug };
+
+  if (tokens[1]) {
+    const secondary = resolveSecondary(primary, String(tokens[1]));
+    if (secondary) result.secondary = secondary.slug;
+  }
+  return result;
+}
+
 function buildPost(path: string, raw: string): Post {
   const slug = slugFromPath(path);
   const { data, body } = parseFrontmatter(raw);
+  const category = parseCategory(data.category);
 
   return {
     slug,
@@ -100,6 +126,8 @@ function buildPost(path: string, raw: string): Post {
     thumbnail: typeof data.thumbnail === "string" ? data.thumbnail : undefined,
     draft: data.draft === "true" || data.draft === true,
     readingMinutes: estimateReadingMinutes(body),
+    primaryCategory: category.primary,
+    secondaryCategory: category.secondary,
     content: body,
   };
 }
@@ -127,6 +155,37 @@ export function getPostBySlug(slug: string): Post | undefined {
   if (!post) return undefined;
   if (post.draft && !isDev) return undefined;
   return post;
+}
+
+/** 특정 1차 카테고리의 글 목록. */
+export function getPostsByPrimary(primary: string): Post[] {
+  return getAllPosts().filter((p) => p.primaryCategory === primary);
+}
+
+/** 특정 2차 카테고리의 글 목록. */
+export function getPostsBySecondary(primary: string, secondary: string): Post[] {
+  return getAllPosts().filter(
+    (p) => p.primaryCategory === primary && p.secondaryCategory === secondary,
+  );
+}
+
+/** 카테고리 slug -> 글 개수 맵 (사이드바 카운트용). primary/secondary 각각. */
+export function getCategoryCounts(): {
+  primary: Record<string, number>;
+  secondary: Record<string, number>;
+} {
+  const primary: Record<string, number> = {};
+  const secondary: Record<string, number> = {};
+  for (const post of getAllPosts()) {
+    if (post.primaryCategory) {
+      primary[post.primaryCategory] = (primary[post.primaryCategory] ?? 0) + 1;
+      if (post.secondaryCategory) {
+        const key = `${post.primaryCategory}/${post.secondaryCategory}`;
+        secondary[key] = (secondary[key] ?? 0) + 1;
+      }
+    }
+  }
+  return { primary, secondary };
 }
 
 /** 모든 태그(중복 제거, 빈도순). */

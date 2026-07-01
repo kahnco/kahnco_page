@@ -3,6 +3,7 @@ title: 블로그를 시작하며 — 인프라·DevOps 기록을 남깁니다
 date: 2026-05-02
 description: 칸코테크 개발 블로그를 엽니다. 앞으로 인프라와 DevOps를 중심으로, 중급 개발자가 실무에서 부딪히는 문제와 해결 과정을 기록합니다.
 tags: [잡담, DevOps]
+category: [life, etc]
 draft: false
 ---
 

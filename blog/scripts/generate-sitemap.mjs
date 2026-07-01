@@ -45,20 +45,29 @@ async function main() {
   );
 
   const postEntries = [];
+  const categoryPaths = new Set();
   for (const file of files) {
     const raw = await readFile(join(POSTS_DIR, file), "utf8");
     const fm = parseFrontmatter(raw);
     if (fm.draft === "true") continue;
     const slug = file.replace(/\.md$/, "");
     postEntries.push(urlEntry(`/${slug}`, fm.date, "0.8"));
+
+    // category: [primary, secondary] 에서 카테고리 페이지 경로 수집
+    const cat = String(fm.category ?? "").replace(/^\[|\]$/g, "");
+    const [p, s] = cat.split(",").map((t) => t.trim()).filter(Boolean);
+    if (p) categoryPaths.add(`/category/${p}`);
+    if (p && s) categoryPaths.add(`/category/${p}/${s}`);
   }
 
   const home = urlEntry("/", undefined, "1.0");
+  const categoryEntries = [...categoryPaths].sort().map((p) => urlEntry(p, undefined, "0.6"));
 
   const xml = [
     '<?xml version="1.0" encoding="UTF-8"?>',
     '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
     home,
+    ...categoryEntries,
     ...postEntries,
     "</urlset>",
     "",

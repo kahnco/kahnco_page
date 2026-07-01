@@ -3,6 +3,7 @@ title: GitOps를 ArgoCD로 시작하기 — 선언적 배포와 지속적 동기
 date: 2026-05-10
 description: GitOps는 "Git을 인프라의 유일한 진실로 삼고, 클러스터가 그 상태로 스스로 수렴하게 만드는" 운영 모델입니다. ArgoCD의 Application 모델부터 sync wave, ApplicationSet을 통한 규모 확장, 시크릿 관리와 흔한 함정까지 정리합니다.
 tags: [GitOps, ArgoCD, Kubernetes, DevOps]
+category: [dev, infra]
 draft: false
 ---
 

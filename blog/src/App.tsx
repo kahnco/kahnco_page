@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import BlogList from "./pages/BlogList";
+import Browse from "./pages/Browse";
 import BlogPost from "./pages/BlogPost";
 
 // AdSense 로더 스크립트는 index.html <head> 에 정적으로 포함되어 있다.
@@ -9,7 +9,9 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<BlogList />} />
+        <Route path="/" element={<Browse />} />
+        <Route path="/category/:primary" element={<Browse />} />
+        <Route path="/category/:primary/:secondary" element={<Browse />} />
         <Route path="/:slug" element={<BlogPost />} />
       </Routes>
     </BrowserRouter>
