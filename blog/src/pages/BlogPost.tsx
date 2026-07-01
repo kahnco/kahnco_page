@@ -4,8 +4,10 @@ import { motion } from "framer-motion";
 import BlogHeader from "../components/BlogHeader";
 import Markdown from "../components/Markdown";
 import AdSlot from "../components/AdSlot";
+import SeriesNav from "../components/SeriesNav";
 import { AD_SLOTS } from "../lib/ads";
 import { getPostBySlug } from "../lib/posts";
+import { seriesForPost } from "../lib/series";
 import { primaryLabel, secondaryLabel } from "../lib/categories";
 import { setSeo, setArticleJsonLd, clearArticleJsonLd } from "../lib/seo";
 
@@ -129,6 +131,16 @@ export default function BlogPost() {
             <time dateTime={post.date}>{formatDate(post.date)}</time>
           </div>
 
+          {(() => {
+            const s = seriesForPost(post.slug);
+            if (!s) return null;
+            return (
+              <div className="mt-4 inline-flex items-center gap-2 rounded-full border border-blue-500/30 bg-blue-500/10 px-3 py-1 text-xs text-blue-300">
+                📚 {s.series.title} 커리큘럼 · {s.position}/{s.total}편
+              </div>
+            );
+          })()}
+
           <h1 className="mt-4 text-3xl sm:text-4xl font-bold leading-tight tracking-tight">
             {post.title}
           </h1>
@@ -176,6 +188,9 @@ export default function BlogPost() {
 
         {/* 본문 끝 광고 */}
         <AdSlot slot={AD_SLOTS.articleEnd} />
+
+        {/* 커리큘럼(시리즈) 내비게이션 */}
+        <SeriesNav slug={post.slug} />
 
         <footer className="mt-16 border-t border-white/10 pt-8">
           <Link
