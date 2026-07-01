@@ -19,13 +19,16 @@ function Home() {
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-white font-[family-name:var(--font-geist-sans)]">
       <header className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-4 bg-[#0a0a0a]/80 backdrop-blur-md">
-        <img src="/logo.jpg" alt="Kahnco" className="w-8 h-8 rounded" />
+        <a href="/" className="flex items-center gap-2">
+          <img src="/logo.jpg" alt="Kahnco" className="w-8 h-8 rounded" />
+          <span className="text-sm font-semibold text-white">Kahnco</span>
+        </a>
         <nav>
           <a
             href={BLOG_URL}
             className="text-sm font-medium text-neutral-400 hover:text-white transition-colors"
           >
-            Blog
+            Blog ↗
           </a>
         </nav>
       </header>
