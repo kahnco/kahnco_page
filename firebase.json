@@ -14,6 +14,7 @@
     {
       "target": "blog",
       "public": "blog/dist",
+      "cleanUrls": true,
       "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
       "rewrites": [
         {
