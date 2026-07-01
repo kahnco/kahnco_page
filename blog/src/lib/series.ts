@@ -25,7 +25,7 @@ export const SERIES: Series[] = [
       { order: 1, title: "시작하기 전에 — 마인드셋과 가격의 원리", slug: "stocks-before-you-start" },
       { order: 2, title: "기업 가치 읽기 — PER·PBR·ROE", slug: "reading-valuation-metrics" },
       { order: 3, title: "성장주는 다르게 봐야 한다 — 지표가 안 통할 때", slug: "valuing-growth-stocks" },
-      { order: 4, title: "분산과 포트폴리오 — 계란을 어떻게 나눌까" },
+      { order: 4, title: "분산과 포트폴리오 — 계란을 어떻게 나눌까", slug: "diversification-and-portfolio" },
       { order: 5, title: "ETF·인덱스 투자 — 시장을 통째로" },
       { order: 6, title: "사고파는 규율 — 매매와 리스크 관리" },
     ],
