@@ -19,17 +19,15 @@ draft: false
 
 ```mermaid
 flowchart TB
-    subgraph VM["가상머신"]
-      HW1["하드웨어"] --> HV["하이퍼바이저"]
-      HV --> G1["게스트 OS + 커널"]
-      HV --> G2["게스트 OS + 커널"]
-      G1 --> AppV1["앱"]
-      G2 --> AppV2["앱"]
+    subgraph VM["가상머신 — 무겁다 · 격리 강함"]
+      direction TB
+      HV["하이퍼바이저"] --> G1["게스트 OS + 커널 + 앱"]
+      HV --> G2["게스트 OS + 커널 + 앱"]
     end
-    subgraph CT["컨테이너"]
-      HW2["하드웨어"] --> HK["호스트 커널 (공유!)"]
-      HK --> C1["격리된 프로세스<br/>(컨테이너 A)"]
-      HK --> C2["격리된 프로세스<br/>(컨테이너 B)"]
+    subgraph CT["컨테이너 — 가볍다 · 격리 약함"]
+      direction TB
+      HK["호스트 커널 — 모두 공유"] --> C1["격리된 프로세스 A"]
+      HK --> C2["격리된 프로세스 B"]
     end
 ```
 
