@@ -26,7 +26,7 @@ export default function Markdown({ children }: { children: string }) {
   return (
     <div className="markdown-body text-neutral-300 leading-relaxed">
       <ReactMarkdown
-        remarkPlugins={[remarkGfm]}
+        remarkPlugins={[[remarkGfm, { singleTilde: false }]]}
         rehypePlugins={[rehypeSlug, [rehypeHighlight, { ignoreMissing: true }]]}
         components={{
           h1: ({ ...props }) => (
