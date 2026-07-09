@@ -40,7 +40,7 @@ export const SERIES: Series[] = [
       { order: 3, title: "유스케이스와 API — 도는 서비스 완성", slug: "go-usecases-and-api" },
       { order: 4, title: "이벤트로 컨텍스트 잇기 (EDD)", slug: "go-events-across-contexts" },
       { order: 5, title: "컨테이너에 담기", slug: "go-containerizing" },
-      { order: 6, title: "로컬 쿠버네티스에 배포" },
+      { order: 6, title: "로컬 쿠버네티스에 배포", slug: "go-kubernetes-deploy" },
       { order: 7, title: "상태·설정·스케일링" },
       { order: 8, title: "CI/CD와 관찰성" },
     ],
