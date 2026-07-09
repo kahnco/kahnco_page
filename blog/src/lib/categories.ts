@@ -21,6 +21,7 @@ export const CATEGORIES: Category[] = [
       { slug: "backend", label: "백엔드" },
       { slug: "infra", label: "인프라·DevOps" },
       { slug: "cs", label: "CS·이론" },
+      { slug: "handson", label: "실전·튜토리얼" },
     ],
   },
   {
