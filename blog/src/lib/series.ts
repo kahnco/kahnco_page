@@ -36,7 +36,7 @@ export const SERIES: Series[] = [
     description: "DDD 설계부터 쿠버네티스 배포까지, 이벤트 기반 쇼핑몰을 Go로 직접 만들어보는 실전 시리즈입니다. 코드는 github.com/kahnco/go-ddd-shop 에 편별 태그로 함께 올라갑니다.",
     parts: [
       { order: 1, title: "DDD로 쇼핑몰 도메인 설계하기", slug: "ddd-shop-domain-design" },
-      { order: 2, title: "Go로 도메인 모델링하기" },
+      { order: 2, title: "TDD로 Go 도메인 모델링하기", slug: "go-domain-modeling" },
       { order: 3, title: "유스케이스와 API — 도는 서비스 완성" },
       { order: 4, title: "이벤트로 컨텍스트 잇기 (EDD)" },
       { order: 5, title: "컨테이너에 담기" },
