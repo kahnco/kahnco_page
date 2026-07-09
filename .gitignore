@@ -36,3 +36,6 @@ next-env.d.ts
 .idea
 # Firebase deploy cache
 .firebase/
+
+# 실전 시리즈용 별도(nested) git 리포 — 루트 git과 분리해서 관리
+/go-ddd-shop/
