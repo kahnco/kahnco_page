@@ -38,7 +38,7 @@ export const SERIES: Series[] = [
       { order: 1, title: "DDD로 쇼핑몰 도메인 설계하기", slug: "ddd-shop-domain-design" },
       { order: 2, title: "TDD로 Go 도메인 모델링하기", slug: "go-domain-modeling" },
       { order: 3, title: "유스케이스와 API — 도는 서비스 완성", slug: "go-usecases-and-api" },
-      { order: 4, title: "이벤트로 컨텍스트 잇기 (EDD)" },
+      { order: 4, title: "이벤트로 컨텍스트 잇기 (EDD)", slug: "go-events-across-contexts" },
       { order: 5, title: "컨테이너에 담기" },
       { order: 6, title: "로컬 쿠버네티스에 배포" },
       { order: 7, title: "상태·설정·스케일링" },
