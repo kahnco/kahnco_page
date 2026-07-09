@@ -42,7 +42,7 @@ export const SERIES: Series[] = [
       { order: 5, title: "컨테이너에 담기", slug: "go-containerizing" },
       { order: 6, title: "로컬 쿠버네티스에 배포", slug: "go-kubernetes-deploy" },
       { order: 7, title: "상태·설정·스케일링", slug: "go-state-config-scaling" },
-      { order: 8, title: "CI/CD와 관찰성" },
+      { order: 8, title: "CI/CD와 관찰성", slug: "go-cicd-observability" },
     ],
   },
 ];
