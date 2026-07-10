@@ -1,6 +1,6 @@
 ---
 title: TDD로 Go 도메인 모델링하기 — 테스트가 이끄는 애그리거트
-date: 2026-07-05
+date: 2025-07-05
 description: 1편에서 그린 DDD 설계를, 이번엔 TDD(테스트 주도 개발)로 Go 코드로 옮깁니다. 실패하는 테스트를 먼저 쓰고(Red), 통과시키고(Green), 다듬는(Refactor) 사이클로 값 객체와 Order 애그리거트의 불변식을 하나씩 쌓아 올립니다. 도메인 규칙을 실행 가능한 명세로 만드는, 이벤트 기반 쇼핑몰 시리즈 2편입니다.
 tags: [DDD, TDD, Go, 애그리거트, 테스트]
 category: [dev, handson]

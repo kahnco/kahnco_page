@@ -1,6 +1,6 @@
 ---
 title: 로컬 쿠버네티스에 배포 — Deployment·Service·Ingress
-date: 2026-07-17
+date: 2025-07-17
 description: 5편에서 만든 컨테이너 이미지를 로컬 쿠버네티스(kind)에 올립니다. Pod·Deployment·Service·Ingress가 각각 무엇을 하는지, 이미지를 kind에 로드하는 법, 서비스가 DNS 이름으로 서로를 찾는 법을 실제로 배포하며 짚습니다. 그리고 replica를 2개로 늘리자 드러난 인메모리 상태의 한계 — 같은 주문을 GET하면 404가 섞이는 현상까지 정직하게 마주합니다. 이벤트 기반 쇼핑몰 시리즈 6편입니다.
 tags: [Kubernetes, kind, Go, DevOps, 배포]
 category: [dev, handson]

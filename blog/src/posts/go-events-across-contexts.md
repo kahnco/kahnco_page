@@ -1,6 +1,6 @@
 ---
 title: 이벤트로 컨텍스트 잇기 — EDD와 결과적 일관성
-date: 2026-07-11
+date: 2025-07-11
 description: 3편까지 만든 주문 서비스의 이벤트는 로그로 찍히기만 할 뿐 아무도 듣지 않았습니다. 4편에서는 NATS 메시지 브로커를 붙여 OrderPlaced 이벤트를 발행하고, 새 재고(inventory) 바운디드 컨텍스트가 이를 구독해 재고를 예약하도록 잇습니다. event-carried state transfer, 컨텍스트 간 계약, 보상 트랜잭션(saga), 결과적 일관성, 그리고 임베디드 NATS로 이벤트 흐름을 TDD하는 법까지. 이벤트 기반 쇼핑몰 시리즈 4편입니다.
 tags: [EDD, DDD, Go, NATS, 이벤트, saga]
 category: [dev, handson]

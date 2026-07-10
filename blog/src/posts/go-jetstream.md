@@ -1,6 +1,6 @@
 ---
 title: 영속 스트림 — JetStream과 내구 소비자
-date: 2026-08-07
+date: 2025-08-07
 description: 아웃박스로 이벤트가 브로커까지 확실히 나가게 했지만, 브로커 자체(core NATS)는 여전히 무영속입니다. 소비자가 죽어 있는 사이 발행된 이벤트는 그냥 사라지죠. 이 편에서 NATS JetStream으로 컨텍스트별 영속 스트림을 만들고, 내구 소비자(durable consumer)로 각 서비스가 자기 위치를 기억하게 하여, 늦게 붙거나 잠깐 죽어도 놓치지 않는 진짜 at-least-once 전달을 완성합니다. 이벤트 기반 쇼핑몰 고도화 시리즈 5편입니다.
 tags: [EDD, JetStream, NATS, Go, 신뢰성]
 category: [dev, handson]

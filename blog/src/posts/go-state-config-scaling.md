@@ -1,6 +1,6 @@
 ---
 title: 상태·설정·스케일링 — 404를 없애고 자동으로 늘리기
-date: 2026-07-20
+date: 2025-07-20
 description: 6편에서 replica를 2개로 늘리자 인메모리 저장소 탓에 GET이 404를 뱉던 문제를, 7편에서 정면으로 풉니다. 주문 저장소를 PostgreSQL로 옮겨(StatefulSet·PVC) replica가 상태를 공유하게 하고, ConfigMap·Secret으로 설정을 분리하고, liveness·readiness probe로 건강을 확인하고, HPA로 부하에 따라 파드를 자동으로 늘립니다. testcontainers로 진짜 Postgres에 대해 저장소를 TDD하는 법까지. 이벤트 기반 쇼핑몰 시리즈 7편입니다.
 tags: [Kubernetes, PostgreSQL, Go, HPA, DDD]
 category: [dev, handson]
