@@ -54,7 +54,7 @@ export const SERIES: Series[] = [
       { order: 1, title: "사가를 닫다 — 결제 서비스와 자동 취소", slug: "go-saga-payment" },
       { order: 2, title: "배송과 완전한 보상", slug: "go-shipping-compensation" },
       { order: 3, title: "상품 카탈로그 — 진짜 상품과 가격", slug: "go-product-catalog" },
-      { order: 4, title: "신뢰할 수 있는 이벤트 — 아웃박스와 멱등성" },
+      { order: 4, title: "신뢰할 수 있는 이벤트 — 아웃박스와 멱등성", slug: "go-outbox-idempotency" },
     ],
   },
 ];
