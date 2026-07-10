@@ -56,6 +56,7 @@ export const SERIES: Series[] = [
       { order: 3, title: "상품 카탈로그 — 진짜 상품과 가격", slug: "go-product-catalog" },
       { order: 4, title: "신뢰할 수 있는 이벤트 — 아웃박스와 멱등성", slug: "go-outbox-idempotency" },
       { order: 5, title: "영속 스트림 — JetStream과 내구 소비자", slug: "go-jetstream" },
+      { order: 6, title: "회원과 장바구니 — 사용자 흐름 얹기", slug: "go-customer-cart" },
     ],
   },
 ];

@@ -1,6 +1,6 @@
 ---
 title: 컨테이너에 담기 — 멀티스테이지로 작고 안전하게
-date: 2025-07-14
+date: 2025-07-22
 description: 4편까지 만든 두 서비스는 아직 제 노트북에서 go run 으로만 돕니다. 5편에서는 멀티스테이지 Dockerfile로 두 서비스를 정적 바이너리 이미지로 만들고, distroless로 16MB짜리 비루트 이미지를 얻습니다. 레이어 캐시, BuildKit 캐시 마운트, 하나의 Dockerfile을 ARG로 재사용하기, 그리고 compose로 브로커까지 한 번에 띄워 컨테이너 안에서 이벤트 흐름을 확인합니다. 쿠버네티스로 가는 첫걸음, 이벤트 기반 쇼핑몰 시리즈 5편입니다.
 tags: [Docker, Go, 컨테이너, distroless, DevOps]
 category: [dev, handson]
