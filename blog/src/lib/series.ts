@@ -45,6 +45,18 @@ export const SERIES: Series[] = [
       { order: 8, title: "CI/CD와 관찰성", slug: "go-cicd-observability" },
     ],
   },
+  {
+    slug: "ddd-shop-advanced",
+    title: "Go 쇼핑몰 고도화하기",
+    description:
+      "8편 시리즈로 만든 이벤트 기반 쇼핑몰을, 주문 여정이 끝까지 실제로 흐르도록 완성하고 리팩터링으로 다듬는 심화 시리즈입니다. 결제·배송·카탈로그를 붙여 사가를 닫고, 아웃박스·멱등성으로 신뢰성을 끌어올립니다. 코드는 github.com/kahnco/go-ddd-shop 에 이어서 태그로 올라갑니다.",
+    parts: [
+      { order: 1, title: "사가를 닫다 — 결제 서비스와 자동 취소", slug: "go-saga-payment" },
+      { order: 2, title: "배송과 완전한 보상" },
+      { order: 3, title: "상품 카탈로그 — 진짜 상품과 가격" },
+      { order: 4, title: "신뢰할 수 있는 이벤트 — 아웃박스와 멱등성" },
+    ],
+  },
 ];
 
 /** 주어진 글 slug 이 속한 시리즈와 그 안에서의 위치(1-based)를 찾는다. */
