@@ -11,7 +11,7 @@
 ```markdown
 ---
 title: 글 제목 (검색 키워드를 자연스럽게 포함)
-date: 2026-07-01
+date: 2025-07-01
 description: 검색 결과·SNS 공유에 노출되는 한 줄 요약. 120자 내외 권장.
 tags: [DevOps, CI/CD, GitHub Actions]
 category: [dev, infra]       # [1차, 2차] — slug 또는 한글 라벨 모두 허용

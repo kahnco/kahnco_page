@@ -1,6 +1,6 @@
 ---
 title: 쿠버네티스는 내부에서 어떻게 동작하는가 — 컨트롤 플레인과 조정 루프
-date: 2026-06-23
+date: 2025-06-23
 description: kubectl apply 한 줄 뒤에서 쿠버네티스가 실제로 하는 일을 밑바닥부터 따라갑니다. 선언적 API와 조정 루프라는 핵심 철학부터 etcd·API server·스케줄러·컨트롤러·kubelet의 역할, 그리고 파드 하나가 뜨기까지의 end-to-end 여정, 나아가 이 설계가 왜 자가 치유와 확장(오퍼레이터)을 가능하게 하는지까지 정리한 교과서형 딥다이브입니다.
 tags: [Kubernetes, 컨트롤플레인, 아키텍처, etcd, 오퍼레이터]
 category: [dev, cs]

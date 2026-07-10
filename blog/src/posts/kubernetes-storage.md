@@ -1,6 +1,6 @@
 ---
 title: 쿠버네티스 스토리지는 어떻게 동작하는가 — 사라지는 컨테이너에 영속 데이터 붙이기
-date: 2026-06-29
+date: 2025-06-29
 description: 컨테이너는 사라지면 데이터도 사라지는데, DB 같은 워크로드는 상태를 지켜야 합니다. 이 간극을 메우는 쿠버네티스 스토리지를 밑바닥부터 파고듭니다. 볼륨의 수명, PV와 PVC의 관심사 분리, StorageClass와 동적 프로비저닝, CSI 표준, 볼륨이 파드에 붙기까지의 여정(provision·attach·mount), 접근 모드, 그리고 StatefulSet까지 정리한 교과서형 딥다이브입니다.
 tags: [Kubernetes, 스토리지, CSI, PV, StatefulSet]
 category: [dev, cs]

@@ -1,6 +1,6 @@
 ---
 title: 서버리스, Lambda는 언제 답인가 — cold start·비용·동시성으로 따져보기
-date: 2026-05-15
+date: 2025-05-15
 description: 서버리스는 만능이 아니라 트레이드오프입니다. Lambda가 빛나는 워크로드와 오히려 독이 되는 워크로드를, cold start·비용 모델·동시성·실행시간 관점에서 따져보고 의사결정 기준을 정리합니다.
 tags: [서버리스, AWS Lambda, 아키텍처, DevOps]
 category: [dev, backend]

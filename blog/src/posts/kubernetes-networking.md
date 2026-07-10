@@ -1,6 +1,6 @@
 ---
 title: 쿠버네티스 네트워킹은 어떻게 동작하는가 — 패킷이 파드 A에서 파드 B까지
-date: 2026-06-26
+date: 2025-06-26
 description: 파드 A의 패킷이 다른 노드의 파드 B까지 실제로 어떻게 도달하는지를 밑바닥부터 따라갑니다. 쿠버네티스의 flat 네트워크 모델, network namespace와 veth, 같은 노드·다른 노드 통신(오버레이 vs 라우팅), CNI, Service와 kube-proxy(iptables·IPVS·eBPF), DNS·Ingress·NetworkPolicy까지 정리한 교과서형 딥다이브입니다.
 tags: [Kubernetes, 네트워킹, CNI, Service, eBPF]
 category: [dev, cs]

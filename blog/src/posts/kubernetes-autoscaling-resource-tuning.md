@@ -1,6 +1,6 @@
 ---
 title: 쿠버네티스 오토스케일링 제대로 쓰기 — requests·limits부터 HPA·VPA·Cluster Autoscaler까지
-date: 2026-05-13
+date: 2025-05-13
 description: requests/limits를 대충 잡으면 오토스케일링이 흔들립니다. QoS 클래스, HPA·VPA·Cluster Autoscaler가 맞물리는 원리, 그리고 CPU limit 논쟁·메모리 OOM 회피 같은 실전 튜닝을 정리합니다.
 tags: [Kubernetes, 오토스케일링, DevOps, SRE]
 category: [dev, infra]

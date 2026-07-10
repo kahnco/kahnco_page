@@ -1,6 +1,6 @@
 ---
 title: 컨테이너는 어떻게 동작하는가 — namespaces, cgroups, 그리고 이미지의 내부
-date: 2026-06-11
+date: 2025-06-11
 description: 컨테이너는 가벼운 VM이라는 흔한 오해에서 출발해, docker run 한 줄 뒤에서 리눅스 커널이 실제로 하는 일을 밑바닥부터 파고듭니다. 무엇을 보는지 격리하는 namespaces, 얼마나 쓰는지 제한하는 cgroups, 이미지를 이루는 union 파일시스템과 OCI 표준, runc·containerd로 이어지는 런타임 구조, 그리고 공유 커널이라는 보안의 한계와 그 강화까지 정리한 교과서형 딥다이브입니다.
 tags: [컨테이너, Docker, 리눅스, namespaces, cgroups, OCI]
 category: [dev, cs]

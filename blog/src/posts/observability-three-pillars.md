@@ -1,6 +1,6 @@
 ---
 title: 관찰성(Observability) 깊이 이해하기 — 제어이론부터 메트릭·로그·추적, 카디널리티, OpenTelemetry, SLO까지
-date: 2026-06-08
+date: 2025-06-08
 description: 관찰성을 개요가 아니라 밑바닥부터 파고듭니다. 제어이론에서 온 어원과 정의, 메트릭·로그·추적 각각의 내부 동작(히스토그램과 분위수, 컨텍스트 전파, 샘플링), 관찰성의 심장인 카디널리티, "세 기둥" 모델의 한계와 그 너머, OpenTelemetry의 구조, SLI·SLO·에러 예산과 번레이트 알림, 그리고 비용의 경제학까지 한 편으로 정리한 교과서형 딥다이브입니다.
 tags: [관찰성, Observability, OpenTelemetry, SLO, 분산추적, DevOps, SRE]
 category: [dev, infra]
