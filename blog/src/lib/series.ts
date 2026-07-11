@@ -60,6 +60,7 @@ export const SERIES: Series[] = [
       { order: 7, title: "읽기 모델 강화 — CQRS로 내 주문 목록", slug: "go-readmodel-cqrs" },
       { order: 8, title: "분산추적 — OpenTelemetry로 흐름을 보다", slug: "go-opentelemetry" },
       { order: 9, title: "아웃박스 신뢰성 — 다중 replica에서 중복 없이", slug: "go-outbox-reliability" },
+      { order: 10, title: "검색과 집계 — 하나의 스트림, 여러 읽기 모델", slug: "go-readmodel-search" },
     ],
   },
 ];
