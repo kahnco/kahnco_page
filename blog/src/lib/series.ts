@@ -59,6 +59,7 @@ export const SERIES: Series[] = [
       { order: 6, title: "회원과 장바구니 — 사용자 흐름 얹기", slug: "go-customer-cart" },
       { order: 7, title: "읽기 모델 강화 — CQRS로 내 주문 목록", slug: "go-readmodel-cqrs" },
       { order: 8, title: "분산추적 — OpenTelemetry로 흐름을 보다", slug: "go-opentelemetry" },
+      { order: 9, title: "아웃박스 신뢰성 — 다중 replica에서 중복 없이", slug: "go-outbox-reliability" },
     ],
   },
 ];
