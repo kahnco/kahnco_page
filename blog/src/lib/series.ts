@@ -61,6 +61,7 @@ export const SERIES: Series[] = [
       { order: 8, title: "분산추적 — OpenTelemetry로 흐름을 보다", slug: "go-opentelemetry" },
       { order: 9, title: "아웃박스 신뢰성 — 다중 replica에서 중복 없이", slug: "go-outbox-reliability" },
       { order: 10, title: "검색과 집계 — 하나의 스트림, 여러 읽기 모델", slug: "go-readmodel-search" },
+      { order: 11, title: "환불과 반품 — 배송 뒤에 시작되는 사가", slug: "go-refund-return" },
     ],
   },
 ];
