@@ -65,6 +65,7 @@ export const SERIES: Series[] = [
       { order: 12, title: "동시성 — 재고에 몰린 요청의 레이스 컨디션", slug: "go-concurrency-stock" },
       { order: 13, title: "인증과 인가 — 로그인·JWT·본인 것만", slug: "go-auth-jwt" },
       { order: 14, title: "죽은 편지함 — 실패한 이벤트는 어디로 가나", slug: "go-dlq-retry" },
+      { order: 15, title: "이벤트 스키마 진화 — 옛 이벤트를 어떻게 읽을까", slug: "go-schema-evolution" },
     ],
   },
 ];
