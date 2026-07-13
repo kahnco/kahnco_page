@@ -63,6 +63,7 @@ export const SERIES: Series[] = [
       { order: 10, title: "검색과 집계 — 하나의 스트림, 여러 읽기 모델", slug: "go-readmodel-search" },
       { order: 11, title: "환불과 반품 — 배송 뒤에 시작되는 사가", slug: "go-refund-return" },
       { order: 12, title: "동시성 — 재고에 몰린 요청의 레이스 컨디션", slug: "go-concurrency-stock" },
+      { order: 13, title: "인증과 인가 — 로그인·JWT·본인 것만", slug: "go-auth-jwt" },
     ],
   },
 ];
