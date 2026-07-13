@@ -8,6 +8,8 @@
     "dev": "vite",
     "sitemap": "node scripts/generate-sitemap.mjs",
     "build": "node scripts/generate-sitemap.mjs && tsc -b && vite build",
+    "build:blog": "cd blog && npm run build",
+    "build:site": "npm run build && npm run build:blog && rm -rf dist/blog && mkdir -p dist/blog && cp -R blog/dist/. dist/blog/",
     "preview": "vite preview",
     "lint": "eslint .",
     "deploy": "yarn build && gh-pages -d dist"

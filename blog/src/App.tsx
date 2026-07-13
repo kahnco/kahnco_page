@@ -7,7 +7,7 @@ import BlogPost from "./pages/BlogPost";
 
 export default function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/blog">
       <Routes>
         <Route path="/" element={<Browse />} />
         <Route path="/category/:primary" element={<Browse />} />

@@ -3,8 +3,13 @@
     {
       "target": "main",
       "public": "dist",
+      "cleanUrls": true,
       "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
       "rewrites": [
+        {
+          "source": "/blog/**",
+          "destination": "/blog/index.html"
+        },
         {
           "source": "**",
           "destination": "/index.html"
@@ -13,13 +18,18 @@
     },
     {
       "target": "blog",
-      "public": "blog/dist",
-      "cleanUrls": true,
+      "public": "blog-redirect",
       "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
-      "rewrites": [
+      "redirects": [
         {
-          "source": "**",
-          "destination": "/index.html"
+          "source": "/",
+          "destination": "https://kahnco.me/blog",
+          "type": 301
+        },
+        {
+          "source": "/:rest*",
+          "destination": "https://kahnco.me/blog/:rest*",
+          "type": 301
         }
       ]
     }

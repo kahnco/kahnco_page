@@ -20,7 +20,7 @@ const ROOT = join(__dirname, "..");
 const POSTS_DIR = join(ROOT, "src", "posts");
 const DIST_DIR = join(ROOT, "dist");
 
-const SITE_URL = "https://blog.kahnco.me";
+const SITE_URL = "https://kahnco.me/blog";
 const SITE_NAME = "Kahnco Blog";
 const MAIN_URL = "https://kahnco.me";
 const DEFAULT_DESC = "칸코테크 개발 블로그 — 인프라, DevOps, 풀스택 개발 경험을 기록합니다.";

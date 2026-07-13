@@ -12,8 +12,9 @@ import AtomicDemolitionPrivacy from "./pages/AtomicDemolitionPrivacy";
 import AtomicDemolitionTerms from "./pages/AtomicDemolitionTerms";
 import AtomicDemolitionLanding from "./pages/AtomicDemolitionLanding";
 
-// 블로그는 별도 프로젝트(blog/)로 분리되어 blog.kahnco.me 에서 서비스됩니다.
-const BLOG_URL = "https://blog.kahnco.me";
+// 블로그는 별도 프로젝트(blog/)이지만 같은 도메인의 /blog 경로에서 서비스됩니다.
+// (apex 사이트 dist 안 dist/blog 로 빌드 결과를 합쳐 배포)
+const BLOG_URL = "/blog";
 
 function Home() {
   return (

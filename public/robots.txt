@@ -2,3 +2,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://kahnco.me/sitemap.xml
+Sitemap: https://kahnco.me/blog/sitemap.xml

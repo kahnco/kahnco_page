@@ -45,7 +45,16 @@ async function main() {
 
   await writeFile(join(PUBLIC_DIR, "sitemap.xml"), xml, "utf8");
 
-  const robots = ["User-agent: *", "Allow: /", "", `Sitemap: ${SITE_URL}/sitemap.xml`, ""].join("\n");
+  // 블로그는 같은 도메인 /blog 경로에서 서빙되며 자체 sitemap(/blog/sitemap.xml)을 가진다.
+  // robots.txt 는 도메인 루트(kahnco.me/robots.txt)에서만 유효하므로 여기서 둘 다 알린다.
+  const robots = [
+    "User-agent: *",
+    "Allow: /",
+    "",
+    `Sitemap: ${SITE_URL}/sitemap.xml`,
+    `Sitemap: ${SITE_URL}/blog/sitemap.xml`,
+    "",
+  ].join("\n");
   await writeFile(join(PUBLIC_DIR, "robots.txt"), robots, "utf8");
 
   console.log(`[main] sitemap.xml 생성: 정적 ${entries.length}개`);

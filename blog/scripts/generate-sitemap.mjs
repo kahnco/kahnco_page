@@ -11,7 +11,7 @@ const ROOT = join(__dirname, "..");
 const POSTS_DIR = join(ROOT, "src", "posts");
 const PUBLIC_DIR = join(ROOT, "public");
 
-const SITE_URL = "https://blog.kahnco.me";
+const SITE_URL = "https://kahnco.me/blog";
 
 function parseFrontmatter(raw) {
   const match = /^---\r?\n([\s\S]*?)\r?\n---/.exec(raw);

@@ -5,7 +5,7 @@
 // 더 강한 SEO 가 필요하면 빌드 타임 프리렌더링(react-snap 등) 도입을 검토할 것.
 
 const SITE_NAME = "Kahnco Blog";
-const SITE_URL = "https://blog.kahnco.me"; // 블로그 정식(canonical) 도메인
+const SITE_URL = "https://kahnco.me/blog"; // 블로그 정식(canonical) 도메인 (kahnco.me/blog)
 const MAIN_URL = "https://kahnco.me"; // 메인 사이트(작성자/발행처)
 const DEFAULT_DESCRIPTION = "칸코테크 개발 블로그 — 인프라, DevOps, 풀스택 개발 경험을 기록합니다.";
 
