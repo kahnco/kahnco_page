@@ -1,13 +1,19 @@
-// 빌드 타임 메타 프리렌더.
+// 빌드 타임 메타 + 본문 프리렌더.
 // vite build 이후 실행되어, 글·카테고리 라우트마다 dist/<path>.html 을 생성하고
 // <head> 에 그 페이지의 title·description·canonical·OG·Twitter·JSON-LD 를 정적으로 박는다.
-// 본문은 기존처럼 React 가 클라이언트에서 렌더한다(soc 크롤러는 head 만 읽으므로 이걸로 충분).
+// 글 페이지는 추가로 마크다운 본문을 정적 HTML 로 렌더해 #root 안에 심는다.
+// → 크롤러(구글봇·애드센스 심사)가 JS 실행 없이도 글 전문을 읽는다.
+//   런타임에는 main.tsx 의 createRoot().render() 가 #root 자식을 교체하므로,
+//   사용자는 기존처럼 React(react-markdown) 렌더를 본다(중복 렌더 없음).
 //
 // Firebase hosting 의 cleanUrls:true 와 함께 동작한다(/slug -> /slug.html).
 
 import { readdir, readFile, writeFile, mkdir } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
+import { marked } from "marked";
+
+marked.setOptions({ gfm: true, breaks: false });
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, "..");
@@ -110,12 +116,37 @@ function buildHeadTags({ title, description, path, type = "website", publishedTi
   return lines.join("\n    ");
 }
 
+/** 프런트매터를 걷어낸 마크다운 본문을 정적 HTML 로 렌더한다(크롤러용). */
+function renderBody(raw) {
+  const body = raw.replace(/^---\r?\n[\s\S]*?\r?\n---\r?\n?/, "");
+  return marked.parse(body);
+}
+
+/**
+ * 글 본문 프리렌더 래퍼. main.tsx 의 createRoot().render() 가 #root 자식을
+ * 통째로 교체하므로, 이 내용은 JS 로딩 전까지만(=크롤러가 보는 시점) 노출된다.
+ */
+function bodyWrapper({ title, publishedTime, bodyHtml }) {
+  const dateLine = publishedTime
+    ? `<p style="color:#888;font-size:.9rem">${esc(publishedTime)}</p>`
+    : "";
+  return (
+    `<div id="root"><main style="max-width:720px;margin:0 auto;padding:2rem 1rem;line-height:1.7">` +
+    `<article><h1>${esc(title)}</h1>${dateLine}\n${bodyHtml}</article></main></div>`
+  );
+}
+
 /** 템플릿(dist/index.html)의 head 를 페이지 메타로 교체한 HTML 을 만든다. */
 function renderHtml(template, meta) {
-  return template
+  let html = template
     .replace(/\s*<title>[\s\S]*?<\/title>/, "")
     .replace(/\s*<meta name="description"[^>]*\/?>/, "")
     .replace("</head>", `    ${buildHeadTags(meta)}\n  </head>`);
+  // 글 페이지면 본문을 #root 안에 정적으로 심는다(크롤러가 전문을 읽도록).
+  if (meta.bodyHtml) {
+    html = html.replace(/<div id="root">\s*<\/div>/, bodyWrapper(meta));
+  }
+  return html;
 }
 
 async function main() {
@@ -143,6 +174,7 @@ async function main() {
       publishedTime: typeof fm.date === "string" ? fm.date : undefined,
       tags: Array.isArray(fm.tags) ? fm.tags : undefined,
       image: typeof fm.thumbnail === "string" ? fm.thumbnail : undefined,
+      bodyHtml: renderBody(raw),
     });
     await writeFile(join(DIST_DIR, `${slug}.html`), html, "utf8");
     count++;
