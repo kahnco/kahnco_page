@@ -64,6 +64,7 @@ export const SERIES: Series[] = [
       { order: 11, title: "환불과 반품 — 배송 뒤에 시작되는 사가", slug: "go-refund-return" },
       { order: 12, title: "동시성 — 재고에 몰린 요청의 레이스 컨디션", slug: "go-concurrency-stock" },
       { order: 13, title: "인증과 인가 — 로그인·JWT·본인 것만", slug: "go-auth-jwt" },
+      { order: 14, title: "죽은 편지함 — 실패한 이벤트는 어디로 가나", slug: "go-dlq-retry" },
     ],
   },
 ];
