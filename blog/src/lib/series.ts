@@ -66,6 +66,7 @@ export const SERIES: Series[] = [
       { order: 13, title: "인증과 인가 — 로그인·JWT·본인 것만", slug: "go-auth-jwt" },
       { order: 14, title: "죽은 편지함 — 실패한 이벤트는 어디로 가나", slug: "go-dlq-retry" },
       { order: 15, title: "이벤트 스키마 진화 — 옛 이벤트를 어떻게 읽을까", slug: "go-schema-evolution" },
+      { order: 16, title: "메트릭과 SLO — 무엇을 재고, 어디까지 괜찮은가", slug: "go-metrics-slo" },
     ],
   },
 ];
