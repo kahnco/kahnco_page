@@ -9,6 +9,17 @@ interface Project {
   appStore?: string;
 }
 
+const personalProjects: Project[] = [
+  {
+    title: "Atomic Demolition",
+    period: "2026",
+    description:
+      "타일을 분열시키고 소멸시키는 전략 퍼즐 게임. 5개 존, 30개 레벨에 도전하는 캐주얼 게임을 기획부터 출시까지 직접 만들었습니다.",
+    tags: ["Flutter", "Dart", "Firebase", "AdMob"],
+    playStore: "https://play.google.com/store/apps/details?id=com.kahnco.atomic_demolition",
+  },
+];
+
 const companyProjects: Project[] = [
   {
     title: "AI 여행 추천 서비스 - Daypli",
@@ -186,6 +197,7 @@ export default function Projects() {
         Projects
       </motion.h2>
 
+      <ProjectGrid label="Personal" projects={personalProjects} />
       <ProjectGrid label="Freelance" projects={freelanceProjects} />
       <ProjectGrid label="Company" projects={companyProjects} />
     </section>
