@@ -4,7 +4,6 @@ import About from "./components/About";
 import Skills from "./components/Skills";
 import Projects from "./components/Projects";
 import Links from "./components/Links";
-import Apps from "./components/Apps";
 import YourThoughtsPrivacy from "./pages/YourThoughtsPrivacy";
 import YourThoughtsTerms from "./pages/YourThoughtsTerms";
 import YourThoughtsLanding from "./pages/YourThoughtsLanding";
@@ -37,7 +36,6 @@ function Home() {
       <About />
       <Skills />
       <Projects />
-      <Apps />
       <Links />
       <footer className="py-12 px-6 text-center text-xs text-neutral-600 space-y-1">
         <p className="font-medium text-neutral-500">칸코테크 (Kahnco)</p>
