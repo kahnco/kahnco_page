@@ -73,6 +73,7 @@ export const SERIES: Series[] = [
       { order: 20, title: "테스트는 하나의 렌즈가 아니다 — 접근성·시각·부하", slug: "go-testing-lenses" },
       { order: 21, title: "프런트가 백엔드를 비춘다 — 실시간·검색·재고·세션", slug: "go-shop-ui-realtime" },
       { order: 22, title: "역할이 필요해질 때 — 관리자 페이지와 RBAC", slug: "go-admin-rbac" },
+      { order: 23, title: "이벤트가 브라우저까지 — 폴링을 SSE로", slug: "go-sse-realtime" },
     ],
   },
 ];
