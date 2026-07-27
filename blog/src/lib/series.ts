@@ -69,6 +69,7 @@ export const SERIES: Series[] = [
       { order: 16, title: "메트릭과 SLO — 무엇을 재고, 어디까지 괜찮은가", slug: "go-metrics-slo" },
       { order: 17, title: "프런트를 붙이니 보이는 것들 — BFF로 CORS 지우기", slug: "go-web-bff" },
       { order: 18, title: "docker compose up 하나로 — Next.js를 풀스택 컴포즈에", slug: "go-compose-nextjs" },
+      { order: 19, title: "테스트가 아키텍처를 드러낸다 — Next.js 전 계층 테스트", slug: "go-frontend-testing" },
     ],
   },
 ];
