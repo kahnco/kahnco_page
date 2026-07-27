@@ -70,6 +70,7 @@ export const SERIES: Series[] = [
       { order: 17, title: "프런트를 붙이니 보이는 것들 — BFF로 CORS 지우기", slug: "go-web-bff" },
       { order: 18, title: "docker compose up 하나로 — Next.js를 풀스택 컴포즈에", slug: "go-compose-nextjs" },
       { order: 19, title: "테스트가 아키텍처를 드러낸다 — Next.js 전 계층 테스트", slug: "go-frontend-testing" },
+      { order: 20, title: "테스트는 하나의 렌즈가 아니다 — 접근성·시각·부하", slug: "go-testing-lenses" },
     ],
   },
 ];
