@@ -14,19 +14,24 @@ const PUBLIC_DIR = join(ROOT, "public");
 
 const SITE_URL = "https://kahnco.me";
 
+// 빌드 시각 기준 lastmod (YYYY-MM-DD). 재빌드/재배포마다 갱신되어 재색인 신호가 된다.
+const LASTMOD = new Date().toISOString().slice(0, 10);
+
 // 정적 라우트 (App.tsx 의 Routes 와 동기화)
 const STATIC_ROUTES = [
-  { path: "/", priority: "1.0" },
-  { path: "/services", priority: "0.8" },
-  { path: "/portfolio", priority: "0.8" },
-  { path: "/yourthoughts", priority: "0.6" },
-  { path: "/atomic-demolition", priority: "0.6" },
+  { path: "/", priority: "1.0", changefreq: "weekly" },
+  { path: "/services", priority: "0.8", changefreq: "weekly" },
+  { path: "/portfolio", priority: "0.8", changefreq: "monthly" },
+  { path: "/yourthoughts", priority: "0.6", changefreq: "monthly" },
+  { path: "/atomic-demolition", priority: "0.6", changefreq: "monthly" },
 ];
 
-function urlEntry(path, priority) {
+function urlEntry({ path, priority, changefreq }) {
   return [
     "  <url>",
     `    <loc>${SITE_URL}${path}</loc>`,
+    `    <lastmod>${LASTMOD}</lastmod>`,
+    changefreq ? `    <changefreq>${changefreq}</changefreq>` : null,
     priority ? `    <priority>${priority}</priority>` : null,
     "  </url>",
   ]
@@ -35,7 +40,7 @@ function urlEntry(path, priority) {
 }
 
 async function main() {
-  const entries = STATIC_ROUTES.map((r) => urlEntry(r.path, r.priority));
+  const entries = STATIC_ROUTES.map((r) => urlEntry(r));
 
   const xml = [
     '<?xml version="1.0" encoding="UTF-8"?>',
