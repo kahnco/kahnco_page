@@ -17,6 +17,8 @@ const SITE_URL = "https://kahnco.me";
 // 정적 라우트 (App.tsx 의 Routes 와 동기화)
 const STATIC_ROUTES = [
   { path: "/", priority: "1.0" },
+  { path: "/services", priority: "0.8" },
+  { path: "/portfolio", priority: "0.8" },
   { path: "/yourthoughts", priority: "0.6" },
   { path: "/atomic-demolition", priority: "0.6" },
 ];

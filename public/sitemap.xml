@@ -5,6 +5,14 @@
     <priority>1.0</priority>
   </url>
   <url>
+    <loc>https://kahnco.me/services</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://kahnco.me/portfolio</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://kahnco.me/yourthoughts</loc>
     <priority>0.6</priority>
   </url>
