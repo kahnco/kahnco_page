@@ -39,29 +39,47 @@ function urlEntry(path, lastmod, priority) {
     .join("\n");
 }
 
+// 날짜 문자열(YYYY-MM-DD) 최신값 유지. b 가 더 최신이면 b, 아니면 a.
+function laterDate(a, b) {
+  if (!b) return a;
+  if (!a) return b;
+  return b > a ? b : a;
+}
+
 async function main() {
   const files = (await readdir(POSTS_DIR)).filter(
     (f) => f.endsWith(".md") && f.toLowerCase() !== "readme.md" && !f.startsWith("_")
   );
 
   const postEntries = [];
-  const categoryPaths = new Set();
+  const categoryLastmod = new Map(); // 카테고리 경로 -> 소속 글의 최신 날짜
+  let latestOverall; // 홈 lastmod = 전체 글 최신 날짜
   for (const file of files) {
     const raw = await readFile(join(POSTS_DIR, file), "utf8");
     const fm = parseFrontmatter(raw);
     if (fm.draft === "true") continue;
     const slug = file.replace(/\.md$/, "");
-    postEntries.push(urlEntry(`/${slug}`, fm.date, "0.8"));
+    const date = typeof fm.date === "string" ? fm.date : undefined;
+    postEntries.push(urlEntry(`/${slug}`, date, "0.8"));
+    latestOverall = laterDate(latestOverall, date);
 
-    // category: [primary, secondary] 에서 카테고리 페이지 경로 수집
+    // category: [primary, secondary] 에서 카테고리 페이지 경로 수집 + 최신 날짜 갱신
     const cat = String(fm.category ?? "").replace(/^\[|\]$/g, "");
     const [p, s] = cat.split(",").map((t) => t.trim()).filter(Boolean);
-    if (p) categoryPaths.add(`/category/${p}`);
-    if (p && s) categoryPaths.add(`/category/${p}/${s}`);
+    if (p) {
+      const path = `/category/${p}`;
+      categoryLastmod.set(path, laterDate(categoryLastmod.get(path), date));
+    }
+    if (p && s) {
+      const path = `/category/${p}/${s}`;
+      categoryLastmod.set(path, laterDate(categoryLastmod.get(path), date));
+    }
   }
 
-  const home = urlEntry("/", undefined, "1.0");
-  const categoryEntries = [...categoryPaths].sort().map((p) => urlEntry(p, undefined, "0.6"));
+  const home = urlEntry("/", latestOverall, "1.0");
+  const categoryEntries = [...categoryLastmod.keys()]
+    .sort()
+    .map((p) => urlEntry(p, categoryLastmod.get(p), "0.6"));
 
   const xml = [
     '<?xml version="1.0" encoding="UTF-8"?>',
