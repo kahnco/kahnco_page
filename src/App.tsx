@@ -1,9 +1,8 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Hero from "./components/Hero";
-import About from "./components/About";
-import Skills from "./components/Skills";
-import Projects from "./components/Projects";
-import Links from "./components/Links";
+import { useEffect } from "react";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import HomePage from "./pages/HomePage";
+import ServicesPage from "./pages/ServicesPage";
+import PortfolioPage from "./pages/PortfolioPage";
 import YourThoughtsPrivacy from "./pages/YourThoughtsPrivacy";
 import YourThoughtsTerms from "./pages/YourThoughtsTerms";
 import YourThoughtsLanding from "./pages/YourThoughtsLanding";
@@ -11,52 +10,31 @@ import AtomicDemolitionPrivacy from "./pages/AtomicDemolitionPrivacy";
 import AtomicDemolitionTerms from "./pages/AtomicDemolitionTerms";
 import AtomicDemolitionLanding from "./pages/AtomicDemolitionLanding";
 
-// 블로그는 별도 프로젝트(blog/)이지만 같은 도메인의 /blog 경로에서 서비스됩니다.
-// (apex 사이트 dist 안 dist/blog 로 빌드 결과를 합쳐 배포)
-const BLOG_URL = "/blog";
-
-function Home() {
-  return (
-    <div className="min-h-screen bg-[#0a0a0a] text-white font-[family-name:var(--font-geist-sans)]">
-      <header className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-4 bg-[#0a0a0a]/80 backdrop-blur-md">
-        <a href="/" className="flex items-center gap-2">
-          <img src="/logo.jpg" alt="Kahnco" className="w-8 h-8 rounded" />
-          <span className="text-sm font-semibold text-white">Kahnco</span>
-        </a>
-        <nav>
-          <a
-            href={BLOG_URL}
-            className="text-sm font-medium text-neutral-400 hover:text-white transition-colors"
-          >
-            Blog ↗
-          </a>
-        </nav>
-      </header>
-      <Hero />
-      <About />
-      <Skills />
-      <Projects />
-      <Links />
-      <footer className="py-12 px-6 text-center text-xs text-neutral-600 space-y-1">
-        <p className="font-medium text-neutral-500">칸코테크 (Kahnco)</p>
-        <p>대표 이현준 · 사업자번호 465-37-01575</p>
-        <p>경기도 화성시 동탄구 동탄중심상가1길 36, 8층 801-84A호</p>
-        <p>
-          <a href="mailto:kahnco@kahnco.me" className="hover:text-blue-400 transition-colors">
-            kahnco@kahnco.me
-          </a>
-        </p>
-        <p className="pt-2">© 2026 Kahnco. All rights reserved.</p>
-      </footer>
-    </div>
-  );
+// 라우트 전환 시 상단으로. 단, 해시(#contact 등)가 있으면 해당 요소로 스크롤.
+function ScrollManager() {
+  const { pathname, hash } = useLocation();
+  useEffect(() => {
+    if (hash) {
+      const el = document.querySelector(hash);
+      if (el) {
+        el.scrollIntoView();
+        return;
+      }
+    }
+    window.scrollTo(0, 0);
+  }, [pathname, hash]);
+  return null;
 }
 
-export default function App() {
+// 라우트 정의(라우터 비포함) — 클라이언트는 BrowserRouter, 프리렌더는 StaticRouter 로 감싼다.
+export function AppRoutes() {
   return (
-    <BrowserRouter>
+    <>
+      <ScrollManager />
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<HomePage />} />
+        <Route path="/services" element={<ServicesPage />} />
+        <Route path="/portfolio" element={<PortfolioPage />} />
         <Route path="/yourthoughts" element={<YourThoughtsLanding />} />
         <Route path="/yourthoughts/privacy" element={<YourThoughtsPrivacy />} />
         <Route path="/yourthoughts/terms" element={<YourThoughtsTerms />} />
@@ -64,6 +42,14 @@ export default function App() {
         <Route path="/atomic-demolition/privacy" element={<AtomicDemolitionPrivacy />} />
         <Route path="/atomic-demolition/terms" element={<AtomicDemolitionTerms />} />
       </Routes>
+    </>
+  );
+}
+
+export default function App() {
+  return (
+    <BrowserRouter>
+      <AppRoutes />
     </BrowserRouter>
   );
 }
