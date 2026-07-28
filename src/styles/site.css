@@ -7,6 +7,7 @@
 .site {
   --bg: #131211;
   --text: #edeae3;
+  --text-soft: #c4bfb5; /* 리드 문단용 — text 와 muted 사이 */
   --muted: #938d81;
   --faint: #56524a;
   --rule: rgba(237, 234, 227, 0.13);
@@ -179,6 +180,23 @@
 .site .phead .crumb { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.12em; color: var(--faint); text-transform: uppercase; }
 .site .phead h1 { font-size: clamp(2.2rem, 6vw, 3.6rem); font-weight: 780; letter-spacing: -0.035em; margin: 16px 0 0; }
 .site .phead p { color: var(--muted); font-size: 1.02rem; max-width: 52ch; margin: 20px 0 0; line-height: 1.7; }
+
+/* ── Service detail blocks (/services) ──── */
+.site .sdetail { padding: clamp(44px, 7vh, 78px) 0; border-top: 1px solid var(--rule); }
+.site .sdetail:first-of-type { border-top: none; padding-top: 6px; }
+.site .sdetail .sd-top { display: flex; align-items: baseline; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+.site .sdetail h2 { font-size: clamp(1.55rem, 3.4vw, 2.25rem); font-weight: 720; letter-spacing: -0.03em; margin: 0; }
+.site .sdetail h2 em { font-family: var(--mono); font-style: normal; font-size: 0.78rem; color: var(--faint); margin-left: 13px; letter-spacing: 0; }
+.site .sdetail .sd-status { display: flex; align-items: center; gap: 9px; font-size: 0.85rem; color: var(--muted); white-space: nowrap; }
+.site .sdetail .sd-meta { display: flex; gap: 24px; flex-wrap: wrap; margin-top: 16px; font-family: var(--mono); font-size: 0.73rem; color: var(--faint); letter-spacing: 0.03em; }
+.site .sdetail .sd-meta b { color: var(--muted); font-weight: 500; }
+.site .sdetail .sd-intro { color: var(--text-soft); font-size: 1.03rem; max-width: 62ch; margin-top: 24px; line-height: 1.78; }
+.site .sdetail .sd-high { list-style: none; padding: 0; margin: 24px 0 0; display: grid; gap: 11px; max-width: 62ch; }
+.site .sdetail .sd-high li { position: relative; padding-left: 20px; color: var(--muted); font-size: 0.95rem; line-height: 1.6; }
+.site .sdetail .sd-high li::before { content: ""; position: absolute; left: 0; top: 0.62em; width: 6px; height: 6px; border: 1px solid var(--faint); }
+.site .sdetail .sd-links { display: flex; gap: 18px; flex-wrap: wrap; margin-top: 28px; }
+.site .sdetail .sd-links a { font-size: 0.86rem; color: var(--text); border-bottom: 1px solid var(--rule-2); padding-bottom: 3px; transition: border-color 0.18s; }
+.site .sdetail .sd-links a:hover { border-color: var(--accent); }
 
 /* ── Portfolio list (grouped) ───────────── */
 .site .pgroup { padding-bottom: clamp(48px, 8vh, 90px); }

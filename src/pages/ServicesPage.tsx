@@ -91,6 +91,75 @@ export default function ServicesPage() {
             </div>
           </div>
         </section>
+
+        <section className="band alt">
+          <div className="wrap">
+            <div className="idx-head">
+              <div className="lead">
+                <span className="no">상세</span>
+                <span className="lab">
+                  각 서비스 <span>무엇을, 어떻게</span>
+                </span>
+              </div>
+            </div>
+
+            {SERVICES.map((svc) => (
+              <article className="sdetail" key={svc.id}>
+                <div className="sd-top">
+                  <h2>
+                    {svc.name} <em>{svc.en}</em>
+                  </h2>
+                  <div className="sd-status">
+                    <span className={`mk${svc.status === "live" ? " on" : ""}`} />
+                    {svc.statusLabel}
+                  </div>
+                </div>
+
+                <div className="sd-meta">
+                  <span>
+                    분류 <b>{svc.category}</b>
+                  </span>
+                  {svc.platform && (
+                    <span>
+                      플랫폼 <b>{svc.platform}</b>
+                    </span>
+                  )}
+                  {svc.year && (
+                    <span>
+                      시작 <b>{svc.year}</b>
+                    </span>
+                  )}
+                </div>
+
+                {svc.intro && <p className="sd-intro">{svc.intro}</p>}
+
+                {svc.highlights && svc.highlights.length > 0 && (
+                  <ul className="sd-high">
+                    {svc.highlights.map((h) => (
+                      <li key={h}>{h}</li>
+                    ))}
+                  </ul>
+                )}
+
+                {svc.links && svc.links.length > 0 && (
+                  <div className="sd-links">
+                    {svc.links.map((l) =>
+                      l.external ? (
+                        <a key={l.href} href={l.href} target="_blank" rel="noopener noreferrer">
+                          {l.label}
+                        </a>
+                      ) : (
+                        <Link key={l.href} to={l.href}>
+                          {l.label}
+                        </Link>
+                      ),
+                    )}
+                  </div>
+                )}
+              </article>
+            ))}
+          </div>
+        </section>
       </main>
 
       <SiteFooter />
