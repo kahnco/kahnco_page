@@ -77,6 +77,7 @@ export const SERIES: Series[] = [
       { order: 24, title: "정확히 1000번째 — 이벤트 당첨자를 어떻게 정할까", slug: "go-exact-nth-winner" },
       { order: 25, title: "당첨자를 놓치지 않으려면 — 아웃박스·큐 완충·어뷰징 방어", slug: "go-promotion-hardening" },
       { order: 26, title: "여러 대로 나눠도 — 분산 레이트리밋·SSE 통지·부하로 재본 큐 완충", slug: "go-promotion-scale" },
+      { order: 27, title: "정말 여러 대로 — 내구 접수·SSE 팬아웃·분산락 종료 배치", slug: "go-promotion-multiinstance" },
     ],
   },
 ];
