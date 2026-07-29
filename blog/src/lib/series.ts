@@ -75,6 +75,7 @@ export const SERIES: Series[] = [
       { order: 22, title: "역할이 필요해질 때 — 관리자 페이지와 RBAC", slug: "go-admin-rbac" },
       { order: 23, title: "이벤트가 브라우저까지 — 폴링을 SSE로", slug: "go-sse-realtime" },
       { order: 24, title: "정확히 1000번째 — 이벤트 당첨자를 어떻게 정할까", slug: "go-exact-nth-winner" },
+      { order: 25, title: "당첨자를 놓치지 않으려면 — 아웃박스·큐 완충·어뷰징 방어", slug: "go-promotion-hardening" },
     ],
   },
 ];
