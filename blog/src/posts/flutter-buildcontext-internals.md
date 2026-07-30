@@ -27,19 +27,49 @@ BuildContext 로 들어가기 전에, 그 정체인 **Element** 부터 짚어야
 
 Flutter 는 여러분이 만든 Widget 마다 `createElement()` 로 Element 를 하나씩 **부풀려(inflate)** 트리를 세웁니다. 이 **Element 트리** 가 진짜로 살아 돌아가는 런타임 트리입니다. Widget 트리는 매 빌드 갈아엎어지지만, Element 트리는 **같은 자리에 호환되는 위젯이 오는 한 그대로 유지** 됩니다.
 
-왜 이런 게 필요할까요? Widget 이 불변이고 매번 버려지기 때문입니다. **버려지는 것에는 상태를 담을 수도, "내가 트리 어디에 있는지"를 기억할 수도 없습니다.** 그래서 Flutter 는 그 역할을 할 **오래 사는 객체** 를 따로 뒀고, 그게 Element 입니다. `StatefulWidget` 의 `State` 객체도 바로 이 Element(정확히는 `StatefulElement`)가 붙들고 있습니다 — **리빌드해도 State 가 안 날아가는 이유** 가 여기 있습니다.
+왜 이런 게 필요할까요? Widget 이 불변이고 매번 버려지기 때문입니다. **버려지는 것에는 상태를 담을 수도, "내가 트리 어디에 있는지"를 기억할 수도 없습니다.** 그래서 Flutter 는 그 역할을 할 **오래 사는 객체** 를 따로 뒀고, 그게 Element 입니다.
 
-그리고 이 Element 가, 다음 장의 주인공인 `BuildContext` 입니다.
+비유가 아니라 실제 소스로 보면 이 역할 분담이 대놓고 드러납니다.
+
+```dart
+// 실제 framework.dart (Flutter 3.44.8) — 주석·assert 는 생략
+
+// Widget: 불변 설정. 하는 일은 "내 Element 를 만들어라" 하나뿐이다.
+abstract class Widget extends DiagnosticableTree {
+  const Widget({this.key});
+  final Key? key;
+  @factory
+  Element createElement();  // ← 위젯이 자기 Element 를 부풀린다(inflate)
+}
+
+// Element: 살아있는 노드. "내 위치·부모·수명·의존"을 전부 기억한다.
+abstract class Element extends DiagnosticableTree implements BuildContext {
+  Element? _parent;         // 부모(위로 걷는 사슬)
+  Object? _slot;            // 부모 안에서 내 자리
+  Widget? _widget;          // 지금 이 자리의 위젯(매번 갈아끼워짐)
+  _ElementLifecycle _lifecycleState = _ElementLifecycle.initial; // 수명
+  Set<InheritedElement>? _dependencies;                          // 내가 구독한 것들
+  PersistentHashMap<Type, InheritedElement>? _inheritedElements; // 조상 색인
+}
+```
+
+Widget 은 `createElement()` **하나가 전부** 입니다 — 그림을 어떻게 그릴지는 알아도, "내가 어디 있는지"는 모릅니다. 그 기억은 전부 Element 가 들고 있죠. 그리고 눈여겨볼 곳 — `Element` 가 `implements BuildContext`. **이 Element 가, 다음 장의 주인공인 `BuildContext` 입니다.**
 
 ## BuildContext 는 사실 그 Element 다
 
-방금 본 Element — 그게 바로 `BuildContext` 입니다. `BuildContext` 는 별도의 객체가 **아닙니다.** 프레임워크 소스를 열면 한 줄로 끝납니다.
+방금 `Element implements BuildContext` 를 봤습니다. 그런데 "그럼 내 `build(context)` 로 넘어오는 그 context 가 정말 이 Element 냐?" — 소스가 직접 답합니다.
 
 ```dart
-abstract class Element extends DiagnosticableTree implements BuildContext { … }
+// 실제 framework.dart (3.44.8) — StatelessElement
+class StatelessElement extends ComponentElement {
+  StatelessElement(StatelessWidget super.widget);
+
+  @override
+  Widget build() => (widget as StatelessWidget).build(this); // ← this(=Element)를 context 로 넘긴다
+}
 ```
 
-`Element` 가 `BuildContext` 인터페이스를 **구현** 합니다. 즉 `build(BuildContext context)` 의 `context` 는 **그 위젯 자리의 Element 그 자체** 입니다. 테스트로 확인하면 이렇습니다.
+`build(this)` — 여러분의 `Widget.build(BuildContext context)` 에 넘어오는 `context` 는 **바로 이 Element(`this`)** 입니다. 별도로 만들어 주는 객체가 아니라, 그 자리의 Element 를 그대로 건네는 거죠. 테스트로도 확인됩니다.
 
 ```dart
 late BuildContext captured;
@@ -64,14 +94,37 @@ expect(captured.runtimeType.toString(), 'StatelessElement'); // Builder 는 Stat
 | **Element** | 살아있는 런타임 노드 = **BuildContext** | 긺 — 같은 자리면 유지 |
 | **RenderObject** | 레이아웃·페인트·히트테스트 | 긺 |
 
-여기서 놓치기 쉬운 게 있습니다 — **`setState` 는 위젯을 바꾸지 않습니다.** 새 위젯을 만들어 **같은 Element 에 갈아끼울** 뿐이죠. 같은 자리에 새 위젯을 두 번 주입해 보면 드러납니다.
+그런데 `StatefulWidget` 의 `State` 는 어디에 사는 걸까요? 리빌드해도 안 날아가는 그 상태 말입니다. 소스를 보면 **State 를 붙들고 있는 건 Element** 입니다.
+
+```dart
+// 실제 framework.dart (3.44.8)
+abstract class StatefulWidget extends Widget {
+  @override
+  StatefulElement createElement() => StatefulElement(this);
+  @protected @factory
+  State createState();
+}
+
+class StatefulElement extends ComponentElement {
+  StatefulElement(StatefulWidget widget)
+      : _state = widget.createState(),  // ← Element 가 State 를 만들어 들고 있는다
+        super(widget) {
+    state._element = this;              // ← State ↔ Element 서로를 가리킨다(양방향)
+    state._widget = widget;
+  }
+  final State _state;
+  // build() 는 state.build(this) 를 부른다 — State 의 build 에도 this(=Element)가 context 로 간다
+}
+```
+
+여기서 놓치기 쉬운 게 있습니다 — **`setState` 는 위젯을 바꾸지 않습니다.** State 는 Element(`StatefulElement`)가 붙들고 있으니, 위젯이 새로 와도 State 와 Element 는 **그대로 유지** 됩니다. 새 위젯을 만들어 같은 Element 에 **갈아끼울** 뿐이죠. 같은 자리에 새 위젯을 두 번 주입해 보면 드러납니다.
 
 ```dart
 expect(identical(elements[0], elements[1]), isTrue);  // Element 는 그대로
 expect(identical(widgets[0], widgets[1]), isFalse);   // Widget 은 교체됨
 ```
 
-그래서 "context 를 필드에 들고 재사용"이 (자리가 그대로인 한) 성립합니다. Widget 은 매 프레임 버려지지만, 그 뒤의 Element 는 살아 있으니까요.
+`_state` 가 Element 안에 있다는 이 한 줄이, "**리빌드해도 State 가 안 날아가는**" 그 흔한 사실의 진짜 근거입니다. 그리고 "context 를 필드에 들고 재사용"이 (자리가 그대로인 한) 성립하는 이유이기도 하죠.
 
 ## context 는 "전역"이 아니라 "트리 위치"다
 
@@ -102,7 +155,28 @@ setState()
   → flushLayout → flushPaint → 레이어 합성
 ```
 
-더티 목록을 **깊이 순** 으로 도는 이유는, 부모를 먼저 리빌드하면 자식은 그 과정에서 갱신되니 중복을 피하려는 겁니다. 그리고 재조정(reconciliation)의 심장인 `updateChild` 에는 이런 단축이 있습니다.
+앞 두 홉의 실제 소스는 이렇습니다.
+
+```dart
+// 실제 framework.dart (3.44.8) — State.setState 의 끝은 결국 한 줄이다
+void setState(VoidCallback fn) {
+  // … fn() 이 Future 를 반환하면 에러(비동기 금지) 등 검사 …
+  _element!.markNeedsBuild();
+}
+
+void markNeedsBuild() {  // Element
+  if (_lifecycleState != _ElementLifecycle.active) {
+    return;                       // 죽은(비활성) Element 면 무시 — mounted 와 직결된다
+  }
+  if (_dirty) {
+    return;
+  }
+  _dirty = true;
+  owner!.scheduleBuildFor(this);  // BuildOwner 의 더티 목록에 넣고 프레임을 예약
+}
+```
+
+`markNeedsBuild` 의 첫 줄 — **비활성 Element 면 그냥 return** — 이 뒤에서 볼 `mounted` 이야기의 씨앗입니다. 그리고 더티 목록을 **깊이 순** 으로 도는 이유는, 부모를 먼저 리빌드하면 자식은 그 과정에서 갱신되니 중복을 피하려는 겁니다. 그리고 재조정(reconciliation)의 심장인 `updateChild` 에는 이런 단축이 있습니다.
 
 ```dart
 if (hasSameSuperclass && child.widget == newWidget) {
@@ -116,18 +190,60 @@ if (hasSameSuperclass && child.widget == newWidget) {
 
 `Provider`, `Theme.of`, `MediaQuery.of` 가 전부 이 하나 위에 서 있습니다. 두 부분으로 나뉩니다.
 
-먼저 **O(1) 조회.** Element 는 mount 될 때 부모의 색인 맵을 물려받습니다.
+먼저 **O(1) 조회.** InheritedElement 는 mount 될 때 부모의 색인 맵을 물려받아 **자기를 얹어** 자손에게 물려줍니다. 그래서 조회는 트리를 걸어 올라가는 게 아니라 맵 룩업 한 번입니다.
 
 ```dart
-PersistentHashMap<Type, InheritedElement>? _inheritedElements;
-final InheritedElement? ancestor = _inheritedElements?[T]; // 그냥 맵 룩업
+// 실제 framework.dart (3.44.8) — InheritedElement
+void _updateInheritance() {
+  final incoming = _parent?._inheritedElements
+      ?? const PersistentHashMap<Type, InheritedElement>.empty();
+  _inheritedElements = incoming.put(widget.runtimeType, this); // 부모 맵 + 나
+}
+
+// dependOnInheritedWidgetOfExactType 의 조회부 — 그냥 맵에서 꺼낸다
+final InheritedElement? ancestor = _inheritedElements?[T];     // O(1)
 ```
 
-자신이 `InheritedElement` 면 이 맵에 자기를 얹어 자손에게 물려줍니다. 그래서 **50겹 아래에서도** `dependOnInheritedWidgetOfExactType<T>()` 는 맵 조회 한 번, **O(1)** 입니다 — 트리를 걸어 올라가지 않습니다. 테스트로 확인했습니다.
+그래서 **50겹 아래에서도** `dependOnInheritedWidgetOfExactType<T>()` 는 O(1)입니다. 테스트로도 확인했습니다.
 
-두 번째가 진짜 핵심 — **구독.** `dependOn…` 은 조회만 하지 않습니다. 그 InheritedElement 의 `_dependents` 에 **나를 등록** 하고, 내 `_dependencies` 에도 그 조상을 담습니다. 소스 주석이 대놓고 말합니다 — *"registers this build context with the returned widget. When that widget changes, this build context is rebuilt."*
+두 번째가 진짜 핵심 — **구독.** `dependOn…` 은 조회만 하지 않습니다. 소스를 그대로 따라가면 등록·통지·리빌드가 한 줄씩 이어집니다.
 
-그래서 InheritedWidget 이 새 값으로 교체되고 `updateShouldNotify == true` 면, `notifyClients` 가 **등록된 각 dependent 만** `markNeedsBuild` 합니다. 이걸 깔끔히 증명하려고, 자손 서브트리를 `identical` 로 고정(앞의 단축을 이용)해 구조적 리빌드를 배제한 뒤 값만 바꿨습니다.
+```dart
+// 실제 framework.dart (3.44.8) — 주석·assert 생략
+
+// (1) 구독 등록: 서로를 가리킨다
+InheritedWidget dependOnInheritedElement(InheritedElement ancestor, {Object? aspect}) {
+  (_dependencies ??= HashSet<InheritedElement>()).add(ancestor); // 내 의존 목록에 조상 추가
+  ancestor.updateDependencies(this, aspect);                     // 조상의 _dependents 에 나 등록
+  return ancestor.widget as InheritedWidget;
+}
+
+// (2) InheritedElement 는 자기를 구독한 Element 들을 들고 있다
+class InheritedElement extends ProxyElement {
+  final Map<Element, Object?> _dependents = HashMap<Element, Object?>();
+
+  void updated(InheritedWidget oldWidget) {
+    if ((widget as InheritedWidget).updateShouldNotify(oldWidget)) {
+      super.updated(oldWidget);   // updateShouldNotify 가 true 일 때만 통지로 넘어간다
+    }
+  }
+  void notifyClients(InheritedWidget oldWidget) {
+    for (final Element dependent in _dependents.keys) {
+      notifyDependent(oldWidget, dependent);   // 등록된 각 dependent 에게
+    }
+  }
+  void notifyDependent(InheritedWidget oldWidget, Element dependent) {
+    dependent.didChangeDependencies();         // → 결국 markNeedsBuild()
+  }
+}
+
+// (3) Element.didChangeDependencies 는 그냥 리빌드다
+void didChangeDependencies() {
+  markNeedsBuild();
+}
+```
+
+이 세 조각을 이으면 끝입니다 — **`of(context)` 로 구독을 걸어 두면, 값이 바뀔 때(`updateShouldNotify`) `_dependents` 에 등록된 그 context 들만 `markNeedsBuild` 된다.** 이걸 깔끔히 증명하려고, 자손 서브트리를 `identical` 로 고정(앞의 단축을 이용)해 구조적 리빌드를 배제한 뒤 값만 바꿨습니다.
 
 ```dart
 key.currentState!.bump(); // InheritedWidget 값만 변경
