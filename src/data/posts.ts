@@ -10,6 +10,11 @@ export interface PostMeta {
 
 export const LATEST_POSTS: PostMeta[] = [
   {
+    slug: "flutter-app-bloc-from-scratch",
+    date: "2026.02.09",
+    title: "flutter_bloc을 지우고 BLoC을 60줄로 짠 이유",
+  },
+  {
     slug: "flutter-app-architecture",
     date: "2026.02.05",
     title: "UI를 한 줄도 안 짜고 앱을 시작하는 이유 — 뼈대부터 세우기",
@@ -19,12 +24,7 @@ export const LATEST_POSTS: PostMeta[] = [
     date: "2026.02.01",
     title: "부모 밖 버튼이 안 눌리는 이유 — 히트 테스트",
   },
-  {
-    slug: "flutter-gesture-arena",
-    date: "2026.01.28",
-    title: "끌면 탭이 취소되는 이유 — 제스처 아레나",
-  },
 ];
 
 // 홈 figure("기술 블로그 N편")와 동기화되는 총 글 수.
-export const BLOG_POST_COUNT = 67;
+export const BLOG_POST_COUNT = 68;

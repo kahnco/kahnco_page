@@ -146,6 +146,11 @@ export const SERIES: Series[] = [
         title: "UI를 한 줄도 안 짜고 앱을 시작하는 이유 — 뼈대부터 세우기",
         slug: "flutter-app-architecture",
       },
+      {
+        order: 2,
+        title: "flutter_bloc을 지우고 BLoC을 60줄로 짠 이유",
+        slug: "flutter-app-bloc-from-scratch",
+      },
     ],
   },
 ];
