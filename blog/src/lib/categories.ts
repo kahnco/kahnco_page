@@ -22,6 +22,7 @@ export const CATEGORIES: Category[] = [
       { slug: "infra", label: "인프라·DevOps" },
       { slug: "cs", label: "CS·이론" },
       { slug: "handson", label: "실전·튜토리얼" },
+      { slug: "flutter", label: "Flutter" },
     ],
   },
   {

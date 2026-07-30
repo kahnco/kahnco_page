@@ -10,21 +10,21 @@ export interface PostMeta {
 
 export const LATEST_POSTS: PostMeta[] = [
   {
-    slug: "go-sse-realtime",
-    date: "2025.11.23",
-    title: "이벤트가 브라우저까지 — 폴링을 SSE로 바꾸다",
+    slug: "flutter-buildcontext-internals",
+    date: "2026.07.30",
+    title: "BuildContext 지하 탐사 — Element, 트리, 그리고 단일 스레드",
   },
   {
-    slug: "go-admin-rbac",
-    date: "2025.11.18",
-    title: "역할이 필요해질 때 — 관리자 페이지와 RBAC",
+    slug: "go-secrets-management",
+    date: "2025.12.23",
+    title: "평문을 지우며 — 시크릿 관리, 그리고 시리즈를 닫으며",
   },
   {
-    slug: "go-shop-ui-realtime",
-    date: "2025.11.13",
-    title: "프런트가 백엔드를 비춘다 — 실시간·검색·재고·세션",
+    slug: "go-promotion-ops",
+    date: "2025.12.18",
+    title: "돌려놓고 보이게 — 이벤트 메트릭·k8s 배포·부하 게이트 CI",
   },
 ];
 
 // 홈 figure("기술 블로그 N편")와 동기화되는 총 글 수.
-export const BLOG_POST_COUNT = 52;
+export const BLOG_POST_COUNT = 58;

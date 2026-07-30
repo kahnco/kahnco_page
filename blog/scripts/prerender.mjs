@@ -31,6 +31,8 @@ const LABELS = {
   backend: "백엔드",
   infra: "인프라·DevOps",
   cs: "CS·이론",
+  handson: "실전·튜토리얼",
+  flutter: "Flutter",
   invest: "투자",
   stocks: "주식",
   life: "일상",
