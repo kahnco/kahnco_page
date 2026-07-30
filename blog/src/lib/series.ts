@@ -151,6 +151,11 @@ export const SERIES: Series[] = [
         title: "flutter_bloc을 지우고 BLoC을 60줄로 짠 이유",
         slug: "flutter-app-bloc-from-scratch",
       },
+      {
+        order: 3,
+        title: "화면을 붙이다 — BlocProvider를 직접 짜서 트리에 얹기",
+        slug: "flutter-app-wiring-ui",
+      },
     ],
   },
 ];
