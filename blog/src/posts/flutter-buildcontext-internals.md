@@ -25,7 +25,11 @@ BuildContext 로 들어가기 전에, 그 정체인 **Element** 부터 짚어야
 - **Element = 그 설계도로 실제 지어져 자리를 지키는 건물(현장 담당자).** 오래 삽니다. 새 설계도가 와도 건물을 부수고 다시 짓는 게 아니라 **바뀐 부분만 반영(리모델링)** 합니다.
 - **RenderObject = 실제로 크기를 재고 픽셀을 칠하는 실무자.**
 
-Flutter 는 여러분이 만든 Widget 마다 `createElement()` 로 Element 를 하나씩 **부풀려(inflate)** 트리를 세웁니다. 이 **Element 트리** 가 진짜로 살아 돌아가는 런타임 트리입니다. Widget 트리는 매 빌드 갈아엎어지지만, Element 트리는 **같은 자리에 호환되는 위젯이 오는 한 그대로 유지** 됩니다.
+Flutter 는 여러분이 만든 Widget 마다 Element 를 하나씩 **부풀려(inflate)** 트리를 세웁니다.
+
+> **"부풀린다(inflate)"가 뭔가요?** 안드로이드에서 온 말입니다 — XML 레이아웃(납작한 설명서)을 실제 `View` 객체로 펼쳐 화면에 올리던 걸 "inflate" 라 불렀죠. Flutter 도 같습니다. **납작하게 접힌 풍선(Widget)에 바람을 넣어, 실제 자리를 차지하는 살아있는 노드(Element)로 펼치는 것** 이 inflate 입니다. 그 구체적 동작이 위젯의 `createElement()` 예요 — Flutter 가 위젯을 트리의 어떤 자리에 꽂을 때 그 위젯의 `createElement()` 를 불러 짝이 되는 Element 를 만들어 냅니다(`StatelessWidget → StatelessElement`, `StatefulWidget → StatefulElement`). 그 Element 가 부모·자리를 배정받아 트리에 붙고, 자식 위젯들도 같은 식으로 **재귀적으로** 부풀려집니다.
+
+이렇게 만들어진 **Element 트리** 가 진짜로 살아 돌아가는 런타임 트리입니다. Widget 트리는 매 빌드 갈아엎어지지만, Element 트리는 **같은 자리에 호환되는 위젯이 오는 한 그대로 유지** 됩니다.
 
 왜 이런 게 필요할까요? Widget 이 불변이고 매번 버려지기 때문입니다. **버려지는 것에는 상태를 담을 수도, "내가 트리 어디에 있는지"를 기억할 수도 없습니다.** 그래서 Flutter 는 그 역할을 할 **오래 사는 객체** 를 따로 뒀고, 그게 Element 입니다.
 
