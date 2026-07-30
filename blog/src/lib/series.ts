@@ -113,6 +113,11 @@ export const SERIES: Series[] = [
         title: "UI가 얼어붙는 이유 — 이벤트 루프와 아이솔레이트",
         slug: "flutter-async-isolate",
       },
+      {
+        order: 6,
+        title: "setState부터 픽셀까지 — 한 프레임의 여정",
+        slug: "flutter-render-pipeline",
+      },
     ],
   },
 ];
