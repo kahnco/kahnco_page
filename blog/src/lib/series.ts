@@ -93,6 +93,11 @@ export const SERIES: Series[] = [
         title: "BuildContext 지하 탐사 — Element, 트리, 그리고 단일 스레드",
         slug: "flutter-buildcontext-internals",
       },
+      {
+        order: 2,
+        title: "State가 엉뚱한 행에 남는 이유 — 재조정과 Key",
+        slug: "flutter-reconciliation-key",
+      },
     ],
   },
 ];
