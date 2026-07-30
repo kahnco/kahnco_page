@@ -108,6 +108,11 @@ export const SERIES: Series[] = [
         title: "레이아웃이 터지는 이유 — RenderObject와 제약",
         slug: "flutter-renderobject-layout",
       },
+      {
+        order: 5,
+        title: "UI가 얼어붙는 이유 — 이벤트 루프와 아이솔레이트",
+        slug: "flutter-async-isolate",
+      },
     ],
   },
 ];
