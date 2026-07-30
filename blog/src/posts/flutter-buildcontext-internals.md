@@ -49,6 +49,8 @@ abstract class Element implements BuildContext {   // ← Element 가 곧 BuildC
 
 Widget 은 `createElement()` 하나가 전부입니다 — "내가 어디 있는지"는 모릅니다. 그 기억은 전부 Element 가 들고 있죠. 그리고 마지막 줄, `Element implements BuildContext`. **이 Element 가 바로 `context` 입니다.**
 
+> **잠깐 — Element 가 Widget 을 가지는데, 왜 Widget 이 `createElement` 를 가질까요?** 방향이 거꾸로 같지만, "생성"과 "보유"는 다른 축입니다. **어떤 Element 가 자기 짝인지는 그 Widget 만** 압니다(`StatefulWidget → StatefulElement`). 그래서 프레임워크는 직접 만들지 않고 위젯에게 위임하죠 — 이게 팩토리 메서드(`@factory`)입니다. 덕분에 프레임워크의 트리 조립 코드(`inflateWidget`)는 `newWidget.createElement()` 한 줄로 끝나, **위젯 종류를 하나도 몰라도** 됩니다(커스텀 위젯도 그냥 붙습니다). 그리고 위젯이 Element 를 만들 때 자기(`this`)를 넘겨주고(`StatelessElement(this)`), Element 가 그걸 `_widget` 으로 붙듭니다 — 그래서 "위젯이 Element 를 만들지만, 그 Element 가 위젯을 가지는" 구조가 나옵니다. 마지막으로, `createElement` 는 **그 자리에 위젯이 처음 나타날 때 딱 한 번** 불립니다. 리빌드 땐 `Widget.canUpdate` 로 기존 Element 의 `_widget` 만 갈아끼우거나(호환), 새로 짓거나(비호환)를 정할 뿐이에요.
+
 ## `context` 는 바로 그 Element 다
 
 "내 `build(context)` 로 넘어오는 그 context 가 정말 이 Element냐?" 소스가 직접 답합니다.
