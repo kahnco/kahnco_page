@@ -123,6 +123,11 @@ export const SERIES: Series[] = [
         title: "애니메이션이 도는 법 — Ticker와 AnimationController",
         slug: "flutter-animation-internals",
       },
+      {
+        order: 8,
+        title: "끌면 탭이 취소되는 이유 — 제스처 아레나",
+        slug: "flutter-gesture-arena",
+      },
     ],
   },
 ];
