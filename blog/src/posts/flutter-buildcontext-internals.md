@@ -1,7 +1,7 @@
 ---
 title: BuildContext 지하 탐사 — Element, 트리, 그리고 단일 스레드
 date: 2025-12-28
-description: BuildContext는 Flutter에서 가장 자주 쓰면서 가장 덜 이해되는 것입니다. 이번엔 말이 아니라 통과하는 테스트로 지하까지 파봤습니다 — BuildContext가 사실 Element라는 것, Element는 오래 살고 Widget은 매번 갈아끼워진다는 것, InheritedWidget이 어떻게 자손을 구독시켜 상태를 전파하는지, 그리고 이 모든 게 단일 UI 아이솔레이트의 한 스레드에서만 돈다는 것까지. 전부 Flutter 3.44.8에서 실측하고 그 버전의 framework.dart 소스로 교차검증했습니다.
+description: BuildContext는 Flutter에서 가장 자주 쓰면서 가장 덜 이해되는 것입니다. 이번엔 말이 아니라 통과하는 테스트로 지하까지 파봤습니다 — BuildContext가 사실 Element라는 것, Element는 오래 살고 Widget은 매번 갈아끼워진다는 것, InheritedWidget이 어떻게 자손을 구독시켜 상태를 전파하는지, 그리고 이 모든 게 단일 UI 아이솔레이트의 한 스레드에서만 돈다는 것까지. 전부 Flutter 3.44.8에서 실측하고 그 버전의 framework.dart 소스로 교차검증했습니다. Flutter 지하 탐사 시리즈 1편입니다.
 tags: [Flutter, BuildContext, Element, InheritedWidget, 아이솔레이트, 내부구조]
 category: [dev, flutter]
 draft: false

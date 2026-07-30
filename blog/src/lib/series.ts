@@ -82,6 +82,19 @@ export const SERIES: Series[] = [
       { order: 29, title: "평문을 지우며 — 시크릿 관리, 그리고 시리즈를 닫으며", slug: "go-secrets-management" },
     ],
   },
+  {
+    slug: "flutter-underground",
+    title: "Flutter 지하 탐사",
+    description:
+      "표면 API를 넘어, Flutter가 '왜 이렇게 도는지'를 내부 구조까지 파고드는 심화 시리즈입니다. 다른 언어·플랫폼에 익숙한 개발자가 Flutter를 지하까지 이해하고 쓰는 것을 목표로, 말이 아니라 돌아가는 코드로 증명하며 갑니다. 예제는 github.com/kahnco/flutter-study 에 함께 올라갑니다.",
+    parts: [
+      {
+        order: 1,
+        title: "BuildContext 지하 탐사 — Element, 트리, 그리고 단일 스레드",
+        slug: "flutter-buildcontext-internals",
+      },
+    ],
+  },
 ];
 
 /** 주어진 글 slug 이 속한 시리즈와 그 안에서의 위치(1-based)를 찾는다. */
