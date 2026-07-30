@@ -11,7 +11,7 @@ export interface PostMeta {
 export const LATEST_POSTS: PostMeta[] = [
   {
     slug: "flutter-buildcontext-internals",
-    date: "2026.07.30",
+    date: "2025.12.28",
     title: "BuildContext 지하 탐사 — Element, 트리, 그리고 단일 스레드",
   },
   {
