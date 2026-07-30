@@ -128,6 +128,11 @@ export const SERIES: Series[] = [
         title: "끌면 탭이 취소되는 이유 — 제스처 아레나",
         slug: "flutter-gesture-arena",
       },
+      {
+        order: 9,
+        title: "부모 밖 버튼이 안 눌리는 이유 — 히트 테스트",
+        slug: "flutter-hit-testing",
+      },
     ],
   },
 ];
