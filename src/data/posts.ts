@@ -10,6 +10,11 @@ export interface PostMeta {
 
 export const LATEST_POSTS: PostMeta[] = [
   {
+    slug: "flutter-animation-internals",
+    date: "2026.01.24",
+    title: "애니메이션이 도는 법 — Ticker와 AnimationController",
+  },
+  {
     slug: "flutter-render-pipeline",
     date: "2026.01.20",
     title: "setState부터 픽셀까지 — 한 프레임의 여정",
@@ -19,12 +24,7 @@ export const LATEST_POSTS: PostMeta[] = [
     date: "2026.01.16",
     title: "UI가 얼어붙는 이유 — 이벤트 루프와 아이솔레이트",
   },
-  {
-    slug: "flutter-renderobject-layout",
-    date: "2026.01.12",
-    title: "레이아웃이 터지는 이유 — RenderObject와 제약",
-  },
 ];
 
 // 홈 figure("기술 블로그 N편")와 동기화되는 총 글 수.
-export const BLOG_POST_COUNT = 63;
+export const BLOG_POST_COUNT = 64;

@@ -118,6 +118,11 @@ export const SERIES: Series[] = [
         title: "setState부터 픽셀까지 — 한 프레임의 여정",
         slug: "flutter-render-pipeline",
       },
+      {
+        order: 7,
+        title: "애니메이션이 도는 법 — Ticker와 AnimationController",
+        slug: "flutter-animation-internals",
+      },
     ],
   },
 ];
