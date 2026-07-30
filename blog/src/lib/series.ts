@@ -135,6 +135,19 @@ export const SERIES: Series[] = [
       },
     ],
   },
+  {
+    slug: "flutter-app",
+    title: "Flutter 실전 — 작은 앱 제대로 짓기",
+    description:
+      "지하 탐사에서 얻은 원리로, 작지만 완성된 할 일 앱을 아키텍처부터 테스트까지 제대로 짓는 실전 시리즈입니다. 클린 아키텍처 · BLoC · 의존성 주입을 실제 코드로 쌓아 올리며, 커져도 무너지지 않는 골격을 몸에 익히는 것을 목표로 합니다. 예제는 github.com/kahnco/flutter-study 에 함께 올라갑니다.",
+    parts: [
+      {
+        order: 1,
+        title: "UI를 한 줄도 안 짜고 앱을 시작하는 이유 — 뼈대부터 세우기",
+        slug: "flutter-app-architecture",
+      },
+    ],
+  },
 ];
 
 /** 주어진 글 slug 이 속한 시리즈와 그 안에서의 위치(1-based)를 찾는다. */
