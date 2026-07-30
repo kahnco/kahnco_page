@@ -103,6 +103,11 @@ export const SERIES: Series[] = [
         title: "Provider를 40줄로 만들기 — watch와 read의 정체",
         slug: "flutter-mini-provider",
       },
+      {
+        order: 4,
+        title: "레이아웃이 터지는 이유 — RenderObject와 제약",
+        slug: "flutter-renderobject-layout",
+      },
     ],
   },
 ];
