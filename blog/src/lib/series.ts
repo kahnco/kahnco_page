@@ -98,6 +98,11 @@ export const SERIES: Series[] = [
         title: "State가 엉뚱한 행에 남는 이유 — 재조정과 Key",
         slug: "flutter-reconciliation-key",
       },
+      {
+        order: 3,
+        title: "Provider를 40줄로 만들기 — watch와 read의 정체",
+        slug: "flutter-mini-provider",
+      },
     ],
   },
 ];
