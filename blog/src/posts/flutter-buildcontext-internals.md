@@ -13,9 +13,27 @@ draft: false
 
 > 💻 이 글의 증명 테스트는 [github.com/kahnco/flutter-study](https://github.com/kahnco/flutter-study) 의 `test/buildcontext_deep_test.dart` 에 있습니다. `fvm flutter test` 로 직접 돌려볼 수 있습니다. 전부 **Flutter 3.44.8** 에서 실측하고, 그 버전의 `framework.dart` 소스로 교차검증했습니다.
 
-## BuildContext 는 사실 Element 다
+## 먼저, Element 가 뭔가요 — 설계도와 건물
 
-가장 먼저 깨야 할 오해가 있습니다. `BuildContext` 는 별도의 객체가 **아닙니다.** 프레임워크 소스를 열면 한 줄로 끝납니다.
+BuildContext 로 들어가기 전에, 그 정체인 **Element** 부터 짚어야 합니다. 여기서 막히면 뒤가 다 막히거든요.
+
+`Text('안녕')` 이라고 쓰면, 그건 화면에 있는 "무엇"이 아니라 **"이렇게 그려 달라"는 설명서** 입니다. Widget 은 불변(immutable)이라, 값 하나만 바뀌어도 통째로 새로 만들어져 버려집니다 — 매 프레임 수백 개가 생겼다 사라지죠. 그런데 화면에 실제로 **자리를 지키고 서 있는 무언가**, "나는 트리의 이 위치야", "내 부모는 누구·자식은 누구", "내 상태(State)는 이거야" 를 **기억하는** 무언가는 따로 있어야 합니다. 그게 **Element** 입니다.
+
+비유하면 이렇습니다.
+
+- **Widget = 설계도(주문서).** 매번 새로 그려서 던지는 종이 한 장. 그 자체론 화면에 아무것도 아닙니다.
+- **Element = 그 설계도로 실제 지어져 자리를 지키는 건물(현장 담당자).** 오래 삽니다. 새 설계도가 와도 건물을 부수고 다시 짓는 게 아니라 **바뀐 부분만 반영(리모델링)** 합니다.
+- **RenderObject = 실제로 크기를 재고 픽셀을 칠하는 실무자.**
+
+Flutter 는 여러분이 만든 Widget 마다 `createElement()` 로 Element 를 하나씩 **부풀려(inflate)** 트리를 세웁니다. 이 **Element 트리** 가 진짜로 살아 돌아가는 런타임 트리입니다. Widget 트리는 매 빌드 갈아엎어지지만, Element 트리는 **같은 자리에 호환되는 위젯이 오는 한 그대로 유지** 됩니다.
+
+왜 이런 게 필요할까요? Widget 이 불변이고 매번 버려지기 때문입니다. **버려지는 것에는 상태를 담을 수도, "내가 트리 어디에 있는지"를 기억할 수도 없습니다.** 그래서 Flutter 는 그 역할을 할 **오래 사는 객체** 를 따로 뒀고, 그게 Element 입니다. `StatefulWidget` 의 `State` 객체도 바로 이 Element(정확히는 `StatefulElement`)가 붙들고 있습니다 — **리빌드해도 State 가 안 날아가는 이유** 가 여기 있습니다.
+
+그리고 이 Element 가, 다음 장의 주인공인 `BuildContext` 입니다.
+
+## BuildContext 는 사실 그 Element 다
+
+방금 본 Element — 그게 바로 `BuildContext` 입니다. `BuildContext` 는 별도의 객체가 **아닙니다.** 프레임워크 소스를 열면 한 줄로 끝납니다.
 
 ```dart
 abstract class Element extends DiagnosticableTree implements BuildContext { … }
@@ -36,9 +54,9 @@ expect(captured.runtimeType.toString(), 'StatelessElement'); // Builder 는 Stat
 
 `StatefulWidget` 이면 그 자리 Element 는 `StatefulElement` 이고, `State.context` 와 `build` 의 `context` 는 **같은 인스턴스** 입니다(`identical`). 결국 context 는 **살아있는 Element 트리에서 "내 위치"** 였던 겁니다.
 
-## Element 는 오래 살고, Widget 은 잠깐 산다
+## Element 는 오래 살고, Widget 은 잠깐 산다 — 증명
 
-Flutter 에는 세 그루의 나무가 있습니다.
+앞서 설계도(Widget)와 건물(Element)로 나눴습니다. 이 "수명 차이"를 표로 정리하고, 코드로 증명해 봅니다.
 
 | 트리 | 정체 | 수명 |
 |---|---|---|
