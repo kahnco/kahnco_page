@@ -156,6 +156,11 @@ export const SERIES: Series[] = [
         title: "화면을 붙이다 — BlocProvider를 직접 짜서 트리에 얹기",
         slug: "flutter-app-wiring-ui",
       },
+      {
+        order: 4,
+        title: "저장소를 sqflite로 갈아 끼우는데 도메인은 한 줄도 안 고쳤다",
+        slug: "flutter-app-sqflite",
+      },
     ],
   },
 ];
