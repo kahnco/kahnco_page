@@ -171,6 +171,11 @@ export const SERIES: Series[] = [
         title: "검색·필터를 SQL로 안 내리고 화면에 둔 이유",
         slug: "flutter-app-search-filter",
       },
+      {
+        order: 7,
+        title: "미뤄 둔 것을 구현할 때 — SQL 검색과 디바운스",
+        slug: "flutter-app-sql-search-debounce",
+      },
     ],
   },
 ];

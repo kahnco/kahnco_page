@@ -10,6 +10,11 @@ export interface PostMeta {
 
 export const LATEST_POSTS: PostMeta[] = [
   {
+    slug: "flutter-app-sql-search-debounce",
+    date: "2026.03.01",
+    title: "미뤄 둔 것을 구현할 때 — SQL 검색과 디바운스",
+  },
+  {
     slug: "flutter-app-search-filter",
     date: "2026.02.25",
     title: "검색·필터를 SQL로 안 내리고 화면에 둔 이유",
@@ -19,12 +24,7 @@ export const LATEST_POSTS: PostMeta[] = [
     date: "2026.02.21",
     title: "조립된 앱이 진짜로 도는지 — 통합 테스트로 시리즈를 닫다",
   },
-  {
-    slug: "flutter-app-sqflite",
-    date: "2026.02.17",
-    title: "저장소를 sqflite로 갈아 끼우는데 도메인은 한 줄도 안 고쳤다",
-  },
 ];
 
 // 홈 figure("기술 블로그 N편")와 동기화되는 총 글 수.
-export const BLOG_POST_COUNT = 72;
+export const BLOG_POST_COUNT = 73;
