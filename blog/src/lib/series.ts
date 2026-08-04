@@ -166,6 +166,11 @@ export const SERIES: Series[] = [
         title: "조립된 앱이 진짜로 도는지 — 통합 테스트로 시리즈를 닫다",
         slug: "flutter-app-integration-finale",
       },
+      {
+        order: 6,
+        title: "검색·필터를 SQL로 안 내리고 화면에 둔 이유",
+        slug: "flutter-app-search-filter",
+      },
     ],
   },
 ];
