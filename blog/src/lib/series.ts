@@ -161,6 +161,11 @@ export const SERIES: Series[] = [
         title: "저장소를 sqflite로 갈아 끼우는데 도메인은 한 줄도 안 고쳤다",
         slug: "flutter-app-sqflite",
       },
+      {
+        order: 5,
+        title: "조립된 앱이 진짜로 도는지 — 통합 테스트로 시리즈를 닫다",
+        slug: "flutter-app-integration-finale",
+      },
     ],
   },
 ];
