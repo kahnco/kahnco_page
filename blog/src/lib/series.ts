@@ -176,6 +176,11 @@ export const SERIES: Series[] = [
         title: "미뤄 둔 것을 구현할 때 — SQL 검색과 디바운스",
         slug: "flutter-app-sql-search-debounce",
       },
+      {
+        order: 8,
+        title: "전부 올리지 않는다 — 페이징과 무한 스크롤",
+        slug: "flutter-app-pagination",
+      },
     ],
   },
 ];
