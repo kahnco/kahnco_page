@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import ServicesPage from "./pages/ServicesPage";
 import PortfolioPage from "./pages/PortfolioPage";
+import PrivacyPage from "./pages/PrivacyPage";
 import YourThoughtsPrivacy from "./pages/YourThoughtsPrivacy";
 import YourThoughtsTerms from "./pages/YourThoughtsTerms";
 import YourThoughtsLanding from "./pages/YourThoughtsLanding";
@@ -35,6 +36,7 @@ export function AppRoutes() {
         <Route path="/" element={<HomePage />} />
         <Route path="/services" element={<ServicesPage />} />
         <Route path="/portfolio" element={<PortfolioPage />} />
+        <Route path="/privacy" element={<PrivacyPage />} />
         <Route path="/yourthoughts" element={<YourThoughtsLanding />} />
         <Route path="/yourthoughts/privacy" element={<YourThoughtsPrivacy />} />
         <Route path="/yourthoughts/terms" element={<YourThoughtsTerms />} />

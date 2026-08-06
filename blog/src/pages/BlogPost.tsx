@@ -192,13 +192,19 @@ export default function BlogPost() {
         {/* 커리큘럼(시리즈) 내비게이션 */}
         <SeriesNav slug={post.slug} />
 
-        <footer className="mt-16 border-t border-white/10 pt-8">
+        <footer className="mt-16 flex flex-wrap gap-x-6 gap-y-2 border-t border-white/10 pt-8">
           <Link
             to="/"
             className="text-sm text-neutral-500 transition-colors hover:text-white"
           >
             ← 블로그 목록으로
           </Link>
+          <a
+            href="/privacy"
+            className="text-sm text-neutral-500 transition-colors hover:text-white"
+          >
+            개인정보처리방침
+          </a>
         </footer>
       </main>
     </div>

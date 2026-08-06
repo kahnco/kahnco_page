@@ -128,13 +128,46 @@ function renderBody(raw) {
  * 글 본문 프리렌더 래퍼. main.tsx 의 createRoot().render() 가 #root 자식을
  * 통째로 교체하므로, 이 내용은 JS 로딩 전까지만(=크롤러가 보는 시점) 노출된다.
  */
+// 크롤러가 보는 정적 푸터 — 블로그 목록·개인정보처리방침 링크(광고 게재 페이지 요건).
+const STATIC_FOOTER =
+  `<footer style="margin-top:3rem;padding-top:1rem;border-top:1px solid #ddd;font-size:.9rem">` +
+  `<a href="/blog">블로그 목록</a> · <a href="/privacy">개인정보처리방침</a> · ` +
+  `<a href="https://kahnco.me">칸코테크</a></footer>`;
+
 function bodyWrapper({ title, publishedTime, bodyHtml }) {
   const dateLine = publishedTime
     ? `<p style="color:#888;font-size:.9rem">${esc(publishedTime)}</p>`
     : "";
   return (
     `<div id="root"><main style="max-width:720px;margin:0 auto;padding:2rem 1rem;line-height:1.7">` +
-    `<article><h1>${esc(title)}</h1>${dateLine}\n${bodyHtml}</article></main></div>`
+    `<article><h1>${esc(title)}</h1>${dateLine}\n${bodyHtml}</article>${STATIC_FOOTER}</main></div>`
+  );
+}
+
+/**
+ * 목록(홈·카테고리) 프리렌더 래퍼. 크롤러가 JS 없이도 글 제목·링크·요약을 읽도록
+ * 실제 글 목록을 #root 안에 정적으로 심는다(런타임엔 React 가 통째로 교체).
+ */
+function listWrapper({ heading, subtitle, listPosts }) {
+  const items = listPosts
+    .map((p) => {
+      const date = p.date
+        ? ` <time style="color:#888;font-size:.85rem">${esc(p.date)}</time>`
+        : "";
+      const desc = p.description
+        ? `<p style="color:#555;margin:.3rem 0 0">${esc(p.description)}</p>`
+        : "";
+      return (
+        `<li style="margin:0 0 1.6rem">` +
+        `<a href="/blog/${esc(p.slug)}" style="font-size:1.15rem;font-weight:600">${esc(p.title)}</a>${date}` +
+        `${desc}</li>`
+      );
+    })
+    .join("\n");
+  return (
+    `<div id="root"><main style="max-width:760px;margin:0 auto;padding:2rem 1rem;line-height:1.6">` +
+    `<h1>${esc(heading)}</h1><p style="color:#666">${esc(subtitle)}</p>` +
+    `<ul style="list-style:none;padding:0">${items}</ul>${STATIC_FOOTER}</main></div>`
   );
 }
 
@@ -144,9 +177,13 @@ function renderHtml(template, meta) {
     .replace(/\s*<title>[\s\S]*?<\/title>/, "")
     .replace(/\s*<meta name="description"[^>]*\/?>/, "")
     .replace("</head>", `    ${buildHeadTags(meta)}\n  </head>`);
-  // 글 페이지면 본문을 #root 안에 정적으로 심는다(크롤러가 전문을 읽도록).
-  if (meta.bodyHtml) {
-    html = html.replace(/<div id="root">\s*<\/div>/, bodyWrapper(meta));
+  // #root 안에 정적 콘텐츠를 심는다(크롤러가 JS 없이 읽도록).
+  // 글 페이지는 본문 전문을, 목록(홈·카테고리) 페이지는 글 목록을 넣는다.
+  let rootHtml;
+  if (meta.bodyHtml) rootHtml = bodyWrapper(meta);
+  else if (meta.listPosts) rootHtml = listWrapper(meta);
+  if (rootHtml) {
+    html = html.replace(/<div id="root">\s*<\/div>/, rootHtml);
   }
   return html;
 }
@@ -160,6 +197,7 @@ async function main() {
 
   let count = 0;
   const categoryPaths = new Set();
+  const allPosts = []; // 목록 페이지(홈·카테고리)에 심을 글 메타
 
   // 1) 글 페이지
   for (const file of files) {
@@ -184,19 +222,37 @@ async function main() {
     const [p, s] = Array.isArray(fm.category) ? fm.category : [];
     if (p) categoryPaths.add(p);
     if (p && s) categoryPaths.add(`${p}/${s}`);
+
+    allPosts.push({
+      slug,
+      title: fm.title || slug,
+      date: typeof fm.date === "string" ? fm.date : "",
+      description: fm.description || "",
+      primary: p,
+      secondary: s,
+    });
   }
 
-  // 2) 카테고리 페이지
+  // 최신순(날짜 내림차순)으로 정렬 — 목록에 그대로 쓴다.
+  allPosts.sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0));
+
+  // 2) 카테고리 페이지 — 해당 글 목록을 정적으로 심는다.
   for (const cat of categoryPaths) {
     const [p, s] = cat.split("/");
     const label = s
       ? `${LABELS[p] ?? p} › ${LABELS[s] ?? s}`
       : `${LABELS[p] ?? p}`;
+    const listPosts = allPosts.filter((post) =>
+      s ? post.primary === p && post.secondary === s : post.primary === p,
+    );
     const html = renderHtml(template, {
       title: label,
       description: `${label} 카테고리의 글 — ${SITE_NAME}`,
       path: `/category/${cat}`,
       type: "website",
+      heading: label,
+      subtitle: `${label} 카테고리의 글`,
+      listPosts,
     });
     const dir = join(DIST_DIR, "category", ...(s ? [p] : []));
     await mkdir(dir, { recursive: true });
@@ -204,16 +260,21 @@ async function main() {
     count++;
   }
 
-  // 3) 홈(index.html) 도 canonical·OG 를 갖도록 보강
+  // 3) 홈(index.html = /blog) — 전체 글 목록을 정적으로 심는다.
   const homeHtml = renderHtml(template, {
     title: undefined,
     description: DEFAULT_DESC,
     path: "/",
     type: "website",
+    heading: "Blog",
+    subtitle: "인프라 · DevOps · 개발, 그리고 이런저런 기록",
+    listPosts: allPosts,
   });
   await writeFile(join(DIST_DIR, "index.html"), homeHtml, "utf8");
 
-  console.log(`[blog] prerender: 글·카테고리 ${count}개 + 홈 정적 head 생성`);
+  console.log(
+    `[blog] prerender: 글·카테고리 ${count}개 + 홈/목록에 글 ${allPosts.length}편 정적 심기`,
+  );
 }
 
 main().catch((err) => {

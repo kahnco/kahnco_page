@@ -19,6 +19,7 @@ export default function SiteFooter() {
           <Link to="/portfolio">포트폴리오</Link>
           <a href="/blog">블로그</a>
           <a href="/#contact">문의</a>
+          <Link to="/privacy">개인정보처리방침</Link>
           <span className="c">© 2026 {COMPANY.nameEn}</span>
         </div>
       </div>

@@ -133,12 +133,18 @@ export default function Browse() {
               ))}
             </div>
 
-            <div className="mt-16 border-t border-white/10 pt-8">
+            <div className="mt-16 flex flex-wrap gap-x-6 gap-y-2 border-t border-white/10 pt-8">
               <a
                 href="https://kahnco.me"
                 className="text-sm text-neutral-500 transition-colors hover:text-white"
               >
                 ← 칸코테크 메인으로
+              </a>
+              <a
+                href="/privacy"
+                className="text-sm text-neutral-500 transition-colors hover:text-white"
+              >
+                개인정보처리방침
               </a>
             </div>
           </div>

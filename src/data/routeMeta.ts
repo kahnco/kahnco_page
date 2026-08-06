@@ -23,6 +23,11 @@ export const ROUTE_META: Record<string, RouteMeta> = {
     description:
       "칸코테크·이현준이 자사 앱, 프리랜스·의뢰, 재직으로 만든 앱·웹 제작 이력입니다.",
   },
+  "/privacy": {
+    title: "개인정보처리방침 — 칸코테크",
+    description:
+      "칸코테크(kahnco.me) 및 블로그의 개인정보처리방침입니다. 쿠키·Google AdSense 등 제3자 광고 관련 고지를 포함합니다.",
+  },
   "/yourthoughts": {
     title: "너의생각 — 실시간 트렌드 모니터 | 칸코테크",
     description:

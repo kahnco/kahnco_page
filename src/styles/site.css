@@ -242,3 +242,27 @@
 @keyframes site-rise { to { opacity: 1; transform: none; } }
 @media (prefers-reduced-motion: reduce) { .site .reveal { animation: none; opacity: 1; transform: none; } }
 .site :focus-visible { outline: 2px solid var(--text); outline-offset: 3px; }
+
+/* 개인정보처리방침 등 법적 고지 본문 */
+.site .legal { max-width: 760px; }
+.site .legal h2 {
+  font-size: 1.02rem;
+  font-weight: 700;
+  color: var(--text);
+  margin: 34px 0 10px;
+}
+.site .legal p,
+.site .legal li { color: var(--text-soft); font-size: 0.92rem; line-height: 1.8; }
+.site .legal ul { margin: 8px 0; padding-left: 1.25em; }
+.site .legal li { margin: 4px 0; }
+.site .legal a { color: var(--text); text-decoration: underline; text-underline-offset: 2px; }
+.site .legal .eff { color: var(--muted); font-size: 0.85rem; margin-top: 6px; }
+.site .legal table { border-collapse: collapse; margin: 10px 0; width: 100%; }
+.site .legal th,
+.site .legal td {
+  border: 1px solid var(--rule);
+  padding: 8px 10px;
+  text-align: left;
+  font-size: 0.88rem;
+  color: var(--text-soft);
+}
