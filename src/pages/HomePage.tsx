@@ -184,7 +184,10 @@ export default function HomePage() {
             {LATEST_POSTS.map((post) => (
               <a className="wr" key={post.slug} href={`/blog/${post.slug}`}>
                 <span className="d tnum">{post.date}</span>
-                <span className="h">{post.title}</span>
+                <span className="wc">
+                  <span className="h">{post.title}</span>
+                  {post.excerpt && <span className="x">{post.excerpt}</span>}
+                </span>
                 <span className="g">→</span>
               </a>
             ))}

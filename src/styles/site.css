@@ -161,7 +161,9 @@
 .site .writing .wr:last-of-type { border-bottom: 1px solid var(--rule); }
 .site .wr:hover { background: var(--hover); }
 .site .wr .d { font-family: var(--mono); font-size: 0.78rem; color: var(--faint); }
+.site .wr .wc { display: grid; gap: 7px; min-width: 0; }
 .site .wr .h { font-size: 1.04rem; font-weight: 520; letter-spacing: -0.015em; line-height: 1.4; }
+.site .wr .x { color: var(--text-soft); font-size: 0.86rem; line-height: 1.62; max-width: 68ch; }
 .site .wr .g { text-align: right; color: var(--faint); transition: transform 0.18s, color 0.18s; }
 .site .wr:hover .g { color: var(--accent); transform: translate(2px, 0); }
 @media (max-width: 560px) { .site .wr { grid-template-columns: 1fr auto; } .site .wr .d { grid-column: 1 / -1; } }
