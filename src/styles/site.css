@@ -1,30 +1,45 @@
-/* 칸코테크 회사 홈 — 모노크롬 에디토리얼 디자인 시스템.
+/* 칸코테크 회사 홈 — 고대비 다크 + 블루 액센트 디자인 시스템.
  *
  * 기존 랜딩(/yourthoughts, /atomic-demolition)은 Tailwind 다크 테마를 그대로 쓰므로,
  * 이 스타일은 `.site` 래퍼 아래로만 적용되도록 전부 스코프한다(요소 셀렉터 포함).
- * 색은 '운영 중(살아있음)'을 뜻하는 --accent 하나로 아주 절제해 쓴다. */
+ * 라틴 글자는 Geist(예전 랜딩의 그 페이스), 한글은 시스템 한글 폰트로 폴백한다.
+ * 가독성을 위해 muted/faint 대비를 끌어올리고, 액센트는 블루 하나로 절제해 쓴다. */
+
+@font-face {
+  font-family: "Geist Sans";
+  src: url("../assets/fonts/GeistVF.woff") format("woff");
+  font-weight: 100 900;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Geist Mono";
+  src: url("../assets/fonts/GeistMonoVF.woff") format("woff");
+  font-weight: 100 900;
+  font-display: swap;
+}
 
 .site {
-  --bg: #131211;
-  --text: #edeae3;
-  --text-soft: #c4bfb5; /* 리드 문단용 — text 와 muted 사이 */
-  --muted: #938d81;
-  --faint: #56524a;
-  --rule: rgba(237, 234, 227, 0.13);
-  --rule-2: rgba(237, 234, 227, 0.3);
-  --hover: rgba(237, 234, 227, 0.045);
-  --surface: #1c1915; /* 교차 섹션 밴드 — 색 없이 톤만 한 단계 위 */
-  --accent: #77957f; /* 유일한 액센트 — '운영 중'의 뜻으로만 */
-  --sans: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Pretendard Variable",
-    Pretendard, system-ui, "Segoe UI", Roboto, sans-serif;
-  --mono: "SF Mono", ui-monospace, "JetBrains Mono", Menlo, monospace;
+  --bg: #0b0b0d;
+  --text: #f2f2f3;
+  --text-soft: #cfcfd4; /* 리드 문단용 */
+  --muted: #9a9aa4; /* 2차 텍스트 — 대비 상향(≈7:1) */
+  --faint: #6e6e78; /* 미세 라벨 — 절제하되 읽히게(≈4.5:1) */
+  --rule: rgba(240, 240, 245, 0.09);
+  --rule-2: rgba(240, 240, 245, 0.22);
+  --hover: rgba(106, 168, 255, 0.06); /* 블루 틴트 호버 */
+  --surface: #131317; /* 교차 섹션 밴드 — 한 단계 위 */
+  --accent: #6aa8ff; /* 유일한 액센트 — 블루 */
+  --accent-soft: rgba(106, 168, 255, 0.16);
+  --sans: "Geist Sans", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo",
+    "Pretendard Variable", Pretendard, system-ui, "Segoe UI", Roboto, sans-serif;
+  --mono: "Geist Mono", "SF Mono", ui-monospace, "JetBrains Mono", Menlo, monospace;
   --pad: 30px;
   --maxw: 1120px;
 
   background: var(--bg);
   color: var(--text);
   font-family: var(--sans);
-  line-height: 1.6;
+  line-height: 1.65;
   letter-spacing: -0.011em;
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
@@ -83,7 +98,7 @@
   line-height: 0.99; letter-spacing: -0.045em; font-weight: 800;
   margin: 0; max-width: 13ch; text-wrap: balance;
 }
-.site .hero h1 .q { color: var(--faint); }
+.site .hero h1 .q { color: var(--accent); }
 .site .hero .sub { display: flex; gap: 48px; margin-top: clamp(34px, 6vh, 64px); align-items: flex-end; flex-wrap: wrap; }
 .site .hero .sub p { font-size: 1.05rem; color: var(--muted); max-width: 40ch; margin: 0; line-height: 1.7; }
 .site .hero .meta { font-family: var(--mono); font-size: 0.74rem; color: var(--faint); letter-spacing: 0.02em; white-space: nowrap; line-height: 2; }
@@ -243,7 +258,7 @@
 .site .d2 { animation-delay: 0.16s; }
 @keyframes site-rise { to { opacity: 1; transform: none; } }
 @media (prefers-reduced-motion: reduce) { .site .reveal { animation: none; opacity: 1; transform: none; } }
-.site :focus-visible { outline: 2px solid var(--text); outline-offset: 3px; }
+.site :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 
 /* 개인정보처리방침 등 법적 고지 본문 */
 .site .legal { max-width: 760px; }
