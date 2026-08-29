@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Masthead from "../components/site/Masthead";
 import SiteFooter from "../components/site/SiteFooter";
@@ -9,6 +10,9 @@ import { LATEST_POSTS, BLOG_POST_COUNT } from "../data/posts";
 import { ROUTE_META } from "../data/routeMeta";
 
 const no = (n: number) => String(n).padStart(2, "0");
+
+// 히어로에서 순환하는 소개 타이틀(예전 랜딩의 회전 타이틀 감성).
+const HERO_TITLES = ["웹·앱을 만듭니다", "직접 운영합니다", "자동화를 좋아합니다"];
 
 function ServiceRow({ svc, idx }: { svc: Service; idx: number }) {
   const inner = (
@@ -49,6 +53,16 @@ export default function HomePage() {
 
   const liveCount = SERVICES.filter((s) => s.status === "live").length;
 
+  // 히어로 타이틀 회전 — SSR/프리렌더 시엔 첫 항목이 정적으로 남고, 클라이언트에서 순환.
+  const [heroIdx, setHeroIdx] = useState(0);
+  useEffect(() => {
+    const t = setInterval(
+      () => setHeroIdx((v) => (v + 1) % HERO_TITLES.length),
+      2600,
+    );
+    return () => clearInterval(t);
+  }, []);
+
   return (
     <div className="site">
       <Masthead />
@@ -56,18 +70,19 @@ export default function HomePage() {
       <main id="top">
         <section className="hero">
           <div className="wrap">
-            <h1 className="reveal">
-              만들고, 직접
-              <br />
-              <span className="q">운영합니다.</span>
-            </h1>
+            <h1 className="reveal">{COMPANY.nameKo}</h1>
+            <div className="rotor reveal d1" aria-live="polite">
+              <span key={heroIdx} className="rot">
+                {HERO_TITLES[heroIdx]}
+              </span>
+            </div>
             <div className="sub">
-              <p className="reveal d1">
+              <p className="reveal d2">
                 웹과 앱 서비스를 만들고, 사용자가 쓰는 동안 직접 운영합니다. 아래는 지금 돌아가고
                 있는 것들입니다.
               </p>
               <div className="meta reveal d2">
-                {COMPANY.nameKo} · {COMPANY.tagline}
+                {COMPANY.nameEn} · {COMPANY.tagline}
                 <br />
                 대표 {COMPANY.ceo} · <b>{COMPANY.region}</b>
               </div>
