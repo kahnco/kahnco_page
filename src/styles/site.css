@@ -104,12 +104,16 @@
   margin: 0; text-wrap: balance;
 }
 .site .hero h1 .q { color: var(--accent); }
-/* 회전 타이틀(예전 랜딩 감성) — 한 줄 높이로 자르고 들어오는 단어만 위로 슬라이드 */
-.site .hero .rotor { height: 1.35em; overflow: hidden; margin-top: clamp(14px, 2.4vh, 22px); }
+/* 회전 타이틀(예전 랜딩 감성) — 한 줄 높이로 자르고 들어오는 단어만 위로 슬라이드.
+ * 폰트 크기를 rotor 에 두어야 height:em 이 타이틀 크기 기준으로 맞는다(안 그러면 잘림). */
+.site .hero .rotor {
+  font-size: clamp(1.5rem, 4.6vw, 2.5rem);
+  height: 1.5em; overflow: hidden; margin-top: clamp(14px, 2.4vh, 22px);
+}
 .site .hero .rotor .rot {
   display: inline-block; color: var(--accent);
-  font-size: clamp(1.5rem, 4.6vw, 2.5rem); font-weight: 640; letter-spacing: -0.02em;
-  line-height: 1.35; will-change: transform, opacity;
+  font-size: inherit; font-weight: 640; letter-spacing: -0.02em;
+  line-height: 1.5; will-change: transform, opacity;
   animation: hero-rot 0.55s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 @keyframes hero-rot { from { opacity: 0; transform: translateY(0.55em); } to { opacity: 1; transform: none; } }
