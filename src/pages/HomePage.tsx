@@ -70,24 +70,33 @@ export default function HomePage() {
       <main id="top">
         <section className="hero">
           <div className="wrap">
-            <h1 className="reveal">{COMPANY.nameKo}</h1>
+            <h1 className="reveal">{COMPANY.nameEn}</h1>
             <div className="rotor reveal d1" aria-live="polite">
               <span key={heroIdx} className="rot">
                 {HERO_TITLES[heroIdx]}
               </span>
             </div>
-            <div className="sub">
-              <p className="reveal d2">
-                웹과 앱 서비스를 만들고, 사용자가 쓰는 동안 직접 운영합니다. 아래는 지금 돌아가고
-                있는 것들입니다.
-              </p>
-              <div className="meta reveal d2">
-                {COMPANY.nameEn} · {COMPANY.tagline}
-                <br />
-                대표 {COMPANY.ceo} · <b>{COMPANY.region}</b>
-              </div>
+            <p className="tagline reveal d2">
+              웹과 앱 서비스를 만들고, 사용자가 쓰는 동안 직접 운영합니다.
+            </p>
+            <div className="meta reveal d2">
+              {COMPANY.nameKo} · 대표 {COMPANY.ceo} · <b>{COMPANY.region}</b>
             </div>
           </div>
+          <a className="scroll" href="#services" aria-label="아래 서비스 목록으로 이동">
+            <svg
+              width="26"
+              height="26"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.6"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M12 5v14M5 12l7 7 7-7" />
+            </svg>
+          </a>
         </section>
 
         <section id="services" className="band alt">
