@@ -3,9 +3,9 @@ import { Link, useParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import BlogHeader from "../components/BlogHeader";
 import Markdown from "../components/Markdown";
-import AdSlot from "../components/AdSlot";
+import CoupangBanner from "../components/CoupangBanner";
 import SeriesNav from "../components/SeriesNav";
-import { AD_SLOTS } from "../lib/ads";
+import { COUPANG_BANNERS } from "../lib/coupang";
 import { getPostBySlug } from "../lib/posts";
 import { seriesForPost } from "../lib/series";
 import { primaryLabel, secondaryLabel } from "../lib/categories";
@@ -177,7 +177,7 @@ export default function BlogPost() {
                 <Markdown>{firstHalf}</Markdown>
                 {secondHalf && (
                   <>
-                    <AdSlot slot={AD_SLOTS.inArticle} />
+                    <CoupangBanner banner={COUPANG_BANNERS.digital} />
                     <Markdown>{secondHalf}</Markdown>
                   </>
                 )}
@@ -187,7 +187,7 @@ export default function BlogPost() {
         </motion.div>
 
         {/* 본문 끝 광고 */}
-        <AdSlot slot={AD_SLOTS.articleEnd} />
+        <CoupangBanner banner={COUPANG_BANNERS.hobby} />
 
         {/* 커리큘럼(시리즈) 내비게이션 */}
         <SeriesNav slug={post.slug} />
