@@ -196,6 +196,11 @@ export const SERIES: Series[] = [
         title: "LIKE를 버리고 FTS5로 — 진짜 전문 검색",
         slug: "flutter-app-fts5-search",
       },
+      {
+        order: 12,
+        title: "CRUD의 빈칸 채우기 — 수정도 값 객체로 재검증한다",
+        slug: "flutter-app-edit-todo",
+      },
     ],
   },
 ];

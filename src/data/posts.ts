@@ -10,6 +10,12 @@ export interface PostMeta {
 
 export const LATEST_POSTS: PostMeta[] = [
   {
+    "slug": "flutter-app-edit-todo",
+    "date": "2026.03.21",
+    "title": "CRUD의 빈칸 채우기 — 수정도 값 객체로 재검증한다",
+    "excerpt": "지금까지 앱은 추가·토글·삭제는 했지만 제목 수정이 없었습니다. CRUD의 U(Update)가 비어 있었죠. 이번 편에 그 빈칸을 채웁니다. 핵심은 수정도 추가와 똑같이 도메인 값 객체(TodoTitle)로 재검증한다는 것 — 빈 제목·과길이는 편집…"
+  },
+  {
     "slug": "flutter-app-fts5-search",
     "date": "2026.03.17",
     "title": "LIKE를 버리고 FTS5로 — 진짜 전문 검색",
@@ -56,14 +62,8 @@ export const LATEST_POSTS: PostMeta[] = [
     "date": "2026.02.17",
     "title": "저장소를 sqflite로 갈아 끼우는데 도메인은 한 줄도 안 고쳤다",
     "excerpt": "앱을 끄면 할 일이 사라졌습니다. 인메모리였으니까요. 이제 진짜 SQLite(sqflite)를 붙입니다. 그런데 저장소를 통째로 바꾸는데 도메인도, 유스케이스도, bloc도, 화면도 한 줄을 안 고쳤습니다 — 1편에서 prod/fake로 갈라 둔 그…"
-  },
-  {
-    "slug": "flutter-app-wiring-ui",
-    "date": "2026.02.13",
-    "title": "화면을 붙이다 — BlocProvider를 직접 짜서 트리에 얹기",
-    "excerpt": "1편에서 뼈대를, 2편에서 손수 짠 bloc을 만들었지만 둘 다 화면이 없었습니다. 이제 붙입니다. 그런데 bloc을 화면 깊은 곳의 위젯이 어떻게 집고, StreamController는 누가 닫을까요? 답은 지하 탐사에서 이미 팠습니다 — Inhe…"
   }
 ];
 
 // 홈 figure("기술 블로그 N편")와 동기화되는 총 글 수.
-export const BLOG_POST_COUNT = 77;
+export const BLOG_POST_COUNT = 78;
