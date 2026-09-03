@@ -43,6 +43,11 @@ export const SERIES: Series[] = [
         title: "요약이 지운 것을 붙잡다 — 에이전트에게 메모리를 주기",
         slug: "agent-from-scratch-memory",
       },
+      {
+        order: 5,
+        title: "무엇을 직접 짜고 무엇을 맡길까 — 손으로 짠 골격을 공식과 나란히",
+        slug: "agent-from-scratch-build-vs-buy",
+      },
     ],
   },
   {

@@ -10,6 +10,12 @@ export interface PostMeta {
 
 export const LATEST_POSTS: PostMeta[] = [
   {
+    "slug": "agent-from-scratch-build-vs-buy",
+    "date": "2026.04.10",
+    "title": "무엇을 직접 짜고 무엇을 맡길까 — 손으로 짠 골격을 공식과 나란히",
+    "excerpt": "1편부터 4편까지 에이전트의 뼈대를 프레임워크 없이 손으로 짰습니다. while 루프, 도구와 예산, 컨텍스트 요약, 메모리까지요. 이제 반대 방향으로 봅니다. 원리를 아는 지금, Anthropic이 공식으로 내놓은 것들(SDK의 Tool Runne…"
+  },
+  {
     "slug": "agent-from-scratch-memory",
     "date": "2026.04.06",
     "title": "요약이 지운 것을 붙잡다 — 에이전트에게 메모리를 주기",
@@ -56,14 +62,8 @@ export const LATEST_POSTS: PostMeta[] = [
     "date": "2026.03.09",
     "title": "offset은 왜 밀리나 — keyset 페이징으로 갈아타기",
     "excerpt": "8편에서 페이징을 offset(LIMIT/OFFSET)으로 짰고, \"정직하게\" 절에 이렇게 적었습니다 — offset은 페이지 사이에 목록이 바뀌면 항목을 건너뛰거나 중복하고, 그럴 땐 keyset이 답이라고요. 이번 편에서 그 keyset(curs…"
-  },
-  {
-    "slug": "flutter-app-pagination",
-    "date": "2026.03.05",
-    "title": "전부 올리지 않는다 — 페이징과 무한 스크롤",
-    "excerpt": "7편의 마지막 숙제였던 페이징을 구현합니다. 목록이 수천 건이면 한 번에 다 올릴 수 없으니, LIMIT/OFFSET으로 한 페이지씩 끊어 오고 바닥에 닿으면 이어 붙이죠. \"다음 페이지가 있는지\"를 별도 카운트 없이 N+1로 아는 기법, Scrol…"
   }
 ];
 
 // 홈 figure("기술 블로그 N편")와 동기화되는 총 글 수.
-export const BLOG_POST_COUNT = 82;
+export const BLOG_POST_COUNT = 83;
