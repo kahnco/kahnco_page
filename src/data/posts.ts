@@ -10,6 +10,12 @@ export interface PostMeta {
 
 export const LATEST_POSTS: PostMeta[] = [
   {
+    "slug": "flutter-app-fts5-search",
+    "date": "2026.03.17",
+    "title": "LIKE를 버리고 FTS5로 — 진짜 전문 검색",
+    "excerpt": "7편부터 계속 미뤄온 숙제입니다. 제목 검색을 LIKE '%…%'로 짜면서 매 편 \"정직하게\" 절에 \"이건 인덱스를 못 타니 진짜 검색은 FTS의 몫\"이라고 적어 왔죠. 이번 편에 그걸 갚습니다. SQLite의 FTS5 가상 테이블로 제목을 역색인하…"
+  },
+  {
     "slug": "flutter-app-migration-index",
     "date": "2026.03.13",
     "title": "이미 깔린 DB에 인덱스 더하기 — 스키마 마이그레이션",
@@ -56,14 +62,8 @@ export const LATEST_POSTS: PostMeta[] = [
     "date": "2026.02.13",
     "title": "화면을 붙이다 — BlocProvider를 직접 짜서 트리에 얹기",
     "excerpt": "1편에서 뼈대를, 2편에서 손수 짠 bloc을 만들었지만 둘 다 화면이 없었습니다. 이제 붙입니다. 그런데 bloc을 화면 깊은 곳의 위젯이 어떻게 집고, StreamController는 누가 닫을까요? 답은 지하 탐사에서 이미 팠습니다 — Inhe…"
-  },
-  {
-    "slug": "flutter-app-bloc-from-scratch",
-    "date": "2026.02.09",
-    "title": "flutter_bloc을 지우고 BLoC을 60줄로 짠 이유",
-    "excerpt": "상태 관리 하면 으레 flutter_bloc을 import하지만, 이번엔 지웁니다. BLoC 패턴의 본질은 패키지가 아니라 \"이벤트가 sink로 들어가고 → UI 없는 로직이 돌고 → 상태가 stream으로 나온다\" 이 세 줄이거든요. StreamC…"
   }
 ];
 
 // 홈 figure("기술 블로그 N편")와 동기화되는 총 글 수.
-export const BLOG_POST_COUNT = 76;
+export const BLOG_POST_COUNT = 77;

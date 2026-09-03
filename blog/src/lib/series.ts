@@ -191,6 +191,11 @@ export const SERIES: Series[] = [
         title: "이미 깔린 DB에 인덱스 더하기 — 스키마 마이그레이션",
         slug: "flutter-app-migration-index",
       },
+      {
+        order: 11,
+        title: "LIKE를 버리고 FTS5로 — 진짜 전문 검색",
+        slug: "flutter-app-fts5-search",
+      },
     ],
   },
 ];
