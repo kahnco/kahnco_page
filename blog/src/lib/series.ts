@@ -48,6 +48,11 @@ export const SERIES: Series[] = [
         title: "무엇을 직접 짜고 무엇을 맡길까 — 손으로 짠 골격을 공식과 나란히",
         slug: "agent-from-scratch-build-vs-buy",
       },
+      {
+        order: 6,
+        title: "매번 다시 읽히지 않게 — 프롬프트 캐싱으로 재전송 비용 줄이기",
+        slug: "agent-from-scratch-prompt-caching",
+      },
     ],
   },
   {

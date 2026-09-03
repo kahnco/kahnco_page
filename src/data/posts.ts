@@ -10,6 +10,12 @@ export interface PostMeta {
 
 export const LATEST_POSTS: PostMeta[] = [
   {
+    "slug": "agent-from-scratch-prompt-caching",
+    "date": "2026.04.14",
+    "title": "매번 다시 읽히지 않게 — 프롬프트 캐싱으로 재전송 비용 줄이기",
+    "excerpt": "3편에서 대화 크기는 요약으로 줄였지만, 매 스텝 다시 보내는 게 하나 더 있었습니다. 안 변하는 접두부 — 도구 선언과 시스템 프롬프트요. 이건 매 요청 재전송될 뿐 아니라 매번 다시 처리(입력 토큰 과금)됩니다. 도구 스키마 JSON은 꽤 크고,…"
+  },
+  {
     "slug": "agent-from-scratch-build-vs-buy",
     "date": "2026.04.10",
     "title": "무엇을 직접 짜고 무엇을 맡길까 — 손으로 짠 골격을 공식과 나란히",
@@ -56,14 +62,8 @@ export const LATEST_POSTS: PostMeta[] = [
     "date": "2026.03.13",
     "title": "이미 깔린 DB에 인덱스 더하기 — 스키마 마이그레이션",
     "excerpt": "9편에서 keyset 페이징을 짜며 \"인덱스가 있으면 O(log n), 근데 인덱스를 더하려면 스키마 버전을 올려야 하고 그건 다음 숙제\"라고 미뤘습니다. 이번 편에 그걸 갚습니다. keyset 정렬 키에 복합 인덱스를 거는 것 자체는 CREATE…"
-  },
-  {
-    "slug": "flutter-app-keyset-pagination",
-    "date": "2026.03.09",
-    "title": "offset은 왜 밀리나 — keyset 페이징으로 갈아타기",
-    "excerpt": "8편에서 페이징을 offset(LIMIT/OFFSET)으로 짰고, \"정직하게\" 절에 이렇게 적었습니다 — offset은 페이지 사이에 목록이 바뀌면 항목을 건너뛰거나 중복하고, 그럴 땐 keyset이 답이라고요. 이번 편에서 그 keyset(curs…"
   }
 ];
 
 // 홈 figure("기술 블로그 N편")와 동기화되는 총 글 수.
-export const BLOG_POST_COUNT = 83;
+export const BLOG_POST_COUNT = 84;
