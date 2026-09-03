@@ -10,6 +10,12 @@ export interface PostMeta {
 
 export const LATEST_POSTS: PostMeta[] = [
   {
+    "slug": "agent-from-scratch-memory",
+    "date": "2026.04.06",
+    "title": "요약이 지운 것을 붙잡다 — 에이전트에게 메모리를 주기",
+    "excerpt": "3편에서 대화를 요약해 접었지만, 요약은 손실 압축이라 정말 잃으면 안 되는 사실(파일 경로, 확정된 결정)이 함께 날아갈 수 있었습니다. 이번 편에 그걸 붙잡습니다. 에이전트에게 대화 밖에 사는 key-value 메모리를 주고, memory_wri…"
+  },
+  {
     "slug": "agent-from-scratch-context",
     "date": "2026.04.02",
     "title": "대화가 눈덩이처럼 불어난다 — 컨텍스트를 요약해 접기",
@@ -56,14 +62,8 @@ export const LATEST_POSTS: PostMeta[] = [
     "date": "2026.03.05",
     "title": "전부 올리지 않는다 — 페이징과 무한 스크롤",
     "excerpt": "7편의 마지막 숙제였던 페이징을 구현합니다. 목록이 수천 건이면 한 번에 다 올릴 수 없으니, LIMIT/OFFSET으로 한 페이지씩 끊어 오고 바닥에 닿으면 이어 붙이죠. \"다음 페이지가 있는지\"를 별도 카운트 없이 N+1로 아는 기법, Scrol…"
-  },
-  {
-    "slug": "flutter-app-sql-search-debounce",
-    "date": "2026.03.01",
-    "title": "미뤄 둔 것을 구현할 때 — SQL 검색과 디바운스",
-    "excerpt": "6편에서 \"목록이 커지면 검색을 SQL로 내리고 디바운스가 필요하다\"고 미뤄 뒀습니다. 이번 편에서 그걸 실제로 구현합니다. 조회 조건을 도메인 값(TodoQuery)으로 만들어 계약을 따라 내려보내고, sqflite가 WHERE/LIKE로 걸러 오…"
   }
 ];
 
 // 홈 figure("기술 블로그 N편")와 동기화되는 총 글 수.
-export const BLOG_POST_COUNT = 81;
+export const BLOG_POST_COUNT = 82;

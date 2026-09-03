@@ -38,6 +38,11 @@ export const SERIES: Series[] = [
         title: "대화가 눈덩이처럼 불어난다 — 컨텍스트를 요약해 접기",
         slug: "agent-from-scratch-context",
       },
+      {
+        order: 4,
+        title: "요약이 지운 것을 붙잡다 — 에이전트에게 메모리를 주기",
+        slug: "agent-from-scratch-memory",
+      },
     ],
   },
   {
