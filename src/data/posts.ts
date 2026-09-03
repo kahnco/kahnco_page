@@ -10,6 +10,12 @@ export interface PostMeta {
 
 export const LATEST_POSTS: PostMeta[] = [
   {
+    "slug": "flutter-app-migration-index",
+    "date": "2026.03.13",
+    "title": "이미 깔린 DB에 인덱스 더하기 — 스키마 마이그레이션",
+    "excerpt": "9편에서 keyset 페이징을 짜며 \"인덱스가 있으면 O(log n), 근데 인덱스를 더하려면 스키마 버전을 올려야 하고 그건 다음 숙제\"라고 미뤘습니다. 이번 편에 그걸 갚습니다. keyset 정렬 키에 복합 인덱스를 거는 것 자체는 CREATE…"
+  },
+  {
     "slug": "flutter-app-keyset-pagination",
     "date": "2026.03.09",
     "title": "offset은 왜 밀리나 — keyset 페이징으로 갈아타기",
@@ -56,14 +62,8 @@ export const LATEST_POSTS: PostMeta[] = [
     "date": "2026.02.09",
     "title": "flutter_bloc을 지우고 BLoC을 60줄로 짠 이유",
     "excerpt": "상태 관리 하면 으레 flutter_bloc을 import하지만, 이번엔 지웁니다. BLoC 패턴의 본질은 패키지가 아니라 \"이벤트가 sink로 들어가고 → UI 없는 로직이 돌고 → 상태가 stream으로 나온다\" 이 세 줄이거든요. StreamC…"
-  },
-  {
-    "slug": "flutter-app-architecture",
-    "date": "2026.02.05",
-    "title": "UI를 한 줄도 안 짜고 앱을 시작하는 이유 — 뼈대부터 세우기",
-    "excerpt": "할 일 앱을 만드는데 첫 편에서 화면을 한 장도 안 그립니다. 대신 도메인·데이터·의존성 주입이라는 뼈대를 먼저 세우죠. 왜냐고요? UI부터 짠 앱은 커질수록 무너지거든요. 실패를 예외가 아니라 값(Either)으로 흘리고, 잘못된 값은 값 객체에서…"
   }
 ];
 
 // 홈 figure("기술 블로그 N편")와 동기화되는 총 글 수.
-export const BLOG_POST_COUNT = 75;
+export const BLOG_POST_COUNT = 76;

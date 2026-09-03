@@ -186,6 +186,11 @@ export const SERIES: Series[] = [
         title: "offset은 왜 밀리나 — keyset 페이징으로 갈아타기",
         slug: "flutter-app-keyset-pagination",
       },
+      {
+        order: 10,
+        title: "이미 깔린 DB에 인덱스 더하기 — 스키마 마이그레이션",
+        slug: "flutter-app-migration-index",
+      },
     ],
   },
 ];
