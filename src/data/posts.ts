@@ -10,6 +10,12 @@ export interface PostMeta {
 
 export const LATEST_POSTS: PostMeta[] = [
   {
+    "slug": "agent-from-scratch-loop",
+    "date": "2026.03.25",
+    "title": "에이전트는 결국 while 루프다 — 프레임워크 없이 직접 짜기",
+    "excerpt": "AI 에이전트가 요즘 화두지만, LangChain 같은 프레임워크가 그 실체를 두껍게 감싸고 있습니다. Flutter 시리즈에서 provider를 40줄로, flutter_bloc을 60줄로 직접 짜 봤듯, 에이전트도 프레임워크를 걷어내고 직접 짜…"
+  },
+  {
     "slug": "flutter-app-edit-todo",
     "date": "2026.03.21",
     "title": "CRUD의 빈칸 채우기 — 수정도 값 객체로 재검증한다",
@@ -56,14 +62,8 @@ export const LATEST_POSTS: PostMeta[] = [
     "date": "2026.02.21",
     "title": "조립된 앱이 진짜로 도는지 — 통합 테스트로 시리즈를 닫다",
     "excerpt": "계층마다 테스트는 다 초록이었습니다. 그런데 실제 컨테이너로 조립하고 실제 SQLite에 붙였을 때 전부 맞물려 도는지는, 따로 증명해야 합니다. 실제 조립 루트로 앱을 부팅해 bloc→유스케이스→repository→sqflite까지 관통하고, 파일…"
-  },
-  {
-    "slug": "flutter-app-sqflite",
-    "date": "2026.02.17",
-    "title": "저장소를 sqflite로 갈아 끼우는데 도메인은 한 줄도 안 고쳤다",
-    "excerpt": "앱을 끄면 할 일이 사라졌습니다. 인메모리였으니까요. 이제 진짜 SQLite(sqflite)를 붙입니다. 그런데 저장소를 통째로 바꾸는데 도메인도, 유스케이스도, bloc도, 화면도 한 줄을 안 고쳤습니다 — 1편에서 prod/fake로 갈라 둔 그…"
   }
 ];
 
 // 홈 figure("기술 블로그 N편")와 동기화되는 총 글 수.
-export const BLOG_POST_COUNT = 78;
+export const BLOG_POST_COUNT = 79;

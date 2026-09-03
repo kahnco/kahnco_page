@@ -18,6 +18,19 @@ export interface Series {
 
 export const SERIES: Series[] = [
   {
+    slug: "agent-from-scratch",
+    title: "에이전트 직접 짜기",
+    description:
+      "LangChain 같은 프레임워크를 걷어내고, LLM 에이전트를 처음부터 직접 짜며 '에이전트가 실은 무엇인지'를 드러내는 시리즈입니다. Go + raw HTTP 로 Claude API 위에 도구 사용 루프를 손으로 짜고, mock 서버로 검증하며 갑니다. mini-Provider·직접 짠 BLoC 의 AI 버전입니다. 예제는 github.com/kahnco/agent-from-scratch 에 함께 올라갑니다.",
+    parts: [
+      {
+        order: 1,
+        title: "에이전트는 결국 while 루프다 — 프레임워크 없이 직접 짜기",
+        slug: "agent-from-scratch-loop",
+      },
+    ],
+  },
+  {
     slug: "stocks-basics",
     title: "주식 투자 기초",
     description: "순서대로 읽으면 주식 투자의 기본기를 잡을 수 있도록 순서를 잡은 글들입니다.",

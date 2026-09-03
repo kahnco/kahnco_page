@@ -33,6 +33,7 @@ const LABELS = {
   cs: "CS·이론",
   handson: "실전·튜토리얼",
   flutter: "Flutter",
+  ai: "AI·LLM",
   invest: "투자",
   stocks: "주식",
   life: "일상",
