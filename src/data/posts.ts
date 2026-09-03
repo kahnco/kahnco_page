@@ -10,6 +10,12 @@ export interface PostMeta {
 
 export const LATEST_POSTS: PostMeta[] = [
   {
+    "slug": "agent-from-scratch-tools-budget",
+    "date": "2026.03.29",
+    "title": "도구를 여럿 쥐여주고, 루프가 폭주하지 않게 — 예산과 병렬",
+    "excerpt": "1편에서 에이전트가 while 루프 하나임을 봤지만, 그 루프엔 구멍이 둘 있었습니다. 도구가 하나뿐이었고, 종료 조건이 \"모델이 멈출 때\"뿐이라 모델이 도구를 끝없이 부르면 루프가 안 끝나 비용 폭탄이 되죠. 이번 편에 둘을 메웁니다. 도구를 레지…"
+  },
+  {
     "slug": "agent-from-scratch-loop",
     "date": "2026.03.25",
     "title": "에이전트는 결국 while 루프다 — 프레임워크 없이 직접 짜기",
@@ -56,14 +62,8 @@ export const LATEST_POSTS: PostMeta[] = [
     "date": "2026.02.25",
     "title": "검색·필터를 SQL로 안 내리고 화면에 둔 이유",
     "excerpt": "시리즈를 닫았다고 했는데, 앱을 쓰다 보니 검색과 필터가 필요해졌습니다. 지금까지의 반사신경은 \"규칙은 도메인에, 저장은 SQL에\"였죠(1·4편). 그런데 이번엔 반대로, 검색·필터를 아래 계층으로 내리지 않고 화면(bloc)에 뒀습니다. 목록이 이…"
-  },
-  {
-    "slug": "flutter-app-integration-finale",
-    "date": "2026.02.21",
-    "title": "조립된 앱이 진짜로 도는지 — 통합 테스트로 시리즈를 닫다",
-    "excerpt": "계층마다 테스트는 다 초록이었습니다. 그런데 실제 컨테이너로 조립하고 실제 SQLite에 붙였을 때 전부 맞물려 도는지는, 따로 증명해야 합니다. 실제 조립 루트로 앱을 부팅해 bloc→유스케이스→repository→sqflite까지 관통하고, 파일…"
   }
 ];
 
 // 홈 figure("기술 블로그 N편")와 동기화되는 총 글 수.
-export const BLOG_POST_COUNT = 79;
+export const BLOG_POST_COUNT = 80;

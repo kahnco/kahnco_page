@@ -28,6 +28,11 @@ export const SERIES: Series[] = [
         title: "에이전트는 결국 while 루프다 — 프레임워크 없이 직접 짜기",
         slug: "agent-from-scratch-loop",
       },
+      {
+        order: 2,
+        title: "도구를 여럿 쥐여주고, 루프가 폭주하지 않게 — 예산과 병렬",
+        slug: "agent-from-scratch-tools-budget",
+      },
     ],
   },
   {
