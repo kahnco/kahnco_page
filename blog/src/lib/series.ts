@@ -181,6 +181,11 @@ export const SERIES: Series[] = [
         title: "전부 올리지 않는다 — 페이징과 무한 스크롤",
         slug: "flutter-app-pagination",
       },
+      {
+        order: 9,
+        title: "offset은 왜 밀리나 — keyset 페이징으로 갈아타기",
+        slug: "flutter-app-keyset-pagination",
+      },
     ],
   },
 ];

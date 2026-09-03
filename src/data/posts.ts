@@ -10,6 +10,12 @@ export interface PostMeta {
 
 export const LATEST_POSTS: PostMeta[] = [
   {
+    "slug": "flutter-app-keyset-pagination",
+    "date": "2026.03.09",
+    "title": "offset은 왜 밀리나 — keyset 페이징으로 갈아타기",
+    "excerpt": "8편에서 페이징을 offset(LIMIT/OFFSET)으로 짰고, \"정직하게\" 절에 이렇게 적었습니다 — offset은 페이지 사이에 목록이 바뀌면 항목을 건너뛰거나 중복하고, 그럴 땐 keyset이 답이라고요. 이번 편에서 그 keyset(curs…"
+  },
+  {
     "slug": "flutter-app-pagination",
     "date": "2026.03.05",
     "title": "전부 올리지 않는다 — 페이징과 무한 스크롤",
@@ -56,14 +62,8 @@ export const LATEST_POSTS: PostMeta[] = [
     "date": "2026.02.05",
     "title": "UI를 한 줄도 안 짜고 앱을 시작하는 이유 — 뼈대부터 세우기",
     "excerpt": "할 일 앱을 만드는데 첫 편에서 화면을 한 장도 안 그립니다. 대신 도메인·데이터·의존성 주입이라는 뼈대를 먼저 세우죠. 왜냐고요? UI부터 짠 앱은 커질수록 무너지거든요. 실패를 예외가 아니라 값(Either)으로 흘리고, 잘못된 값은 값 객체에서…"
-  },
-  {
-    "slug": "flutter-hit-testing",
-    "date": "2026.02.01",
-    "title": "부모 밖 버튼이 안 눌리는 이유 — 히트 테스트",
-    "excerpt": "부모 밖으로 삐져나온 버튼은 왜 안 눌리고, Stack에서 위 위젯이 왜 탭을 먼저 먹고, IgnorePointer와 AbsorbPointer는 뭐가 다를까요? 전부 히트 테스트에서 나옵니다 — 포인터가 내려오면 RenderObject 트리를 훑어…"
   }
 ];
 
 // 홈 figure("기술 블로그 N편")와 동기화되는 총 글 수.
-export const BLOG_POST_COUNT = 74;
+export const BLOG_POST_COUNT = 75;
