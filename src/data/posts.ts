@@ -10,6 +10,12 @@ export interface PostMeta {
 
 export const LATEST_POSTS: PostMeta[] = [
   {
+    "slug": "agent-from-scratch-context",
+    "date": "2026.04.02",
+    "title": "대화가 눈덩이처럼 불어난다 — 컨텍스트를 요약해 접기",
+    "excerpt": "에이전트 루프는 한 바퀴 돌 때마다 대화(messages)에 모델의 말과 도구 결과를 이어 붙입니다. 그런데 매 스텝 그 전체를 다시 API로 보내죠. 그래서 대화는 눈덩이처럼 불어나 토큰이 O(n²)으로 커지고, 비싸지고 느려지다 결국 컨텍스트 윈…"
+  },
+  {
     "slug": "agent-from-scratch-tools-budget",
     "date": "2026.03.29",
     "title": "도구를 여럿 쥐여주고, 루프가 폭주하지 않게 — 예산과 병렬",
@@ -56,14 +62,8 @@ export const LATEST_POSTS: PostMeta[] = [
     "date": "2026.03.01",
     "title": "미뤄 둔 것을 구현할 때 — SQL 검색과 디바운스",
     "excerpt": "6편에서 \"목록이 커지면 검색을 SQL로 내리고 디바운스가 필요하다\"고 미뤄 뒀습니다. 이번 편에서 그걸 실제로 구현합니다. 조회 조건을 도메인 값(TodoQuery)으로 만들어 계약을 따라 내려보내고, sqflite가 WHERE/LIKE로 걸러 오…"
-  },
-  {
-    "slug": "flutter-app-search-filter",
-    "date": "2026.02.25",
-    "title": "검색·필터를 SQL로 안 내리고 화면에 둔 이유",
-    "excerpt": "시리즈를 닫았다고 했는데, 앱을 쓰다 보니 검색과 필터가 필요해졌습니다. 지금까지의 반사신경은 \"규칙은 도메인에, 저장은 SQL에\"였죠(1·4편). 그런데 이번엔 반대로, 검색·필터를 아래 계층으로 내리지 않고 화면(bloc)에 뒀습니다. 목록이 이…"
   }
 ];
 
 // 홈 figure("기술 블로그 N편")와 동기화되는 총 글 수.
-export const BLOG_POST_COUNT = 80;
+export const BLOG_POST_COUNT = 81;

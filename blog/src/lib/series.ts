@@ -33,6 +33,11 @@ export const SERIES: Series[] = [
         title: "도구를 여럿 쥐여주고, 루프가 폭주하지 않게 — 예산과 병렬",
         slug: "agent-from-scratch-tools-budget",
       },
+      {
+        order: 3,
+        title: "대화가 눈덩이처럼 불어난다 — 컨텍스트를 요약해 접기",
+        slug: "agent-from-scratch-context",
+      },
     ],
   },
   {
