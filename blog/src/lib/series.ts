@@ -18,6 +18,25 @@ export interface Series {
 
 export const SERIES: Series[] = [
   {
+    slug: "ai-math",
+    title: "AI의 수학적 기초",
+    description:
+      "선형대수·확률·최적화 같은 밑바닥 수학에서 출발해, 선형·로지스틱 회귀와 신경망·역전파를 지나 트랜스포머까지, 'AI가 왜 도는지'를 수식으로 차근차근 쌓아 올리는 이론 시리즈입니다. 코드가 아니라 수학으로 증명하며 갑니다. 실전으로 만들어 본 '에이전트 직접 짜기'의 이론적 바닥에 해당합니다.",
+    parts: [
+      {
+        order: 1,
+        title: "세상을 벡터로 놓다 — AI가 데이터를 보는 첫 언어",
+        slug: "ai-math-vectors",
+      },
+      { order: 2, title: "거리와 유사도 — 노름과 내적이 재는 것" },
+      { order: 3, title: "확률과 불확실성 — 분포·기댓값·베이즈" },
+      { order: 4, title: "미분과 경사하강 — 기계가 '배우는' 방식" },
+      { order: 5, title: "가장 단순한 학습 — 선형회귀를 끝까지" },
+      { order: 6, title: "비선형으로 — 신경망과 역전파" },
+      { order: 7, title: "주목이라는 연산 — 트랜스포머로" },
+    ],
+  },
+  {
     slug: "agent-from-scratch",
     title: "에이전트 직접 짜기",
     description:

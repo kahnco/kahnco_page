@@ -1,8 +1,11 @@
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import remarkMath from "remark-math";
 import rehypeHighlight from "rehype-highlight";
+import rehypeKatex from "rehype-katex";
 import rehypeSlug from "rehype-slug";
 import "highlight.js/styles/github-dark.css";
+import "katex/dist/katex.min.css";
 import MermaidDiagram from "./MermaidDiagram";
 
 /** pre 의 자식 code 엘리먼트에서 raw 텍스트를 추출한다. */
@@ -18,6 +21,7 @@ function extractText(node: unknown): string {
 /**
  * 블로그 본문 마크다운 렌더러.
  * - remark-gfm: 표, 체크리스트, 취소선 등 GitHub 확장 문법
+ * - remark-math + rehype-katex: $인라인$·$$블록$$ 수식을 KaTeX 로 렌더 (수학 시리즈용)
  * - rehype-highlight: 코드 블록 구문 강조 (highlight.js)
  * - rehype-slug: 헤딩에 id 부여 (목차/앵커 링크용)
  * 스타일은 Tailwind 클래스로 컴포넌트별 매핑하여 사이트 다크 테마와 통일.
@@ -26,8 +30,12 @@ export default function Markdown({ children }: { children: string }) {
   return (
     <div className="markdown-body text-neutral-300 leading-relaxed">
       <ReactMarkdown
-        remarkPlugins={[[remarkGfm, { singleTilde: false }]]}
-        rehypePlugins={[rehypeSlug, [rehypeHighlight, { ignoreMissing: true }]]}
+        remarkPlugins={[[remarkGfm, { singleTilde: false }], remarkMath]}
+        rehypePlugins={[
+          rehypeSlug,
+          [rehypeKatex, { strict: false }],
+          [rehypeHighlight, { ignoreMissing: true }],
+        ]}
         components={{
           h1: ({ ...props }) => (
             <h1 className="scroll-mt-24 text-3xl sm:text-4xl font-bold text-white mt-12 mb-5" {...props} />

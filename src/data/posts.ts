@@ -10,6 +10,12 @@ export interface PostMeta {
 
 export const LATEST_POSTS: PostMeta[] = [
   {
+    "slug": "ai-math-vectors",
+    "date": "2026.04.18",
+    "title": "세상을 벡터로 놓다 — AI가 데이터를 보는 첫 언어",
+    "excerpt": "새 시리즈를 엽니다. '에이전트 직접 짜기'가 AI를 어떻게 만드는지의 실전이었다면, 이 시리즈는 AI가 왜 도는지를 수식으로 차근차근 쌓는 이론입니다. 코드가 아니라 수학으로 증명하며 가죠. 그 첫 질문은 이겁니다. AI는 세상을 대체 어떻게 표현…"
+  },
+  {
     "slug": "agent-from-scratch-prompt-caching",
     "date": "2026.04.14",
     "title": "매번 다시 읽히지 않게 — 프롬프트 캐싱으로 재전송 비용 줄이기",
@@ -56,14 +62,8 @@ export const LATEST_POSTS: PostMeta[] = [
     "date": "2026.03.17",
     "title": "LIKE를 버리고 FTS5로 — 진짜 전문 검색",
     "excerpt": "7편부터 계속 미뤄온 숙제입니다. 제목 검색을 LIKE '%…%'로 짜면서 매 편 \"정직하게\" 절에 \"이건 인덱스를 못 타니 진짜 검색은 FTS의 몫\"이라고 적어 왔죠. 이번 편에 그걸 갚습니다. SQLite의 FTS5 가상 테이블로 제목을 역색인하…"
-  },
-  {
-    "slug": "flutter-app-migration-index",
-    "date": "2026.03.13",
-    "title": "이미 깔린 DB에 인덱스 더하기 — 스키마 마이그레이션",
-    "excerpt": "9편에서 keyset 페이징을 짜며 \"인덱스가 있으면 O(log n), 근데 인덱스를 더하려면 스키마 버전을 올려야 하고 그건 다음 숙제\"라고 미뤘습니다. 이번 편에 그걸 갚습니다. keyset 정렬 키에 복합 인덱스를 거는 것 자체는 CREATE…"
   }
 ];
 
 // 홈 figure("기술 블로그 N편")와 동기화되는 총 글 수.
-export const BLOG_POST_COUNT = 84;
+export const BLOG_POST_COUNT = 85;

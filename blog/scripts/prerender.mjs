@@ -12,8 +12,12 @@ import { readdir, readFile, writeFile, mkdir } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 import { marked } from "marked";
+import markedKatex from "marked-katex-extension";
 
 marked.setOptions({ gfm: true, breaks: false });
+// $인라인$·$$블록$$ 수식을 KaTeX HTML 로 프리렌더한다(수학 시리즈용).
+// 런타임 rehype-katex 와 같은 katex CSS 를 쓰므로 첫 페인트도 정상 렌더된다.
+marked.use(markedKatex({ throwOnError: false, nonStandard: true }));
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, "..");
