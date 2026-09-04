@@ -10,6 +10,12 @@ export interface PostMeta {
 
 export const LATEST_POSTS: PostMeta[] = [
   {
+    "slug": "ai-math-transformer",
+    "date": "2026.05.12",
+    "title": "주목이라는 연산 — 트랜스포머로",
+    "excerpt": "시리즈의 마지막 편입니다. 신경망 위에 마지막 블록, 어텐션을 올려 트랜스포머를 완성하고, 밑바닥 벡터에서 시작한 한 줄기를 여기서 닫습니다. 어텐션의 핵심은 놀랍도록 익숙합니다. 각 토큰이 다른 토큰들을 얼마나 참고할지를 1편의 내적으로 재고, 3…"
+  },
+  {
     "slug": "ai-math-neural-networks",
     "date": "2026.05.08",
     "title": "비선형으로 — 신경망과 역전파",
@@ -56,14 +62,8 @@ export const LATEST_POSTS: PostMeta[] = [
     "date": "2026.04.10",
     "title": "무엇을 직접 짜고 무엇을 맡길까 — 손으로 짠 골격을 공식과 나란히",
     "excerpt": "1편부터 4편까지 에이전트의 뼈대를 프레임워크 없이 손으로 짰습니다. while 루프, 도구와 예산, 컨텍스트 요약, 메모리까지요. 이제 반대 방향으로 봅니다. 원리를 아는 지금, Anthropic이 공식으로 내놓은 것들(SDK의 Tool Runne…"
-  },
-  {
-    "slug": "agent-from-scratch-memory",
-    "date": "2026.04.06",
-    "title": "요약이 지운 것을 붙잡다 — 에이전트에게 메모리를 주기",
-    "excerpt": "3편에서 대화를 요약해 접었지만, 요약은 손실 압축이라 정말 잃으면 안 되는 사실(파일 경로, 확정된 결정)이 함께 날아갈 수 있었습니다. 이번 편에 그걸 붙잡습니다. 에이전트에게 대화 밖에 사는 key-value 메모리를 주고, memory_wri…"
   }
 ];
 
 // 홈 figure("기술 블로그 N편")와 동기화되는 총 글 수.
-export const BLOG_POST_COUNT = 90;
+export const BLOG_POST_COUNT = 91;

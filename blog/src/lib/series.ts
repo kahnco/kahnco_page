@@ -53,7 +53,11 @@ export const SERIES: Series[] = [
         title: "비선형으로 — 신경망과 역전파",
         slug: "ai-math-neural-networks",
       },
-      { order: 7, title: "주목이라는 연산 — 트랜스포머로" },
+      {
+        order: 7,
+        title: "주목이라는 연산 — 트랜스포머로",
+        slug: "ai-math-transformer",
+      },
     ],
   },
   {
