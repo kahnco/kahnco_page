@@ -10,6 +10,12 @@ export interface PostMeta {
 
 export const LATEST_POSTS: PostMeta[] = [
   {
+    "slug": "ai-math-linear-regression",
+    "date": "2026.05.04",
+    "title": "가장 단순한 학습 — 선형회귀를 끝까지",
+    "excerpt": "1편부터 4편까지 벡터·거리·확률·경사하강을 따로따로 세웠습니다. 이 편에서 그 넷을 처음으로 하나의 완결된 학습에 합칩니다. 선형회귀입니다. 학습은 늘 세 박자예요. 모델을 놓고, 손실을 정의하고, 그 손실을 최소화한다. 선형회귀는 그 삼박자가 가…"
+  },
+  {
     "slug": "ai-math-gradient-descent",
     "date": "2026.04.30",
     "title": "미분과 경사하강 — 기계가 '배우는' 방식",
@@ -56,14 +62,8 @@ export const LATEST_POSTS: PostMeta[] = [
     "date": "2026.04.02",
     "title": "대화가 눈덩이처럼 불어난다 — 컨텍스트를 요약해 접기",
     "excerpt": "에이전트 루프는 한 바퀴 돌 때마다 대화(messages)에 모델의 말과 도구 결과를 이어 붙입니다. 그런데 매 스텝 그 전체를 다시 API로 보내죠. 그래서 대화는 눈덩이처럼 불어나 토큰이 O(n²)으로 커지고, 비싸지고 느려지다 결국 컨텍스트 윈…"
-  },
-  {
-    "slug": "agent-from-scratch-tools-budget",
-    "date": "2026.03.29",
-    "title": "도구를 여럿 쥐여주고, 루프가 폭주하지 않게 — 예산과 병렬",
-    "excerpt": "1편에서 에이전트가 while 루프 하나임을 봤지만, 그 루프엔 구멍이 둘 있었습니다. 도구가 하나뿐이었고, 종료 조건이 \"모델이 멈출 때\"뿐이라 모델이 도구를 끝없이 부르면 루프가 안 끝나 비용 폭탄이 되죠. 이번 편에 둘을 메웁니다. 도구를 레지…"
   }
 ];
 
 // 홈 figure("기술 블로그 N편")와 동기화되는 총 글 수.
-export const BLOG_POST_COUNT = 88;
+export const BLOG_POST_COUNT = 89;
