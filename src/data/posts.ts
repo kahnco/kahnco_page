@@ -10,6 +10,12 @@ export interface PostMeta {
 
 export const LATEST_POSTS: PostMeta[] = [
   {
+    "slug": "ai-math-probability",
+    "date": "2026.04.26",
+    "title": "확률과 불확실성 — 분포·기댓값·베이즈",
+    "excerpt": "1·2편의 벡터가 '무엇을 아는가'의 언어였다면, 확률은 '무엇을 모르는가'의 언어입니다. AI는 세상을 확실히 아는 게 아니라 확률로 믿고, 데이터를 보며 그 믿음을 갱신하죠. 이 편에서는 그 언어를 밑바닥부터 세웁니다. 확률의 세 공리에서 출발해…"
+  },
+  {
     "slug": "ai-math-distance-similarity",
     "date": "2026.04.22",
     "title": "거리와 유사도 — 노름과 내적이 재는 것",
@@ -56,14 +62,8 @@ export const LATEST_POSTS: PostMeta[] = [
     "date": "2026.03.25",
     "title": "에이전트는 결국 while 루프다 — 프레임워크 없이 직접 짜기",
     "excerpt": "AI 에이전트가 요즘 화두지만, LangChain 같은 프레임워크가 그 실체를 두껍게 감싸고 있습니다. Flutter 시리즈에서 provider를 40줄로, flutter_bloc을 60줄로 직접 짜 봤듯, 에이전트도 프레임워크를 걷어내고 직접 짜…"
-  },
-  {
-    "slug": "flutter-app-edit-todo",
-    "date": "2026.03.21",
-    "title": "CRUD의 빈칸 채우기 — 수정도 값 객체로 재검증한다",
-    "excerpt": "지금까지 앱은 추가·토글·삭제는 했지만 제목 수정이 없었습니다. CRUD의 U(Update)가 비어 있었죠. 이번 편에 그 빈칸을 채웁니다. 핵심은 수정도 추가와 똑같이 도메인 값 객체(TodoTitle)로 재검증한다는 것 — 빈 제목·과길이는 편집…"
   }
 ];
 
 // 홈 figure("기술 블로그 N편")와 동기화되는 총 글 수.
-export const BLOG_POST_COUNT = 86;
+export const BLOG_POST_COUNT = 87;
