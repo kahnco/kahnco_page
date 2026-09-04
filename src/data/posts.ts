@@ -10,6 +10,12 @@ export interface PostMeta {
 
 export const LATEST_POSTS: PostMeta[] = [
   {
+    "slug": "ai-math-gradient-descent",
+    "date": "2026.04.30",
+    "title": "미분과 경사하강 — 기계가 '배우는' 방식",
+    "excerpt": "3편에서 학습의 목적을 얻었습니다. 손실을 최소로, 로그가능도를 최대로. 그런데 '최소로 만들라'는 목적과 '실제로 최소를 찾는' 방법은 다릅니다. 이 편에서는 그 방법, 기계가 배우는 메커니즘을 세웁니다. 미분을 순간 변화율이자 접선 기울기로 정의…"
+  },
+  {
     "slug": "ai-math-probability",
     "date": "2026.04.26",
     "title": "확률과 불확실성 — 분포·기댓값·베이즈",
@@ -56,14 +62,8 @@ export const LATEST_POSTS: PostMeta[] = [
     "date": "2026.03.29",
     "title": "도구를 여럿 쥐여주고, 루프가 폭주하지 않게 — 예산과 병렬",
     "excerpt": "1편에서 에이전트가 while 루프 하나임을 봤지만, 그 루프엔 구멍이 둘 있었습니다. 도구가 하나뿐이었고, 종료 조건이 \"모델이 멈출 때\"뿐이라 모델이 도구를 끝없이 부르면 루프가 안 끝나 비용 폭탄이 되죠. 이번 편에 둘을 메웁니다. 도구를 레지…"
-  },
-  {
-    "slug": "agent-from-scratch-loop",
-    "date": "2026.03.25",
-    "title": "에이전트는 결국 while 루프다 — 프레임워크 없이 직접 짜기",
-    "excerpt": "AI 에이전트가 요즘 화두지만, LangChain 같은 프레임워크가 그 실체를 두껍게 감싸고 있습니다. Flutter 시리즈에서 provider를 40줄로, flutter_bloc을 60줄로 직접 짜 봤듯, 에이전트도 프레임워크를 걷어내고 직접 짜…"
   }
 ];
 
 // 홈 figure("기술 블로그 N편")와 동기화되는 총 글 수.
-export const BLOG_POST_COUNT = 87;
+export const BLOG_POST_COUNT = 88;
