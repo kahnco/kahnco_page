@@ -10,6 +10,12 @@ export interface PostMeta {
 
 export const LATEST_POSTS: PostMeta[] = [
   {
+    "slug": "ai-math-distance-similarity",
+    "date": "2026.04.22",
+    "title": "거리와 유사도 — 노름과 내적이 재는 것",
+    "excerpt": "1편에서 데이터를 벡터로 놓았습니다. 그런데 '두 점이 가깝다', '두 벡터가 닮았다'를 재는 자는 하나가 아닙니다. 이 편에서는 그 자들을 제대로 세웁니다. 노름의 여러 얼굴(L1 맨해튼, L2 유클리드, L-무한대 체비쇼프)과 각 노름의 단위원…"
+  },
+  {
     "slug": "ai-math-vectors",
     "date": "2026.04.18",
     "title": "세상을 벡터로 놓다 — AI가 데이터를 보는 첫 언어",
@@ -56,14 +62,8 @@ export const LATEST_POSTS: PostMeta[] = [
     "date": "2026.03.21",
     "title": "CRUD의 빈칸 채우기 — 수정도 값 객체로 재검증한다",
     "excerpt": "지금까지 앱은 추가·토글·삭제는 했지만 제목 수정이 없었습니다. CRUD의 U(Update)가 비어 있었죠. 이번 편에 그 빈칸을 채웁니다. 핵심은 수정도 추가와 똑같이 도메인 값 객체(TodoTitle)로 재검증한다는 것 — 빈 제목·과길이는 편집…"
-  },
-  {
-    "slug": "flutter-app-fts5-search",
-    "date": "2026.03.17",
-    "title": "LIKE를 버리고 FTS5로 — 진짜 전문 검색",
-    "excerpt": "7편부터 계속 미뤄온 숙제입니다. 제목 검색을 LIKE '%…%'로 짜면서 매 편 \"정직하게\" 절에 \"이건 인덱스를 못 타니 진짜 검색은 FTS의 몫\"이라고 적어 왔죠. 이번 편에 그걸 갚습니다. SQLite의 FTS5 가상 테이블로 제목을 역색인하…"
   }
 ];
 
 // 홈 figure("기술 블로그 N편")와 동기화되는 총 글 수.
-export const BLOG_POST_COUNT = 85;
+export const BLOG_POST_COUNT = 86;
