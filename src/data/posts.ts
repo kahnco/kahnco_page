@@ -10,6 +10,12 @@ export interface PostMeta {
 
 export const LATEST_POSTS: PostMeta[] = [
   {
+    "slug": "ai-math-neural-networks",
+    "date": "2026.05.08",
+    "title": "비선형으로 — 신경망과 역전파",
+    "excerpt": "5편의 선형회귀는 직선(초평면)밖에 못 그렸습니다. 1편에서 예고한 문제, 선형변환을 아무리 합성해도 여전히 선형이라는 벽이 마침내 무대에 오릅니다. 이 편에서는 그 벽을 넘습니다. 먼저 선형 합성이 왜 표현력을 못 늘리는지를 행렬곱으로 증명하고,…"
+  },
+  {
     "slug": "ai-math-linear-regression",
     "date": "2026.05.04",
     "title": "가장 단순한 학습 — 선형회귀를 끝까지",
@@ -56,14 +62,8 @@ export const LATEST_POSTS: PostMeta[] = [
     "date": "2026.04.06",
     "title": "요약이 지운 것을 붙잡다 — 에이전트에게 메모리를 주기",
     "excerpt": "3편에서 대화를 요약해 접었지만, 요약은 손실 압축이라 정말 잃으면 안 되는 사실(파일 경로, 확정된 결정)이 함께 날아갈 수 있었습니다. 이번 편에 그걸 붙잡습니다. 에이전트에게 대화 밖에 사는 key-value 메모리를 주고, memory_wri…"
-  },
-  {
-    "slug": "agent-from-scratch-context",
-    "date": "2026.04.02",
-    "title": "대화가 눈덩이처럼 불어난다 — 컨텍스트를 요약해 접기",
-    "excerpt": "에이전트 루프는 한 바퀴 돌 때마다 대화(messages)에 모델의 말과 도구 결과를 이어 붙입니다. 그런데 매 스텝 그 전체를 다시 API로 보내죠. 그래서 대화는 눈덩이처럼 불어나 토큰이 O(n²)으로 커지고, 비싸지고 느려지다 결국 컨텍스트 윈…"
   }
 ];
 
 // 홈 figure("기술 블로그 N편")와 동기화되는 총 글 수.
-export const BLOG_POST_COUNT = 89;
+export const BLOG_POST_COUNT = 90;
