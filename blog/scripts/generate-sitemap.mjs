@@ -76,7 +76,8 @@ async function main() {
     }
   }
 
-  const home = urlEntry("/", latestOverall, "1.0");
+  // 홈은 무슬래시 정식 URL(https://kahnco.me/blog). trailingSlash:false 와 일관.
+  const home = urlEntry("", latestOverall, "1.0");
   const categoryEntries = [...categoryLastmod.keys()]
     .sort()
     .map((p) => urlEntry(p, categoryLastmod.get(p), "0.6"));

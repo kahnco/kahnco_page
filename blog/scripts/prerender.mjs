@@ -269,7 +269,7 @@ async function main() {
   const homeHtml = renderHtml(template, {
     title: undefined,
     description: DEFAULT_DESC,
-    path: "/",
+    path: "", // 홈 canonical 은 무슬래시(https://kahnco.me/blog) — trailingSlash:false 와 일관
     type: "website",
     heading: "Blog",
     subtitle: "인프라 · DevOps · 개발, 그리고 이런저런 기록",
