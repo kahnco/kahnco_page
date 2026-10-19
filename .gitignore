@@ -42,3 +42,6 @@ next-env.d.ts
 
 # SSR prerender bundle (build temp)
 .ssr
+
+# brainstorming visual companion
+.superpowers/
