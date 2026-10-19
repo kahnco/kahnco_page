@@ -11,7 +11,7 @@ export const ROUTE_META: Record<string, RouteMeta> = {
   "/": {
     title: "칸코테크 — 만들고, 직접 운영합니다",
     description:
-      "칸코테크(Kahnco)는 웹·앱 서비스를 직접 만들고 운영하는 소프트웨어 스튜디오입니다. 사주쿠키·Atomic Demolition 등을 운영합니다.",
+      "칸코테크(Kahnco)는 개발자 이현준의 1인 회사입니다. 앱·웹·서버·인프라를 혼자서 끝까지 만들고, 그래서요·사주쿠키·Atomic Demolition을 운영합니다.",
   },
   "/services": {
     title: "서비스 — 칸코테크",
