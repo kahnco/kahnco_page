@@ -14,7 +14,7 @@ export default function PrivacyPage() {
     <LegalDocument title="개인정보처리방침" meta={`시행일: ${EFFECTIVE_DATE}`}>
       <p>
         칸코테크(Kahnco)는 이용자의 개인정보를 소중히 다루며, 관련 법령을 준수합니다.
-        본 방침은 회사 홈페이지 kahnco.me 및 블로그(blog.kahnco.me)에 적용됩니다.
+        본 방침은 회사 홈페이지 kahnco.me 및 블로그(kahnco.me/blog)에 적용됩니다.
       </p>
 
       <LegalSection title="1. 수집하는 개인정보 항목">
