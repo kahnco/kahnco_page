@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import Masthead from "../components/site/Masthead";
+import SiteHeader from "../components/site/SiteHeader";
 import SiteFooter from "../components/site/SiteFooter";
 import { useDocumentMeta } from "../lib/useDocumentMeta";
 import { SERVICES, NEXT_SERVICE, type Service } from "../data/services";
@@ -46,7 +46,7 @@ export default function ServicesPage() {
 
   return (
     <div className="site">
-      <Masthead />
+      <SiteHeader />
 
       <main>
         <section className="phead">

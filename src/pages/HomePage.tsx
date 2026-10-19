@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import Masthead from "../components/site/Masthead";
+import SiteHeader from "../components/site/SiteHeader";
 import SiteFooter from "../components/site/SiteFooter";
 import { useDocumentMeta } from "../lib/useDocumentMeta";
 import { COMPANY } from "../data/company";
@@ -65,7 +65,7 @@ export default function HomePage() {
 
   return (
     <div className="site">
-      <Masthead />
+      <SiteHeader />
 
       <main id="top">
         <section className="hero">

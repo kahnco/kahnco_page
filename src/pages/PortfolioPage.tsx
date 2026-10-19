@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import Masthead from "../components/site/Masthead";
+import SiteHeader from "../components/site/SiteHeader";
 import SiteFooter from "../components/site/SiteFooter";
 import { useDocumentMeta } from "../lib/useDocumentMeta";
 import { PORTFOLIO, PORTFOLIO_COUNT, type PortfolioItem } from "../data/portfolio";
@@ -57,7 +57,7 @@ export default function PortfolioPage() {
 
   return (
     <div className="site">
-      <Masthead />
+      <SiteHeader />
 
       <main>
         <section className="phead">

@@ -1,4 +1,4 @@
-import Masthead from "../components/site/Masthead";
+import SiteHeader from "../components/site/SiteHeader";
 import SiteFooter from "../components/site/SiteFooter";
 import { useDocumentMeta } from "../lib/useDocumentMeta";
 import { ROUTE_META } from "../data/routeMeta";
@@ -13,7 +13,7 @@ export default function PrivacyPage() {
 
   return (
     <div className="site">
-      <Masthead />
+      <SiteHeader />
 
       <main>
         <section className="phead">
