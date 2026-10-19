@@ -40,7 +40,7 @@ export default function CoupangBanner() {
   }, []);
 
   return (
-    <aside className="my-8" aria-label="쿠팡 파트너스 광고">
+    <aside className="my-14" aria-label="쿠팡 파트너스 광고">
       <div
         ref={wrapRef}
         style={{
@@ -65,7 +65,7 @@ export default function CoupangBanner() {
           }}
         />
       </div>
-      <p className="mt-2 text-center text-[11px] leading-relaxed text-neutral-500">
+      <p className="mt-2 text-center text-[13px] leading-relaxed text-ink-3">
         {COUPANG_DISCLOSURE}
       </p>
     </aside>

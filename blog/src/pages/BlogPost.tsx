@@ -1,20 +1,15 @@
-import { useEffect } from "react";
+import { useEffect, type ReactNode } from "react";
 import { Link, useParams } from "react-router-dom";
-import { motion } from "framer-motion";
 import BlogHeader from "../components/BlogHeader";
+import BlogFooter from "../components/BlogFooter";
 import Markdown from "../components/Markdown";
 import CoupangBanner from "../components/CoupangBanner";
 import SeriesNav from "../components/SeriesNav";
+import PostNav from "../components/PostNav";
 import { getPostBySlug } from "../lib/posts";
-import { seriesForPost } from "../lib/series";
+import { formatDate } from "../lib/listing";
 import { primaryLabel, secondaryLabel } from "../lib/categories";
 import { setSeo, setArticleJsonLd, clearArticleJsonLd } from "../lib/seo";
-
-function formatDate(iso: string): string {
-  const [y, m, d] = iso.split("-");
-  if (!y || !m || !d) return iso;
-  return `${y}.${m}.${d}`;
-}
 
 /**
  * 본문을 인아티클 광고를 끼울 두 덩어리로 나눈다.
@@ -36,19 +31,27 @@ function splitForAd(content: string): [string, string] {
   return [content.slice(0, best), content.slice(best)];
 }
 
+function Frame({ children }: { children: ReactNode }) {
+  return (
+    <div className="min-h-screen bg-bg font-sans text-ink">
+      <BlogHeader />
+      {children}
+      <BlogFooter />
+    </div>
+  );
+}
+
 export default function BlogPost() {
   const { slug } = useParams<{ slug: string }>();
   const post = slug ? getPostBySlug(slug) : undefined;
 
   useEffect(() => {
     window.scrollTo(0, 0);
-
     if (!post) {
       setSeo({ title: "글을 찾을 수 없습니다", path: `/${slug ?? ""}` });
       clearArticleJsonLd();
       return;
     }
-
     setSeo({
       title: post.title,
       description: post.description,
@@ -65,147 +68,68 @@ export default function BlogPost() {
       datePublished: post.date,
       image: post.thumbnail,
     });
-
     return () => clearArticleJsonLd();
   }, [post, slug]);
 
   if (!post) {
     return (
-      <div className="min-h-screen bg-[#0a0a0a] text-white font-[family-name:var(--font-geist-sans)]">
-        <BlogHeader />
-        <main className="mx-auto max-w-3xl px-6 pt-40 pb-24 text-center">
-          <h1 className="text-3xl font-bold">글을 찾을 수 없습니다</h1>
-          <p className="mt-4 text-neutral-400">요청하신 글이 존재하지 않거나 이동되었습니다.</p>
-          <Link
-            to="/"
-            className="mt-8 inline-block rounded-full bg-blue-500 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-blue-600"
-          >
-            블로그 목록으로
-          </Link>
+      <Frame>
+        <main className="mx-auto max-w-prose px-gutter pb-[120px] pt-[120px]">
+          <h1 className="text-[clamp(30px,4.6vw,44px)] font-bold tracking-[-0.04em]">글을 찾을 수 없습니다</h1>
+          <p className="mt-4 text-[17px] text-ink-3">요청하신 글이 존재하지 않거나 이동되었습니다.</p>
+          <p className="mt-8 text-[17px]">
+            <Link to="/" className="lk">
+              블로그 목록으로
+            </Link>
+          </p>
         </main>
-      </div>
+      </Frame>
     );
   }
 
+  const [firstHalf, secondHalf] = splitForAd(post.content);
+  const cat = post.primaryCategory
+    ? post.secondaryCategory
+      ? {
+          to: `/category/${post.primaryCategory}/${post.secondaryCategory}`,
+          label: secondaryLabel(post.primaryCategory, post.secondaryCategory),
+        }
+      : { to: `/category/${post.primaryCategory}`, label: primaryLabel(post.primaryCategory) }
+    : undefined;
+
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-white font-[family-name:var(--font-geist-sans)]">
-      <BlogHeader />
-
-      <main className="mx-auto max-w-3xl px-6 pt-28 pb-24">
-        <motion.header
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-        >
-          <Link
-            to="/"
-            className="text-sm text-neutral-500 transition-colors hover:text-white"
-          >
-            ← 블로그 목록
-          </Link>
-
-          <div className="mt-6 flex flex-wrap items-center gap-2 text-xs text-neutral-500">
-            {post.primaryCategory && (
+    <Frame>
+      <main className="mx-auto max-w-[calc(700px+var(--gutter)*2)] px-gutter pb-[120px] pt-[72px]">
+        <header className="mb-11 border-b border-line pb-10">
+          <h1 className="text-[clamp(30px,4.6vw,44px)] font-bold leading-[1.3] tracking-[-0.04em]">{post.title}</h1>
+          <p className="mt-4 text-[15px] text-ink-3 tabular-nums">
+            {cat && (
               <>
-                <Link
-                  to={`/category/${post.primaryCategory}`}
-                  className="text-blue-400 hover:text-blue-300 transition-colors"
-                >
-                  {primaryLabel(post.primaryCategory)}
+                <Link to={cat.to} className="hover:text-ink">
+                  {cat.label}
                 </Link>
-                {post.secondaryCategory && (
-                  <>
-                    <span className="text-neutral-600">›</span>
-                    <Link
-                      to={`/category/${post.primaryCategory}/${post.secondaryCategory}`}
-                      className="text-blue-400 hover:text-blue-300 transition-colors"
-                    >
-                      {secondaryLabel(post.primaryCategory, post.secondaryCategory)}
-                    </Link>
-                  </>
-                )}
-                <span className="text-neutral-700">·</span>
+                {" · "}
               </>
             )}
-            <time dateTime={post.date}>{formatDate(post.date)}</time>
-          </div>
+            <time dateTime={post.date}>{formatDate(post.date)}</time> · 읽는 데 약 {post.readingMinutes}분
+          </p>
+        </header>
 
-          {(() => {
-            const s = seriesForPost(post.slug);
-            if (!s) return null;
-            return (
-              <div className="mt-4 inline-flex items-center gap-2 rounded-full border border-blue-500/30 bg-blue-500/10 px-3 py-1 text-xs text-blue-300">
-                📚 {s.series.title} · {s.position}/{s.total}편
-              </div>
-            );
-          })()}
+        <SeriesNav slug={post.slug} />
 
-          <h1 className="mt-4 text-3xl sm:text-4xl font-bold leading-tight tracking-tight">
-            {post.title}
-          </h1>
-
-          {post.description && (
-            <p className="mt-4 text-lg text-neutral-400">{post.description}</p>
-          )}
-
-          {post.tags.length > 0 && (
-            <div className="mt-5 flex flex-wrap gap-2">
-              {post.tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="rounded-full bg-white/5 px-2.5 py-1 text-xs text-neutral-500"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
-          )}
-        </motion.header>
-
-        <div className="my-8 border-t border-white/10" />
-
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-        >
-          {(() => {
-            const [firstHalf, secondHalf] = splitForAd(post.content);
-            return (
-              <>
-                <Markdown>{firstHalf}</Markdown>
-                {secondHalf && (
-                  <>
-                    <CoupangBanner />
-                    <Markdown>{secondHalf}</Markdown>
-                  </>
-                )}
-              </>
-            );
-          })()}
-        </motion.div>
+        <Markdown>{firstHalf}</Markdown>
+        {secondHalf && (
+          <>
+            <CoupangBanner />
+            <Markdown>{secondHalf}</Markdown>
+          </>
+        )}
 
         {/* 본문 끝 광고 */}
         <CoupangBanner />
 
-        {/* 커리큘럼(시리즈) 내비게이션 */}
-        <SeriesNav slug={post.slug} />
-
-        <footer className="mt-16 flex flex-wrap gap-x-6 gap-y-2 border-t border-white/10 pt-8">
-          <Link
-            to="/"
-            className="text-sm text-neutral-500 transition-colors hover:text-white"
-          >
-            ← 블로그 목록으로
-          </Link>
-          <a
-            href="/privacy"
-            className="text-sm text-neutral-500 transition-colors hover:text-white"
-          >
-            개인정보처리방침
-          </a>
-        </footer>
+        <PostNav slug={post.slug} />
       </main>
-    </div>
+    </Frame>
   );
 }
