@@ -135,17 +135,17 @@ function renderBody(raw) {
  */
 // 크롤러가 보는 정적 푸터 — 블로그 목록·개인정보처리방침 링크(광고 게재 페이지 요건).
 const STATIC_FOOTER =
-  `<footer style="margin-top:3rem;padding-top:1rem;border-top:1px solid #ddd;font-size:.9rem">` +
+  `<footer style="margin-top:3rem;padding-top:1rem;border-top:1px solid var(--line);font-size:.9rem">` +
   `<a href="/blog">블로그 목록</a> · <a href="/privacy">개인정보처리방침</a> · ` +
   `<a href="https://kahnco.me">칸코테크</a></footer>`;
 
 function bodyWrapper({ title, publishedTime, bodyHtml }) {
   const dateLine = publishedTime
-    ? `<p style="color:#888;font-size:.9rem">${esc(publishedTime)}</p>`
+    ? `<p style="color:var(--text-3);font-size:.9rem">${esc(publishedTime)}</p>`
     : "";
   return (
-    `<div id="root"><main style="max-width:720px;margin:0 auto;padding:2rem 1rem;line-height:1.7">` +
-    `<article><h1>${esc(title)}</h1>${dateLine}\n${bodyHtml}</article>${STATIC_FOOTER}</main></div>`
+    `<div id="root"><main class="prerender-shell">` +
+    `<article class="prose"><h1>${esc(title)}</h1>${dateLine}\n${bodyHtml}</article>${STATIC_FOOTER}</main></div>`
   );
 }
 
@@ -157,10 +157,10 @@ function listWrapper({ heading, subtitle, listPosts }) {
   const items = listPosts
     .map((p) => {
       const date = p.date
-        ? ` <time style="color:#888;font-size:.85rem">${esc(p.date)}</time>`
+        ? ` <time style="color:var(--text-3);font-size:.85rem">${esc(p.date)}</time>`
         : "";
       const desc = p.description
-        ? `<p style="color:#555;margin:.3rem 0 0">${esc(p.description)}</p>`
+        ? `<p style="color:var(--text-2);margin:.3rem 0 0">${esc(p.description)}</p>`
         : "";
       return (
         `<li style="margin:0 0 1.6rem">` +
@@ -170,8 +170,8 @@ function listWrapper({ heading, subtitle, listPosts }) {
     })
     .join("\n");
   return (
-    `<div id="root"><main style="max-width:760px;margin:0 auto;padding:2rem 1rem;line-height:1.6">` +
-    `<h1>${esc(heading)}</h1><p style="color:#666">${esc(subtitle)}</p>` +
+    `<div id="root"><main class="prerender-shell">` +
+    `<h1>${esc(heading)}</h1><p style="color:var(--text-3)">${esc(subtitle)}</p>` +
     `<ul style="list-style:none;padding:0">${items}</ul>${STATIC_FOOTER}</main></div>`
   );
 }
