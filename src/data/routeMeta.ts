@@ -16,7 +16,7 @@ export const ROUTE_META: Record<string, RouteMeta> = {
   "/services": {
     title: "서비스 — 칸코테크",
     description:
-      "칸코테크가 직접 만들고 운영 중인 서비스 목록. 각 서비스는 자체 서브도메인으로 운영됩니다.",
+      "칸코테크가 직접 만들고 운영하는 서비스 — 그래서요, 사주쿠키, Atomic Demolition. 베라페이블과 더그아웃을 만들고 있습니다.",
   },
   "/portfolio": {
     title: "포트폴리오 — 칸코테크",
