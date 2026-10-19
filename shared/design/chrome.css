@@ -1,0 +1,53 @@
+/* 두 앱이 같이 쓰는 조각: 헤더·푸터·링크·버튼·테마 버튼. 마크업은 앱마다 따로 둔다. */
+
+.tnum { font-variant-numeric: tabular-nums; }
+
+/* 헤더 — 애플식 얇은 반투명 */
+.gn {
+  position: sticky; top: 0; z-index: 50; height: var(--header-h);
+  background: color-mix(in srgb, var(--bg) 80%, transparent);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  backdrop-filter: saturate(180%) blur(20px);
+  border-bottom: 1px solid color-mix(in srgb, var(--line) 50%, transparent);
+  font-family: var(--sans);
+}
+.gn-in {
+  max-width: var(--max); height: 100%; margin: 0 auto; padding: 0 var(--gutter);
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+}
+.gn-brand { font-size: 15px; font-weight: 700; letter-spacing: -0.02em; color: var(--text); text-decoration: none; }
+.gn-nav { display: flex; align-items: center; gap: 28px; font-size: 13px; }
+.gn-nav a { color: var(--text-2); text-decoration: none; }
+.gn-nav a:hover, .gn-nav a[aria-current="page"] { color: var(--text); }
+@media (max-width: 520px) { .gn-nav { gap: 18px; } }
+
+.theme-btn {
+  all: unset; cursor: pointer; width: 32px; height: 32px; display: grid; place-items: center;
+  border-radius: 999px; color: var(--text-2); font-size: 16px; line-height: 1;
+}
+.theme-btn:hover { color: var(--text); background: var(--tile); }
+.theme-btn:focus-visible { outline: 2px solid var(--link); outline-offset: 2px; }
+
+/* 푸터 — 애플식 작은 회색 */
+.ft { background: var(--tile); color: var(--text-3); font-family: var(--sans); font-size: 12px; line-height: 1.8; }
+.ft-in { max-width: var(--max); margin: 0 auto; padding: 22px var(--gutter) 40px; }
+.ft-links { display: flex; flex-wrap: wrap; gap: 4px 20px; margin-bottom: 10px; }
+.ft a { color: var(--text-2); text-decoration: none; }
+.ft a:hover { text-decoration: underline; }
+.ft-row {
+  display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px 20px;
+  border-top: 1px solid var(--line); margin-top: 14px; padding-top: 14px;
+}
+
+/* 링크·버튼 */
+.lk { color: var(--link); text-decoration: none; }
+.lk:hover { text-decoration: underline; }
+.lk::after { content: " ›"; }
+.on-deep .lk { color: var(--on-deep-link); }
+
+.btn {
+  display: inline-block; background: var(--btn); color: var(--btn-text); border-radius: 999px;
+  padding: 10px 22px; font-size: 15px; font-weight: 500; text-decoration: none;
+}
+.btn:hover { filter: brightness(1.08); }
+.btn:focus-visible, .lk:focus-visible { outline: 2px solid var(--link); outline-offset: 3px; }
