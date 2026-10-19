@@ -1,0 +1,49 @@
+/* 글 본문(블로그)과 약관이 같이 쓰는 문서 스타일. */
+.prose { font-family: var(--sans); font-size: 18px; line-height: 1.85; color: var(--text-2); letter-spacing: -0.01em; word-break: keep-all; overflow-wrap: anywhere; }
+@media (max-width: 700px) { .prose { font-size: 17px; } }
+.prose > :first-child { margin-top: 0; }
+.prose p { margin: 0 0 26px; }
+.prose h1, .prose h2, .prose h3, .prose h4 { color: var(--text); font-weight: 700; scroll-margin-top: calc(var(--header-h) + 24px); }
+.prose h1 { font-size: clamp(30px, 4.6vw, 44px); line-height: 1.3; letter-spacing: -0.04em; margin: 0 0 18px; }
+.prose h2 { font-size: 28px; line-height: 1.35; letter-spacing: -0.035em; margin: 64px 0 20px; }
+.prose h3 { font-size: 22px; line-height: 1.4; letter-spacing: -0.03em; margin: 44px 0 14px; }
+.prose h4 { font-size: 19px; font-weight: 600; margin: 32px 0 10px; }
+.prose strong, .prose b { color: var(--text); font-weight: 600; }
+.prose a { color: var(--link); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+.prose ul, .prose ol { margin: 0 0 26px; padding-left: 1.3em; }
+.prose ul { list-style: disc; }
+.prose ol, .prose ul.num { list-style: decimal; }
+.prose li { margin: 6px 0; padding-left: 4px; }
+.prose li::marker { color: var(--text-3); }
+.prose li > ul, .prose li > ol { margin: 6px 0 0; }
+.prose blockquote { margin: 0 0 26px; padding: 2px 0 2px 20px; border-left: 3px solid var(--line); color: var(--text-3); }
+.prose hr { border: 0; border-top: 1px solid var(--line); margin: 56px 0; }
+.prose img { display: block; max-width: 100%; height: auto; margin: 32px auto; border-radius: 14px; }
+
+.prose .table-wrap { margin: 0 0 30px; overflow-x: auto; }
+.prose table { width: 100%; border-collapse: collapse; font-size: 15.5px; line-height: 1.6; }
+.prose th, .prose td { border-bottom: 1px solid var(--line); padding: 10px 12px 10px 0; text-align: left; vertical-align: top; }
+.prose th { color: var(--text); font-weight: 600; }
+
+.prose :not(pre) > code { font-family: var(--mono); font-size: 0.86em; background: var(--tile); color: var(--text); border-radius: 6px; padding: 2px 6px; }
+.prose pre {
+  margin: 0 0 30px; padding: 22px 24px; border-radius: 14px; overflow-x: auto;
+  background: var(--code-bg); color: var(--code-text);
+  font: 14px/1.75 var(--mono); letter-spacing: 0;
+}
+.prose pre code { font: inherit; background: none; padding: 0; color: inherit; }
+
+.prose .katex-display { margin: 0 0 30px; overflow-x: auto; overflow-y: hidden; padding: 4px 0; color: var(--text); }
+.prose .katex { color: var(--text); }
+
+/* 코드 강조 — 짙은 코드 배경 하나에 맞춘 팔레트(라이트·다크 공통) */
+.hljs-comment, .hljs-quote { color: #8b929e; font-style: italic; }
+.hljs-keyword, .hljs-selector-tag, .hljs-literal, .hljs-meta .hljs-keyword { color: #ff7ab2; }
+.hljs-string, .hljs-regexp, .hljs-addition, .hljs-template-string { color: #ff8170; }
+.hljs-number, .hljs-symbol, .hljs-bullet { color: #d9c97c; }
+.hljs-title, .hljs-title.function_, .hljs-section { color: #6bdfff; }
+.hljs-title.class_, .hljs-type, .hljs-built_in { color: #dabaff; }
+.hljs-attr, .hljs-attribute, .hljs-variable, .hljs-property, .hljs-params { color: #acf2e4; }
+.hljs-meta, .hljs-deletion { color: #fd8f3f; }
+.hljs-emphasis { font-style: italic; }
+.hljs-strong { font-weight: 600; }

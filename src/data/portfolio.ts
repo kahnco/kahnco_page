@@ -38,6 +38,13 @@ export const PORTFOLIO: PortfolioGroup[] = [
     label: "프리랜스 · 의뢰",
     items: [
       {
+        title: "쿠펀 (CoUFun)",
+        period: "의뢰 · 약 8개월 (실작업 약 2개월)",
+        description:
+          "매장 스탬프·리워드 서비스. 고객 앱과 사장님 앱, 관리자 웹과 서버를 함께 만들었습니다.",
+        tags: ["Flutter", "Firebase", "Cloud Functions", "관리자 웹"],
+      },
+      {
         title: "피어클럽 (PeerClub)",
         period: "2025.06 ~ 현재",
         description:
@@ -47,7 +54,7 @@ export const PORTFOLIO: PortfolioGroup[] = [
       },
       {
         title: "축신",
-        period: "2024.12 ~ 2026.03",
+        period: "2024.12 ~ 2026.04 · 인수인계 완료",
         description: "축구 코치와 선수를 매칭하는 레슨 플랫폼 앱.",
         tags: ["Flutter", "Riverpod", "Firebase", "In-App Purchase"],
         playStore: "https://play.google.com/store/apps/details?id=com.chukshin.chukshinapp",

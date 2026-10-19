@@ -1,19 +1,23 @@
-import { Link } from "react-router-dom";
+import ThemeToggle from "./ThemeToggle";
 
-/** 블로그 공통 상단 바 — 로고·타이틀(블로그 홈) + 메인 사이트(kahnco.me) 링크. */
+// 홈 헤더(src/components/site/SiteHeader.tsx)와 같은 클래스·같은 구조.
+// 블로그는 /blog 아래 별도 앱이라 홈 링크는 일반 <a> 로 간다.
 export default function BlogHeader() {
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-4 bg-[#0a0a0a]/80 backdrop-blur-md border-b border-white/5">
-      <Link to="/" className="flex items-center gap-2">
-        <img src="/logo.jpg" alt="Kahnco Blog" className="w-8 h-8 rounded" />
-        <span className="text-sm font-semibold text-white">Kahnco Blog</span>
-      </Link>
-      <a
-        href="https://kahnco.me"
-        className="text-sm font-medium text-neutral-400 hover:text-white transition-colors"
-      >
-        kahnco.me ↗
-      </a>
+    <header className="gn">
+      <div className="gn-in">
+        <a className="gn-brand" href="/">
+          Kahnco
+        </a>
+        <nav className="gn-nav" aria-label="주요 메뉴">
+          <a href="/services">서비스</a>
+          <a href="/portfolio">포트폴리오</a>
+          <a href="/blog" aria-current="page">
+            블로그
+          </a>
+          <ThemeToggle />
+        </nav>
+      </div>
     </header>
   );
 }

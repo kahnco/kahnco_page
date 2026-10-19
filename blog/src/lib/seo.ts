@@ -52,7 +52,9 @@ export function setSeo(input: SeoInput = {}) {
   } = input;
 
   const fullTitle = title ? `${title} | ${SITE_NAME}` : SITE_NAME;
-  const url = path.startsWith("http") ? path : `${SITE_URL}${path}`;
+  // 홈("/")은 무슬래시 정식 URL(https://kahnco.me/blog)로 — 정적 프리렌더·trailingSlash:false 와 일치.
+  const normalizedPath = path === "/" ? "" : path;
+  const url = normalizedPath.startsWith("http") ? normalizedPath : `${SITE_URL}${normalizedPath}`;
 
   document.title = fullTitle;
 

@@ -1,94 +1,76 @@
 import { Link } from "react-router-dom";
-import Masthead from "../components/site/Masthead";
+import SiteHeader from "../components/site/SiteHeader";
 import SiteFooter from "../components/site/SiteFooter";
+import AskBand from "../components/site/AskBand";
 import { useDocumentMeta } from "../lib/useDocumentMeta";
+import { useReveal } from "../lib/useReveal";
 import { PORTFOLIO, PORTFOLIO_COUNT, type PortfolioItem } from "../data/portfolio";
 import { ROUTE_META } from "../data/routeMeta";
 
-function ItemBody({ item }: { item: PortfolioItem }) {
+function Links({ item }: { item: PortfolioItem }) {
+  if (!item.href && !item.appStore && !item.playStore) return null;
   return (
-    <>
-      <div className="per">{item.period}</div>
-      <div>
-        <div className="nm">{item.title}</div>
-        <div className="desc">{item.description}</div>
-        <div className="tags">
-          {item.tags.map((t) => (
-            <span className="tag" key={t}>
-              {t}
-            </span>
-          ))}
-        </div>
-      </div>
-      <div className="links">
-        {item.href && <span>자세히 →</span>}
-        {item.appStore && (
-          <a href={item.appStore} target="_blank" rel="noopener noreferrer">
-            App Store
-          </a>
-        )}
-        {item.playStore && (
-          <a href={item.playStore} target="_blank" rel="noopener noreferrer">
-            Play Store
-          </a>
-        )}
-      </div>
-    </>
-  );
-}
-
-function PItem({ item }: { item: PortfolioItem }) {
-  if (item.href) {
-    return (
-      <Link className="pitem" to={item.href}>
-        <ItemBody item={item} />
-      </Link>
-    );
-  }
-  return (
-    <div className="pitem">
-      <ItemBody item={item} />
-    </div>
+    <p className="tl-links">
+      {item.href && (
+        <Link className="lk" to={item.href}>
+          소개 페이지
+        </Link>
+      )}
+      {item.appStore && (
+        <a className="lk" href={item.appStore} target="_blank" rel="noopener noreferrer">
+          App Store
+        </a>
+      )}
+      {item.playStore && (
+        <a className="lk" href={item.playStore} target="_blank" rel="noopener noreferrer">
+          Google Play
+        </a>
+      )}
+    </p>
   );
 }
 
 export default function PortfolioPage() {
   useDocumentMeta(ROUTE_META["/portfolio"].title, ROUTE_META["/portfolio"].description);
+  useReveal();
 
   return (
     <div className="site">
-      <Masthead />
-
+      <SiteHeader />
       <main>
-        <section className="phead">
-          <div className="wrap">
-            <div className="crumb">Kahnco · 포트폴리오</div>
-            <h1>제작 이력</h1>
-            <p>
-              자사 앱부터 프리랜스·의뢰, 재직 프로젝트까지 그동안 만든 앱·웹 작업 {PORTFOLIO_COUNT}
-              건입니다. 운영 중인 자사 서비스는 <Link to="/services">서비스</Link>에서 따로 볼 수
-              있습니다.
-            </p>
-          </div>
-        </section>
-
-        <section className="band">
-          <div className="wrap">
-            {PORTFOLIO.map((group) => (
-              <div className="pgroup" key={group.key}>
-                <div className="ghead">
-                  <span className="gt">{group.label}</span>
-                  <span className="gc tnum">{group.items.length}</span>
-                </div>
-                {group.items.map((item) => (
-                  <PItem key={item.title} item={item} />
-                ))}
-              </div>
-            ))}
-          </div>
-        </section>
+        <header className="phead">
+          <h1>만든 것들</h1>
+          <p>
+            자사 앱, 의뢰·프리랜스, 재직 프로젝트로 만든 {PORTFOLIO_COUNT}건입니다. 지금 운영하는 서비스는{" "}
+            <Link className="lk" to="/services">
+              서비스
+            </Link>
+            에 따로 모았습니다.
+          </p>
+        </header>
+        {PORTFOLIO.map((group) => (
+          <section className="pf-group" key={group.key}>
+            <h2>
+              {group.label}
+              <span className="n tnum">{group.items.length}</span>
+            </h2>
+            <ol className="tl">
+              {group.items.map((item) => (
+                <li className="tl-item" key={item.title}>
+                  <div className="tl-when tnum">{item.period}</div>
+                  <div>
+                    <h3>{item.title}</h3>
+                    <p>{item.description}</p>
+                    <p className="tech">{item.tags.join(" · ")}</p>
+                    <Links item={item} />
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </section>
+        ))}
+        <AskBand />
       </main>
-
       <SiteFooter />
     </div>
   );

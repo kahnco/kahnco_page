@@ -28,12 +28,36 @@ export const SERIES: Series[] = [
         title: "세상을 벡터로 놓다 — AI가 데이터를 보는 첫 언어",
         slug: "ai-math-vectors",
       },
-      { order: 2, title: "거리와 유사도 — 노름과 내적이 재는 것" },
-      { order: 3, title: "확률과 불확실성 — 분포·기댓값·베이즈" },
-      { order: 4, title: "미분과 경사하강 — 기계가 '배우는' 방식" },
-      { order: 5, title: "가장 단순한 학습 — 선형회귀를 끝까지" },
-      { order: 6, title: "비선형으로 — 신경망과 역전파" },
-      { order: 7, title: "주목이라는 연산 — 트랜스포머로" },
+      {
+        order: 2,
+        title: "거리와 유사도 — 노름과 내적이 재는 것",
+        slug: "ai-math-distance-similarity",
+      },
+      {
+        order: 3,
+        title: "확률과 불확실성 — 분포·기댓값·베이즈",
+        slug: "ai-math-probability",
+      },
+      {
+        order: 4,
+        title: "미분과 경사하강 — 기계가 '배우는' 방식",
+        slug: "ai-math-gradient-descent",
+      },
+      {
+        order: 5,
+        title: "가장 단순한 학습 — 선형회귀를 끝까지",
+        slug: "ai-math-linear-regression",
+      },
+      {
+        order: 6,
+        title: "비선형으로 — 신경망과 역전파",
+        slug: "ai-math-neural-networks",
+      },
+      {
+        order: 7,
+        title: "주목이라는 연산 — 트랜스포머로",
+        slug: "ai-math-transformer",
+      },
     ],
   },
   {
