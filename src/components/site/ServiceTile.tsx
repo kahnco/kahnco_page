@@ -24,10 +24,16 @@ function Go({ s }: { s: Service }) {
 export default function ServiceTile({ service: s, full = false }: { service: Service; full?: boolean }) {
   return (
     <section className={full ? "tile full" : "tile"} aria-label={s.name}>
-      {s.status !== "live" && <p className="st soon">{s.statusLabel}</p>}
       <h2 className="name">{s.name}</h2>
       <p className="tl">{s.tagline}</p>
-      <p className="st">{s.kind}</p>
+      <p className="st">
+        {s.status !== "live" && (
+          <>
+            <span className="soon">{s.statusLabel}</span> ·{" "}
+          </>
+        )}
+        {s.kind}
+      </p>
       <Go s={s} />
       <div className="vis">
         {s.shot?.frame === "browser" && <BrowserFrame src={s.shot.src} alt={s.shot.alt} url={s.shot.url} />}

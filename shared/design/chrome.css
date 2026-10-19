@@ -5,9 +5,11 @@
 /* 헤더 — 애플식 얇은 반투명 */
 .gn {
   position: sticky; top: 0; z-index: 50; height: var(--header-h);
+  background: var(--bg);
   background: color-mix(in srgb, var(--bg) 80%, transparent);
   -webkit-backdrop-filter: saturate(180%) blur(20px);
   backdrop-filter: saturate(180%) blur(20px);
+  border-bottom: 1px solid var(--line);
   border-bottom: 1px solid color-mix(in srgb, var(--line) 50%, transparent);
   font-family: var(--sans);
 }

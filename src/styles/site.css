@@ -14,8 +14,9 @@ body:has(.site) { background: var(--bg); color: var(--text); }
 .wrap { max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter); }
 
 /* 페이드업 — JS 가 있을 때만 숨긴다 */
-.js .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
-.js .reveal.is-in { opacity: 1; transform: none; }
+.js .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; animation: reveal-fallback 0s 2.5s forwards; }
+.js .reveal.is-in { opacity: 1; transform: none; animation: none; }
+@keyframes reveal-fallback { to { opacity: 1; transform: none; } }
 @media (prefers-reduced-motion: reduce) {
   .js .reveal { opacity: 1; transform: none; transition: none; }
 }
@@ -134,7 +135,7 @@ body:has(.site) { background: var(--bg); color: var(--text); }
 .tile .name { font-size: clamp(36px, 6vw, 56px); font-weight: 700; letter-spacing: -0.035em; line-height: 1.07; }
 .tile .tl { font-size: clamp(19px, 2.4vw, 28px); font-weight: 500; letter-spacing: -0.02em; color: var(--text-2); margin-top: 8px; }
 .tile .st { font-size: 14px; color: var(--text-3); margin-top: 10px; }
-.tile .st.soon { color: var(--soon); font-weight: 600; margin: 0 0 6px; }
+.tile .st .soon { color: var(--soon); font-weight: 600; }
 .tile .go { margin-top: 18px; font-size: 17px; }
 .tile .vis { margin: 44px auto 0; max-width: 980px; }
 .tile.full { height: calc(100svh - var(--header-h)); min-height: 620px; max-height: 1100px; display: flex; flex-direction: column; }
@@ -178,6 +179,7 @@ body:has(.site) { background: var(--bg); color: var(--text); }
 /* ── 약관 ── */
 .legal-wrap { max-width: var(--max); margin: 0 auto; padding: 72px var(--gutter) 120px; display: grid; grid-template-columns: minmax(0, var(--prose)) 1fr; gap: 64px; }
 .legal { grid-column: 1; grid-row: 1; }
+.legal section[id] { scroll-margin-top: calc(var(--header-h) + 24px); }
 .legal h1 { margin-bottom: 8px; }
 .legal .legal-meta { font-size: 15px; color: var(--text-3); padding-bottom: 36px; border-bottom: 1px solid var(--line); margin-bottom: 44px; }
 .legal-toc { grid-column: 2; grid-row: 1; font-size: 14px; line-height: 1.6; }

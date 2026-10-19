@@ -56,7 +56,7 @@ export default function PortfolioPage() {
             </h2>
             <ol className="tl">
               {group.items.map((item) => (
-                <li className="tl-item reveal" key={item.title}>
+                <li className="tl-item" key={item.title}>
                   <div className="tl-when tnum">{item.period}</div>
                   <div>
                     <h3>{item.title}</h3>

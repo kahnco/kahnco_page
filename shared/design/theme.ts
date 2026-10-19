@@ -9,12 +9,11 @@ export const THEME_EVENT = "kahnco-theme";
 const DARK_QUERY = "(prefers-color-scheme: dark)";
 
 export function readStoredTheme(
-  storage: Pick<Storage, "getItem"> | undefined = typeof localStorage === "undefined"
-    ? undefined
-    : localStorage,
+  storage?: Pick<Storage, "getItem">,
 ): ThemePref | null {
   try {
-    const v = storage?.getItem(THEME_KEY);
+    const s = storage ?? (typeof localStorage === "undefined" ? undefined : localStorage);
+    const v = s?.getItem(THEME_KEY);
     return v === "light" || v === "dark" ? v : null;
   } catch {
     return null;
@@ -58,9 +57,11 @@ export function onThemeChange(cb: (t: ThemePref) => void): () => void {
     if (!readStoredTheme()) cb(currentTheme());
   };
   window.addEventListener(THEME_EVENT, onManual);
-  mq?.addEventListener("change", onSystem);
+  if (mq?.addEventListener) mq.addEventListener("change", onSystem);
+  else mq?.addListener?.(onSystem);
   return () => {
     window.removeEventListener(THEME_EVENT, onManual);
-    mq?.removeEventListener("change", onSystem);
+    if (mq?.removeEventListener) mq.removeEventListener("change", onSystem);
+    else mq?.removeListener?.(onSystem);
   };
 }
